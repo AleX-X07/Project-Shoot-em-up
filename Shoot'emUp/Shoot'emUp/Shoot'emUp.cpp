@@ -1,5 +1,7 @@
 #include <print>
 #include <SDL3/SDL.h>
+#include <SDL3_image/SDL_image.h>
+
 
 int main(int argc, char** argv)
 {
@@ -10,10 +12,16 @@ int main(int argc, char** argv)
     if (!SDL_Init(SDL_INIT_VIDEO))
         return 1;
 
+    SDL_Texture* texture = nullptr;
+
     if (!SDL_CreateWindowAndRenderer("HELLO SDL", 640, 480, SDL_WINDOW_RESIZABLE, &window, &renderer))
         return 1;
 
     SDL_SetRenderLogicalPresentation(renderer, 640, 480, SDL_LOGICAL_PRESENTATION_LETTERBOX);
+
+    auto surface = IMG_Load("test.png");
+    texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_DestroySurface(surface);
 
     bool keepGoing = true;
     do
@@ -39,4 +47,6 @@ int main(int argc, char** argv)
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     return 0;
+
+
 }
