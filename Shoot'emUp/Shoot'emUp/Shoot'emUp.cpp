@@ -48,7 +48,7 @@ int main(int argc, char** argv)
 
         SDL_RenderClear(renderer);
 
-        // 🔥 Dessiner l’image de fond
+        // Dessiner l’image de fond
         SDL_RenderTexture(renderer, background, NULL, NULL);
 
         // Tu peux ensuite dessiner par-dessus (sprites, etc.)
