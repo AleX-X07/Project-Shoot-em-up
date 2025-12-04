@@ -4,32 +4,30 @@
 
 int main(int argc, char** argv)
 {
+
     SDL_Window* window;
     SDL_Renderer* renderer;
 
-    SDL_SetAppMetadata("SDL Test", "1.0", "games.anakata.test-sdl");
-    if (!SDL_Init(SDL_INIT_VIDEO))
-        return 1;
-    
-    // Initialiser SDL_image pour PNG/JPG
-    if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
-        SDL_Log("Erreur init SDL_image: %s", IMG_GetError());
+    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        SDL_Log("Erreur SDL: %s", SDL_GetError());
         return 1;
     }
 
-    if (!SDL_CreateWindowAndRenderer("HELLO SDL", 640, 480, SDL_WINDOW_RESIZABLE, &window, &renderer))
+    if (!SDL_CreateWindowAndRenderer("HELLO SDL", 640, 480, SDL_WINDOW_RESIZABLE, &window, &renderer)) {
+        SDL_Log("Erreur création fenêtre/rendu: %s", SDL_GetError());
         return 1;
+    }
 
-    SDL_SetRenderLogicalPresentation(renderer, 640, 480, SDL_LOGICAL_PRESENTATION_LETTERBOX);
-
-    // Charger ton image de fond
+    // Charger directement une image PNG (pas besoin de IMG_Init)
     SDL_Surface* surface = IMG_Load("arena.png");
     if (!surface) {
-        SDL_Log("Erreur chargement image: %s", IMG_GetError());
+        SDL_Log("Erreur chargement image: %s", SDL_GetError());
         return 1;
     }
+
     SDL_Texture* background = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
+
 
     bool keepGoing = true;
     do
@@ -60,7 +58,6 @@ int main(int argc, char** argv)
     SDL_DestroyTexture(background);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
-    IMG_Quit();
     SDL_Quit();
     return 0;
 }
