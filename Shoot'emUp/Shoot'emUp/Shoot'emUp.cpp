@@ -1,6 +1,6 @@
 ﻿#include <print>
 #include <SDL3/SDL.h>
-#include <SDL3_image/SDL_image.h >   // <-- ajout pour charger des images
+#include <SDL3_image/SDL_image.h >  
 
 int main(int argc, char** argv)
 {
