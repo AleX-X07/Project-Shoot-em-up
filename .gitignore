@@ -40,4 +40,5 @@
 # debug information files
 *.dwo
 
-\.vs
+.vs/
+x64/
