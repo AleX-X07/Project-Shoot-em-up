@@ -135,7 +135,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Fonction.cpp" />
+    <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Shoot%27emUp.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Fonction.h" />
+    <ClInclude Include="Hero.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Shoot%27emUp.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

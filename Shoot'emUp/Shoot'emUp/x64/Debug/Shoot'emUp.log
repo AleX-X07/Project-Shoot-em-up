@@ -1,3 +1,5 @@
-﻿  Shoot'emUp.cpp
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\print(11): warning STL4038: The contents of <print> are available only with C++23 or later.
+﻿  Hero.cpp
+  Shoot'emUp.cpp
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shoot'emUp.cpp(10,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
+  Génération de code en cours...
   Shoot'emUp.vcxproj -> C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\x64\Debug\Shoot'emUp.exe
