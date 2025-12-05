@@ -1,24 +1,38 @@
-#include <print>
+ï»¿#include <print>
 #include <SDL3/SDL.h>
+#include <SDL3_image/SDL_image.h >  
 
 int main(int argc, char** argv)
 {
+
     SDL_Window* window;
     SDL_Renderer* renderer;
 
-    SDL_SetAppMetadata("SDL Test", "1.0", "games.anakata.test-sdl");
-    if (!SDL_Init(SDL_INIT_VIDEO))
+    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        SDL_Log("Erreur SDL: %s", SDL_GetError());
         return 1;
+    }
 
-    if (!SDL_CreateWindowAndRenderer("HELLO SDL", 640, 480, SDL_WINDOW_RESIZABLE, &window, &renderer))
+    if (!SDL_CreateWindowAndRenderer("HELLO SDL", 640, 480, SDL_WINDOW_RESIZABLE, &window, &renderer)) {
+        SDL_Log("Erreur crÃ©ation fenÃªtre/rendu: %s", SDL_GetError());
         return 1;
+    }
 
-    SDL_SetRenderLogicalPresentation(renderer, 640, 480, SDL_LOGICAL_PRESENTATION_LETTERBOX);
+    // Charger directement une image PNG (pas besoin de IMG_Init)
+    SDL_Surface* surface = IMG_Load("arena.png");
+    if (!surface) {
+        SDL_Log("Erreur chargement image: %s", SDL_GetError());
+        return 1;
+    }
 
-    // Position et taille de l'élément
+    SDL_Texture* background = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_DestroySurface(surface);
+
+
+    // Position et taille de l'ï¿½lï¿½ment
     SDL_FRect rect = { 400.0f, 300.0f, 50.0f, 50.0f };
 
-    // Vitesse de déplacement
+    // Vitesse de dï¿½placement
     float speed = 200.0f; // pixels par seconde
     Uint64 last_time = SDL_GetTicks();
 
@@ -37,7 +51,7 @@ int main(int argc, char** argv)
                 keepGoing = false;
         }
 
-        const double now = ((double)SDL_GetTicks()) / 1000.0;  /* convert from milliseconds to seconds. */
+        const double now = ((double)SDL_GetTicks()) / 1000.0;
 
         const float red = 0;
         const float green = 0;
@@ -65,13 +79,14 @@ int main(int argc, char** argv)
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
 
-        SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-        SDL_RenderFillRect(renderer, &rect);
+        // Dessiner lâ€™image de fond
+        SDL_RenderTexture(renderer, background, NULL, NULL);
 
-		SDL_RenderPresent(renderer);
-
+        // Tu peux ensuite dessiner par-dessus (sprites, etc.)
+        SDL_RenderPresent(renderer);
     } while (keepGoing);
 
+    SDL_DestroyTexture(background);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
