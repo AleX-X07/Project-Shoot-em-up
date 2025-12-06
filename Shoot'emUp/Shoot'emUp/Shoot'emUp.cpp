@@ -13,8 +13,8 @@ int main(int argc, char** argv) {
     SDL_Texture* background = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
 
-    Entity player(400.0f, 300.0f, 100.0f, 100.0f, SDL_Color{ 255, 0, 0, 255 });
-    player.loadTexture(renderer, "player.png");
+    Entity player(400.0f, 300.0f, 200, 200, SDL_Color{ 255, 0, 0, 255 },400);
+    player.loadTexture(renderer, "player2.png");
 
     Uint64 last_time = SDL_GetTicks();
     bool keepGoing = true;

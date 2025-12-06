@@ -1,5 +1,3 @@
-﻿  Hero.cpp
-  Shoot'emUp.cpp
+﻿  Shoot'emUp.cpp
 C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shoot'emUp.cpp(10,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
-  Génération de code en cours...
   Shoot'emUp.vcxproj -> C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\x64\Debug\Shoot'emUp.exe

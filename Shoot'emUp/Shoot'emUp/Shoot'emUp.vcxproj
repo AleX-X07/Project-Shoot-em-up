@@ -135,11 +135,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Fonction.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Shoot%27emUp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Fonction.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="resource.h" />

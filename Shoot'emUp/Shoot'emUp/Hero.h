@@ -2,6 +2,9 @@
 #define ENTITY_H
 
 #include <SDL3/SDL.h>
+#include <vector>
+#include "Bullet.h"
+#include "Hero.h"
 #include <SDL3_image/SDL_image.h>
 
 class Entity {
@@ -10,6 +13,8 @@ public:
     SDL_Texture* texture;
     SDL_Color color;
     float speed;
+    SDL_Texture* bulletTexture;
+    std::vector<Bullet> bullets;
 
     Entity(float x, float y, float w, float h, float spd = 200.0f);
     Entity(float x, float y, float w, float h, SDL_Texture* tex, float spd = 200.0f);
