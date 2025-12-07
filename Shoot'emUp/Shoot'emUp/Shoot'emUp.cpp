@@ -16,6 +16,8 @@ int main(int argc, char** argv) {
     Entity player(400.0f, 300.0f, 200, 200, SDL_Color{ 255, 0, 0, 255 },400);
     player.loadTexture(renderer, "player2.png");
 
+    player.loadBulletTexture(renderer, "bullet.png");
+
     Uint64 last_time = SDL_GetTicks();
     bool keepGoing = true;
     while (keepGoing) {
@@ -26,10 +28,17 @@ int main(int argc, char** argv) {
         player.handleInput(SDL_GetKeyboardState(NULL), dt);
         SDL_GetWindowSize(window, &w, &h);
         player.clampToScreen(w, h);
+
+        player.updateBullets(dt);
+
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
         SDL_RenderTexture(renderer, background, NULL, NULL);
+
         player.render(renderer);
+        player.renderBullets(renderer);
+		player.DisplayHP(renderer, player.HP);
+
         SDL_RenderPresent(renderer);
     }
     SDL_DestroyTexture(background);

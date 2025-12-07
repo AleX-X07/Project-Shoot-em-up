@@ -8,7 +8,8 @@ public:
     float vx, vy;
     int w, h;
     SDL_Texture* texture;
-    Bullet(float startX, float startY, float velX, float velY, int width, int height, SDL_Texture* tex);
+    SDL_Color color;
+    Bullet(float startX, float startY, float velX, float velY, int width, int height, SDL_Color col);
     void update(float dt);
     void render(SDL_Renderer* renderer);
 };

@@ -51,7 +51,51 @@ void Entity::handleInput(const bool* keys, float dt) {
     if (keys[SDL_SCANCODE_DOWN] || keys[SDL_SCANCODE_S]) dy += 1;
     if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A]) dx -= 1;
     if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D]) dx += 1;
+
+    timeSinceLastShot += dt;
+    if (keys[SDL_SCANCODE_SPACE] && timeSinceLastShot >= shootCooldown) {
+        shoot();
+        timeSinceLastShot = 0.0f;
+    }
     move(dx, dy, dt);
+}
+
+void Entity::shoot() {
+        /*if (bulletTexture) {
+        bullets.emplace_back(rect.x + rect.w / 2 - 5, rect.y, 0, -400, 10, 20, bulletTexture);
+		}*/
+        bullets.emplace_back(rect.x + rect.w, rect.y + rect.h / 2 - 5, 800, 0, 40, 10, SDL_Color{ 0, 0, 255, 255 });
+}
+
+void Entity::loadBulletTexture(SDL_Renderer* renderer, const char* filepath) {
+    SDL_Surface* surface = IMG_Load(filepath);
+    if (surface) {
+        bulletTexture = SDL_CreateTextureFromSurface(renderer, surface);
+        SDL_DestroySurface(surface);
+    }
+    else {
+        SDL_Log("Erreur chargement bullet: %s", SDL_GetError());
+    }
+}
+
+void Entity::updateBullets(float dt) {
+    for (auto& b : bullets) b.update(dt);
+    //// Optionnel : supprimer les balles hors écran
+    //bullets.erase(std::remove_if(bullets.begin(), bullets.end(),
+    //    [](Bullet& b) { return b.x > 800 || b.x < 0 || b.y > 600 || b.y < 0; }),
+    //    bullets.end());
+}
+
+void Entity::renderBullets(SDL_Renderer* renderer) {
+    for (auto& b : bullets) b.render(renderer);
+}
+
+void Entity::DisplayHP(SDL_Renderer* renderer, int HP) {
+    for (int i = 0; i < HP; ++i) {
+        SDL_FRect hpRect = { 10.0f + i * 35.0f, 10.0f, 30.0f, 30.0f };
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+        SDL_RenderFillRect(renderer, &hpRect);
+    }
 }
 
 Entity::~Entity() {

@@ -1,7 +1,7 @@
 #include "Bullet.h"
 
- Bullet::Bullet(float startX, float startY, float velX, float velY, int width, int height, SDL_Texture* tex)
-    : x(startX), y(startY), vx(velX), vy(velY), w(width), h(height), texture(tex) {
+ Bullet::Bullet(float startX, float startY, float velX, float velY, int width, int height, SDL_Color col)
+    : x(startX), y(startY), vx(velX), vy(velY), w(width), h(height), color(col) {
 }
 
 void Bullet::update(float dt) {
@@ -11,5 +11,8 @@ void Bullet::update(float dt) {
 
 void Bullet::render(SDL_Renderer* renderer) {
     SDL_FRect dst = { x, y, (float)w, (float)h };
-    SDL_RenderTexture(renderer, texture, NULL, &dst);
+    //SDL_RenderTexture(renderer, texture, NULL, &dst);
+    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+    SDL_RenderFillRect(renderer, &dst);
+
 }

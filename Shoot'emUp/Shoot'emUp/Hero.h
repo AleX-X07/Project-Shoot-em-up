@@ -1,10 +1,6 @@
-#ifndef ENTITY_H
-#define ENTITY_H
-
 #include <SDL3/SDL.h>
 #include <vector>
 #include "Bullet.h"
-#include "Hero.h"
 #include <SDL3_image/SDL_image.h>
 
 class Entity {
@@ -15,6 +11,9 @@ public:
     float speed;
     SDL_Texture* bulletTexture;
     std::vector<Bullet> bullets;
+    float shootCooldown = 0.15f;      
+    float timeSinceLastShot = 0.0f;
+	int HP = 3;
 
     Entity(float x, float y, float w, float h, float spd = 200.0f);
     Entity(float x, float y, float w, float h, SDL_Texture* tex, float spd = 200.0f);
@@ -25,8 +24,11 @@ public:
     void render(SDL_Renderer* renderer);
     void loadTexture(SDL_Renderer* renderer, const char* filepath);
     void handleInput(const bool* keys, float dt);
+	void shoot();
+    void updateBullets(float dt);
+	void renderBullets(SDL_Renderer* renderer);
+    void loadBulletTexture(SDL_Renderer* renderer, const char* filepath);
+	void DisplayHP(SDL_Renderer* renderer, int HP);
 
     ~Entity();
 };
-
-#endif
