@@ -1,5 +1,8 @@
 #include "Screen.h"
 #include <SDL3/SDL.h>
+#include <SDL3_ttf/SDL_ttf.h>
+
+static TTF_Font* font = nullptr;
 
 GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window) {
     int w, h;
@@ -7,8 +10,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
     static bool upPressed = false;
     static bool downPressed = false;
     static bool enterPressed = false;
-
-
+    TTF_Font* font = TTF_OpenFont("assets/arialmt.ttf", 32);
     const bool* keys = SDL_GetKeyboardState(NULL);
 
     switch (screen) {
@@ -21,8 +23,15 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
 
         // --- Titre ---
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-        SDL_FRect titleRect = { (float)(w / 2 - 200), 100, 400, 80 };
-        SDL_RenderRect(renderer, &titleRect);
+		SDL_Color white = { 255, 255, 255, 255 };
+        SDL_Surface* texteSurfaceTitle = TTF_RenderText_Solid(font, "SHOOT'EM UP",11 ,white);
+        SDL_Texture* texteTextureTitle = SDL_CreateTextureFromSurface(renderer, texteSurfaceTitle);
+        SDL_DestroySurface(texteSurfaceTitle);
+        // Position et taille
+        SDL_FRect destRect = { w / 2 - 200, 300, 400, 80 };
+        // Afficher
+        SDL_RenderTexture(renderer, texteTextureTitle, NULL, &destRect);
+		SDL_DestroyTexture(texteTextureTitle);
 
         // --- Option PLAY ---
         int playY = h / 2 - 40;
@@ -31,6 +40,24 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
             SDL_SetRenderDrawColor(renderer, 100, 255, 100, 255);
             SDL_RenderFillRect(renderer, &playRect);
         }
+		SDL_Surface* texteSurfacePlay = TTF_RenderText_Solid(font, "PLAY", 4, white);
+		SDL_Texture* texteTexturePlay = SDL_CreateTextureFromSurface(renderer, texteSurfacePlay);
+        SDL_DestroySurface(texteSurfaceTitle);
+        // Position et taille
+        int textW = texteSurfacePlay->w;
+        int textH = texteSurfacePlay->h;
+        SDL_DestroySurface(texteSurfacePlay);
+
+        SDL_FRect destRectPlay = {
+            playRect.x + (playRect.w - textW) / 2.0f,
+            playRect.y + (playRect.h - textH) / 2.0f,
+            (float)textW,
+            (float)textH
+        };
+
+        // Afficher
+        SDL_RenderTexture(renderer, texteTexturePlay, NULL, &destRectPlay);
+        SDL_DestroyTexture(texteTexturePlay);
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         SDL_RenderRect(renderer, &playRect);
 

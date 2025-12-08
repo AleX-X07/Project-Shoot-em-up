@@ -1,5 +1,6 @@
 ﻿#include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
+#include <SDL3_ttf/SDL_ttf.h>
 #include "Hero.h"
 #include "Screen.h"
 
@@ -9,20 +10,23 @@ int main(int argc, char** argv) {
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0 || !SDL_CreateWindowAndRenderer("SHOOT'EM UP", 640, 480, SDL_WINDOW_FULLSCREEN, &window, &renderer))
         return 1;
-
-    SDL_Surface* surface = IMG_Load("arena.png");
+    if (TTF_Init() < 0) {
+        SDL_Log("Erreur SDL_ttf : %s", SDL_GetError());
+        return 1;
+    }
+    SDL_Surface* surface = IMG_Load("picture/arena.png");
     SDL_Texture* background = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
 
     Entity player(400.0f, 300.0f, 200, 200, SDL_Color{ 255, 0, 0, 255 }, 400);
-    player.loadTexture(renderer, "player2.png");
+    player.loadTexture(renderer, "picture/player2.png");
     player.loadBulletTexture(renderer, "bullet.png");
 
     Uint64 last_time = SDL_GetTicks();
     bool keepGoing = true;
     GameState screen = MENU;
 
-    int menuSelection = 0; // 0 = Play, 1 = Quit
+    int menuSelection = 0; 
     bool enterPressed = false;
 
     while (keepGoing) {
