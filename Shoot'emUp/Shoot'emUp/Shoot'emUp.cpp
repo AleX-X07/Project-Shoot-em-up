@@ -1,10 +1,14 @@
-﻿#include <print>
-#include <SDL3/SDL.h>
-#include <SDL3_image/SDL_image.h >  
+﻿#include <SDL3/SDL.h>
+#include <SDL3_image/SDL_image.h>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+#include <algorithm>
+#include "Enemy.h"
+#include "Classic_enemy.h"
 
-int main(int argc, char** argv)
-{
 
+int main(int argc, char** argv) {
     SDL_Window* window;
     SDL_Renderer* renderer;
 
@@ -18,73 +22,100 @@ int main(int argc, char** argv)
         return 1;
     }
 
-    // Charger directement une image PNG (pas besoin de IMG_Init)
+    // Charger une image de fond
     SDL_Surface* surface = IMG_Load("arena.png");
     if (!surface) {
         SDL_Log("Erreur chargement image: %s", SDL_GetError());
         return 1;
     }
-
     SDL_Texture* background = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
 
+    // Variables pour les ennemis
+    std::srand(static_cast<unsigned>(std::time(nullptr)));
+    std::vector<Enemy> enemies;
+    Uint32 lastSpawn = SDL_GetTicks();
+    Uint32 spawnInterval = 2000; // toutes les 2 secondes
 
-    // Position et taille de l'�l�ment
-    SDL_FRect rect = { 400.0f, 300.0f, 50.0f, 50.0f };
+    bool running = true;
+    SDL_Event event;
 
-    // Vitesse de d�placement
-    float speed = 200.0f; // pixels par seconde
-    Uint64 last_time = SDL_GetTicks();
-
-    bool keepGoing = true;
-    do
-    {
-        // Calcul du delta time
-        Uint64 current_time = SDL_GetTicks();
-        float dt = (current_time - last_time) / 1000.0f;
-        last_time = current_time;
-
-        SDL_Event event;
-        while (SDL_PollEvent(&event))
-        {
-            if (event.type == SDL_EVENT_QUIT)
-                keepGoing = false;
+    while (running) {
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_EVENT_QUIT) running = false;
         }
 
-        const double now = ((double)SDL_GetTicks()) / 1000.0;
+        // Récupérer la taille de la fenêtre
+        int windowWidth, windowHeight;
+        SDL_GetWindowSize(window, &windowWidth, &windowHeight);
 
-        const float red = 0;
-        const float green = 0;
-        const float blue = 0;
-		const bool* keys = SDL_GetKeyboardState(NULL);
-
-        if (keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_W]) {
-            rect.y -= speed * dt;
-        }
-        if (keys[SDL_SCANCODE_DOWN] || keys[SDL_SCANCODE_S]) {
-            rect.y += speed * dt;
-        }
-        if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A]) {
-            rect.x -= speed * dt;
-        }
-        if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D]) {
-            rect.x += speed * dt;
+        // Spawn ennemi
+        Uint32 now = SDL_GetTicks();
+        if (now - lastSpawn > spawnInterval) {
+            spawnEnemy(enemies, windowWidth, windowHeight);
+            lastSpawn = now;
         }
 
-        if (rect.x < 0) rect.x = 0;
-        if (rect.y < 0) rect.y = 0;
-        if (rect.x + rect.w > 640) rect.x = 640 - rect.w;
-        if (rect.y + rect.h > 480) rect.y = 480 - rect.h;
+        updateEnemies(enemies);
 
+        // Effacer l'écran
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
 
-        // Dessiner l’image de fond
+        // Dessiner le fond
         SDL_RenderTexture(renderer, background, NULL, NULL);
 
-        // Tu peux ensuite dessiner par-dessus (sprites, etc.)
+        // Dessiner les ennemis
+        renderEnemies(renderer, enemies);
+
+        // Afficher
         SDL_RenderPresent(renderer);
-    } while (keepGoing);
+
+        SDL_Delay(16); // ~60 FPS
+    }
+    Uint32 now = SDL_GetTicks();
+
+    // Vecteurs globaux
+    std::vector<Classic_enemy> e;
+    std::vector<Projectile> projectiles;
+
+    // Exemple : un ennemi qui se déplace
+    e.push_back(Classic_enemy(600, 200, 50, 50, 3));
+
+    while (running) {
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_EVENT_QUIT) running = false;
+        }
+
+        Uint32 now = SDL_GetTicks();
+
+        // Tir des ennemis
+        for (auto& e : enemies) {
+            e.shoot(projectiles, now);
+        }
+
+        // Mise à jour projectiles
+        updateProjectiles(projectiles);
+
+        // Effacer l'écran
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderClear(renderer);
+
+        // Dessiner le fond
+        SDL_RenderTexture(renderer, background, NULL, NULL);
+
+        // Dessiner les ennemis
+        renderEnemies(renderer, enemies);
+
+        // Dessiner les projectiles
+        renderProjectiles(renderer, projectiles);
+
+        SDL_RenderPresent(renderer);
+
+        SDL_Delay(16); // ~60 FPS
+    }
+
+
 
     SDL_DestroyTexture(background);
     SDL_DestroyRenderer(renderer);

@@ -1,4 +1,8 @@
-﻿  Shoot'emUp.cpp
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\print(11): warning STL4038: The contents of <print> are available only with C++23 or later.
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shoot'emUp.cpp(11,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
+﻿  Classic_enemy.cpp
+  Enemy.cpp
+  Shoot'emUp.cpp
+  Génération de code en cours...
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shoot'emUp.cpp(14,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shoot'emUp.cpp(36,22): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shoot'emUp.cpp(52,20): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
   Shoot'emUp.vcxproj -> C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\x64\Debug\Shoot'emUp.exe
