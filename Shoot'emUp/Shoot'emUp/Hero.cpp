@@ -80,10 +80,6 @@ void Entity::loadBulletTexture(SDL_Renderer* renderer, const char* filepath) {
 
 void Entity::updateBullets(float dt) {
     for (auto& b : bullets) b.update(dt);
-    //// Optionnel : supprimer les balles hors écran
-    //bullets.erase(std::remove_if(bullets.begin(), bullets.end(),
-    //    [](Bullet& b) { return b.x > 800 || b.x < 0 || b.y > 600 || b.y < 0; }),
-    //    bullets.end());
 }
 
 void Entity::renderBullets(SDL_Renderer* renderer) {

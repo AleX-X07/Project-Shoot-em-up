@@ -1,46 +1,74 @@
 ﻿#include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
 #include "Hero.h"
+#include "Screen.h"
 
 int main(int argc, char** argv) {
     SDL_Window* window;
     SDL_Renderer* renderer;
-    int w;
-    int h;
-    if (SDL_Init(SDL_INIT_VIDEO) < 0 || !SDL_CreateWindowAndRenderer("HELLO SDL", 640, 480, SDL_WINDOW_FULLSCREEN, &window, &renderer)) return 1;
+
+    if (SDL_Init(SDL_INIT_VIDEO) < 0 || !SDL_CreateWindowAndRenderer("SHOOT'EM UP", 640, 480, SDL_WINDOW_FULLSCREEN, &window, &renderer))
+        return 1;
 
     SDL_Surface* surface = IMG_Load("arena.png");
     SDL_Texture* background = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
 
-    Entity player(400.0f, 300.0f, 200, 200, SDL_Color{ 255, 0, 0, 255 },400);
+    Entity player(400.0f, 300.0f, 200, 200, SDL_Color{ 255, 0, 0, 255 }, 400);
     player.loadTexture(renderer, "player2.png");
-
     player.loadBulletTexture(renderer, "bullet.png");
 
     Uint64 last_time = SDL_GetTicks();
     bool keepGoing = true;
+    GameState screen = MENU;
+
+    int menuSelection = 0; // 0 = Play, 1 = Quit
+    bool enterPressed = false;
+
     while (keepGoing) {
         float dt = (SDL_GetTicks() - last_time) / 1000.0f;
         last_time = SDL_GetTicks();
+
         SDL_Event event;
-        while (SDL_PollEvent(&event)) if (event.type == SDL_EVENT_QUIT) keepGoing = false;
-        player.handleInput(SDL_GetKeyboardState(NULL), dt);
-        SDL_GetWindowSize(window, &w, &h);
-        player.clampToScreen(w, h);
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_EVENT_QUIT) {
+                keepGoing = false;
+                screen = QUIT;
+            }
 
-        player.updateBullets(dt);
+            if (screen == MENU && event.type == SDL_EVENT_KEY_DOWN) {
+                if (event.key.key == SDLK_UP || event.key.key == SDLK_W) {
+                    menuSelection = (menuSelection - 1 + 2) % 2;
+                }
+                if (event.key.key == SDLK_DOWN || event.key.key == SDLK_S) {
+                    menuSelection = (menuSelection + 1) % 2;
+                }
+                if (event.key.key == SDLK_RETURN && !enterPressed) {
+                    enterPressed = true;
+                    if (menuSelection == 0) {
+                        screen = LEVEL1;
+                    }
+                    else if (menuSelection == 1) {
+                        screen = QUIT;
+                    }
+                }
+                if (event.key.key == SDLK_ESCAPE) {
+                    screen = QUIT;
+                }
+            }
 
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderClear(renderer);
-        SDL_RenderTexture(renderer, background, NULL, NULL);
+            if (event.type == SDL_EVENT_KEY_UP) {
+                if (event.key.key == SDLK_RETURN) {
+                    enterPressed = false;
+                }
+            }
+        }
 
-        player.render(renderer);
-        player.renderBullets(renderer);
-		player.DisplayHP(renderer, player.HP);
+        screen = updateGameState(screen, renderer, background, player, dt, window);
 
-        SDL_RenderPresent(renderer);
+        if (screen == QUIT) keepGoing = false;
     }
+
     SDL_DestroyTexture(background);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);

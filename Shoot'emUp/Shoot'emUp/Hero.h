@@ -1,3 +1,4 @@
+#pragma once
 #include <SDL3/SDL.h>
 #include <vector>
 #include "Bullet.h"
@@ -9,7 +10,7 @@ public:
     SDL_Texture* texture;
     SDL_Color color;
     float speed;
-    SDL_Texture* bulletTexture;
+    SDL_Texture* bulletTexture = nullptr;
     std::vector<Bullet> bullets;
     float shootCooldown = 0.15f;      
     float timeSinceLastShot = 0.0f;
