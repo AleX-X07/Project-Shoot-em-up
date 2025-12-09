@@ -7,7 +7,6 @@
 #include "Enemy.h"
 #include "Classic_enemy.h"
 
-
 int main(int argc, char** argv) {
     SDL_Window* window;
     SDL_Renderer* renderer;
@@ -31,11 +30,25 @@ int main(int argc, char** argv) {
     SDL_Texture* background = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
 
-    // Variables pour les ennemis
+    // Variables pour les ennemis rouges
     std::srand(static_cast<unsigned>(std::time(nullptr)));
     std::vector<Enemy> enemies;
     Uint32 lastSpawn = SDL_GetTicks();
     Uint32 spawnInterval = 2000; // toutes les 2 secondes
+
+    // --- Classic_enemy ---
+    int windowWidth, windowHeight;
+    SDL_GetWindowSize(window, &windowWidth, &windowHeight);
+
+    Classic_enemy classic(
+        windowWidth,                       // spawn à droite
+        std::rand() % (windowHeight - 50), // position Y aléatoire
+        50,                                // largeur
+        50,                                // hauteur
+        2                                  // vitesse
+    );
+
+    std::vector<Projectile> projectiles;
 
     bool running = true;
     SDL_Event event;
@@ -45,11 +58,9 @@ int main(int argc, char** argv) {
             if (event.type == SDL_EVENT_QUIT) running = false;
         }
 
-        // Récupérer la taille de la fenêtre
-        int windowWidth, windowHeight;
         SDL_GetWindowSize(window, &windowWidth, &windowHeight);
 
-        // Spawn ennemi
+        // Spawn ennemi rouge
         Uint32 now = SDL_GetTicks();
         if (now - lastSpawn > spawnInterval) {
             spawnEnemy(enemies, windowWidth, windowHeight);
@@ -58,44 +69,18 @@ int main(int argc, char** argv) {
 
         updateEnemies(enemies);
 
-        // Effacer l'écran
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderClear(renderer);
+        // --- Update Classic_enemy ---
+        classic.update(windowWidth);
+        classic.shoot(projectiles, now);
 
-        // Dessiner le fond
-        SDL_RenderTexture(renderer, background, NULL, NULL);
-
-        // Dessiner les ennemis
-        renderEnemies(renderer, enemies);
-
-        // Afficher
-        SDL_RenderPresent(renderer);
-
-        SDL_Delay(16); // ~60 FPS
-    }
-    Uint32 now = SDL_GetTicks();
-
-    // Vecteurs globaux
-    std::vector<Classic_enemy> e;
-    std::vector<Projectile> projectiles;
-
-    // Exemple : un ennemi qui se déplace
-    e.push_back(Classic_enemy(600, 200, 50, 50, 3));
-
-    while (running) {
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_EVENT_QUIT) running = false;
+        // Update projectiles
+        for (auto& p : projectiles) {
+            p.x += p.speed;
         }
-
-        Uint32 now = SDL_GetTicks();
-
-        // Tir des ennemis
-        for (auto& e : enemies) {
-            e.shoot(projectiles, now);
-        }
-
-        // Mise à jour projectiles
-        updateProjectiles(projectiles);
+        // Nettoyer projectiles hors écran
+        projectiles.erase(std::remove_if(projectiles.begin(), projectiles.end(),
+            [](const Projectile& p) { return p.x + p.w < 0; }),
+            projectiles.end());
 
         // Effacer l'écran
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -104,18 +89,22 @@ int main(int argc, char** argv) {
         // Dessiner le fond
         SDL_RenderTexture(renderer, background, NULL, NULL);
 
-        // Dessiner les ennemis
+        // Dessiner les ennemis rouges
         renderEnemies(renderer, enemies);
+
+        // Dessiner Classic_enemy
+        classic.render(renderer);
 
         // Dessiner les projectiles
-        renderProjectiles(renderer, projectiles);
+        SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // jaune
+        for (auto& p : projectiles) {
+            SDL_FRect rect = { p.x, p.y, p.w, p.h };
+            SDL_RenderFillRect(renderer, &rect);
+        }
 
         SDL_RenderPresent(renderer);
-
         SDL_Delay(16); // ~60 FPS
     }
-
-
 
     SDL_DestroyTexture(background);
     SDL_DestroyRenderer(renderer);
