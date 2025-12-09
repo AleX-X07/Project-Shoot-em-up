@@ -36,6 +36,12 @@ int main(int argc, char** argv) {
     Uint32 lastSpawn = SDL_GetTicks();
     Uint32 spawnInterval = 2000; // toutes les 2 secondes
 
+    std::vector<Classic_enemy> classics;
+    Uint32 lastClassicSpawn = SDL_GetTicks();
+    Uint32 classicSpawnInterval = 3000; // toutes les 3 secondes
+    std::vector<Projectile> projectiles;
+
+
     // --- Classic_enemy ---
     int windowWidth, windowHeight;
     SDL_GetWindowSize(window, &windowWidth, &windowHeight);
@@ -47,8 +53,6 @@ int main(int argc, char** argv) {
         50,                                // hauteur
         2                                  // vitesse
     );
-
-    std::vector<Projectile> projectiles;
 
     bool running = true;
     SDL_Event event;
@@ -68,6 +72,40 @@ int main(int argc, char** argv) {
         }
 
         updateEnemies(enemies);
+
+        // Spawn Classic_enemy
+    	if (now - lastClassicSpawn > classicSpawnInterval) {
+            Classic_enemy::spawnClassicEnemy(classics, windowWidth, windowHeight);
+            lastClassicSpawn = now;
+        }
+
+        // Update Classic_enemy
+        for (auto& c : classics) {
+            c.update(windowWidth);
+            c.shoot(projectiles, now);
+        }
+
+        // Render Classic_enemy
+        for (auto& c : classics) {
+            c.render(renderer);  // Appel sur l'instance
+        }
+
+
+		// Update projectiles
+		for (auto& p : projectiles) {
+		    p.x += p.speed;
+		}
+		projectiles.erase(std::remove_if(projectiles.begin(), projectiles.end(),
+		    [](const Projectile& p) { return p.x + p.w < 0; }),
+		    projectiles.end());
+
+
+		// Render projectiles
+		SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+		for (auto& p : projectiles) {
+		    SDL_FRect rect = { p.x, p.y, p.w, p.h };
+		    SDL_RenderFillRect(renderer, &rect);
+		}
 
         // --- Update Classic_enemy ---
         classic.update(windowWidth);
@@ -92,8 +130,10 @@ int main(int argc, char** argv) {
         // Dessiner les ennemis rouges
         renderEnemies(renderer, enemies);
 
-        // Dessiner Classic_enemy
-        classic.render(renderer);
+        // Dessiner tous les Classic_enemy
+        for (auto& c : classics) {
+            c.render(renderer);
+        }
 
         // Dessiner les projectiles
         SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // jaune

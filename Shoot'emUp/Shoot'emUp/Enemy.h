@@ -5,15 +5,15 @@
 class Enemy
 {
 public:
-    int x, y;
-    int w, h;
-    int speed;
+    float x, y;
+    float w, h;
+    float speed;
 
     Enemy()
     {
 
     };
-    Enemy(int _x, int _y, int _w, int _h, int _speed)
+    Enemy(float _x, float _y, float _w, float _h, float _speed)
     {
         x = _x;
         y = _y;

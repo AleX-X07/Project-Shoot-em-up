@@ -26,7 +26,7 @@ void spawnEnemy(std::vector<Enemy>& enemies, int windowWidth, int windowHeight) 
     e.w = 50;
     e.h = 50;
     e.x = windowWidth; // apparaît à droite
-    e.y = std::rand() % (windowHeight - e.h);
+    e.y = std::rand() % (windowHeight - static_cast<int>(e.h));
     e.speed = 3 + std::rand() % 5;
     enemies.push_back(e);
 }
