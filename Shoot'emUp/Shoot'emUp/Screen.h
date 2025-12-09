@@ -11,5 +11,3 @@ enum GameState {
 };
 
 GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window);
-
-

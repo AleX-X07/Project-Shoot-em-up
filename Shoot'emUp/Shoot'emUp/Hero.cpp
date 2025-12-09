@@ -61,9 +61,6 @@ void Entity::handleInput(const bool* keys, float dt) {
 }
 
 void Entity::shoot() {
-        /*if (bulletTexture) {
-        bullets.emplace_back(rect.x + rect.w / 2 - 5, rect.y, 0, -400, 10, 20, bulletTexture);
-		}*/
         bullets.emplace_back(rect.x + rect.w, rect.y + rect.h / 2 - 5, 800, 0, 40, 10, SDL_Color{ 0, 0, 255, 255 });
 }
 
