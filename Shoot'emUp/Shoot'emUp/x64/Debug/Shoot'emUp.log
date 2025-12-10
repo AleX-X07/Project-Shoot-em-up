@@ -1,41 +1,9 @@
-﻿  Classic_enemy.cpp
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(732,103): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-  (compiler le fichier source 'Classic_enemy.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(732,103):
-      le contexte d’instanciation du modèle (le plus ancien) est
-          C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Classic_enemy.cpp(12,14):
-          voir la référence à l'instanciation de la fonction modèle 'void std::vector<Classic_enemy,std::allocator<Classic_enemy>>::emplace_back<int&,int&,int&,int&,int&>(int &,int &,int &,int &,int &)' en cours de compilation
-              C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Classic_enemy.cpp(12,26):
-              voir la première référence à « std::vector<Classic_enemy,std::allocator<Classic_enemy>>::emplace_back » dans « Classic_enemy::spawnClassicEnemy »
-          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\vector(924,24):
-          voir la référence à l'instanciation de la fonction modèle '_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_one_at_back<int&,int&,int&,int&,int&>(int &,int &,int &,int &,int &)' en cours de compilation
-          with
-          [
-              _Ty=Classic_enemy
-          ]
-          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\vector(845,20):
-          voir la référence à l'instanciation de la fonction modèle '_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_back_with_unused_capacity<int&,int&,int&,int&,int&>(int &,int &,int &,int &,int &)' en cours de compilation
-          with
-          [
-              _Ty=Classic_enemy
-          ]
-          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\vector(863,27):
-          voir la référence à l'instanciation de la fonction modèle 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,int&,int&,int&,int&,int&>(_Alloc &,_Objty *const ,int &,int &,int &,int &,int &)' en cours de compilation
-          with
-          [
-              _Alloc=std::allocator<Classic_enemy>,
-              _Ty=Classic_enemy,
-              _Objty=Classic_enemy
-          ]
-  
-  Enemy.cpp
-C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(28,11): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(29,23): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(30,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+﻿  EnemyManager.cpp
   Shoot'emUp.cpp
-C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shoot'emUp.cpp(14,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
-C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shoot'emUp.cpp(36,22): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
-C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shoot'emUp.cpp(40,29): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
-C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shoot'emUp.cpp(59,20): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shoot'emUp.cpp(15,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
+C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shoot'emUp.cpp(40,22): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shoot'emUp.cpp(41,29): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shoot'emUp.cpp(42,28): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shoot'emUp.cpp(53,20): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
   Génération de code en cours...
-LINK : fatal error LNK1104: impossible d'ouvrir le fichier 'SDL3.lib'
+  Shoot'emUp.vcxproj -> C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\x64\Debug\Shoot'emUp.exe

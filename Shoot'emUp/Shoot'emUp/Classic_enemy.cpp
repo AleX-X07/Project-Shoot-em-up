@@ -24,7 +24,7 @@ void Classic_enemy::update(int windowWidth) {
 
 // Tir
 void Classic_enemy::shoot(std::vector<Projectile>& projectiles, Uint32 now) {
-    if (now - lastShotTime >= 500) { // toutes les 0.5s
+    if (now - lastShotTime >= 1500) { // toutes les 0.5s
         Projectile p;
         p.x = x;
         p.y = y + h / 2;

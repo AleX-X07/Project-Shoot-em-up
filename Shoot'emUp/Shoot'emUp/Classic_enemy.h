@@ -7,6 +7,7 @@ struct Projectile {
     float x, y;
     float w, h;
     float speed;
+    float speedY = 0;
 };
 
 class Classic_enemy : public Enemy {
