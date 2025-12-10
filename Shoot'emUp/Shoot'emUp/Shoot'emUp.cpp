@@ -19,8 +19,8 @@ int main(int argc, char** argv) {
     SDL_DestroySurface(surface);
 
     Entity player(400.0f, 300.0f, 200, 200, SDL_Color{ 255, 0, 0, 255 }, 400);
-    player.loadTexture(renderer, "picture/player2.png");
-    /*player.loadBulletTexture(renderer, "bullet.png");*/
+    player.loadTexture(renderer, "picture/player.png");
+    player.loadBulletTexture(renderer, "picture/bullet.png");
 
     Uint64 last_time = SDL_GetTicks();
     bool keepGoing = true;

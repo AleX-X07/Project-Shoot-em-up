@@ -39,6 +39,7 @@ void Entity::loadTexture(SDL_Renderer* renderer, const char* filepath) {
     if (surface) {
         texture = SDL_CreateTextureFromSurface(renderer, surface);
         SDL_DestroySurface(surface);
+        SDL_SetTextureScaleMode(texture, SDL_SCALEMODE_NEAREST);
     }
     else {
         SDL_Log("Erreur chargement texture: %s", SDL_GetError());
@@ -61,7 +62,8 @@ void Entity::handleInput(const bool* keys, float dt) {
 }
 
 void Entity::shoot() {
-        bullets.emplace_back(rect.x + rect.w, rect.y + rect.h / 2 - 5, 800, 0, 40, 10, SDL_Color{ 0, 0, 255, 255 });
+        bullets.emplace_back(rect.x + rect.w, rect.y + rect.h / 2 - 5, 800, 0, 120, 60, SDL_Color{ 0, 0, 255, 255 });
+        bullets.back().texture = bulletTexture;
 }
 
 void Entity::loadBulletTexture(SDL_Renderer* renderer, const char* filepath) {
@@ -69,6 +71,7 @@ void Entity::loadBulletTexture(SDL_Renderer* renderer, const char* filepath) {
     if (surface) {
         bulletTexture = SDL_CreateTextureFromSurface(renderer, surface);
         SDL_DestroySurface(surface);
+        SDL_SetTextureScaleMode(bulletTexture, SDL_SCALEMODE_NEAREST);
     }
     else {
         SDL_Log("Erreur chargement bullet: %s", SDL_GetError());
@@ -80,7 +83,9 @@ void Entity::updateBullets(float dt) {
 }
 
 void Entity::renderBullets(SDL_Renderer* renderer) {
-    for (auto& b : bullets) b.render(renderer);
+    for (auto& b : bullets) {
+        b.render(renderer);  // Utiliser la méthode render de Bullet
+    }
 }
 
 void Entity::DisplayHP(SDL_Renderer* renderer, int HP) {
