@@ -44,15 +44,6 @@ int main(int argc, char** argv) {
 
     // --- Classic_enemy ---
     int windowWidth, windowHeight;
-    SDL_GetWindowSize(window, &windowWidth, &windowHeight);
-
-    Classic_enemy classic(
-        windowWidth,                       // spawn à droite
-        std::rand() % (windowHeight - 50), // position Y aléatoire
-        50,                                // largeur
-        50,                                // hauteur
-        2                                  // vitesse
-    );
 
     bool running = true;
     SDL_Event event;
@@ -79,26 +70,13 @@ int main(int argc, char** argv) {
             lastClassicSpawn = now;
         }
 
-        // Update Classic_enemy
-        for (auto& c : classics) {
-            c.update(windowWidth);
-            c.shoot(projectiles, now);
-        }
 
         // Render Classic_enemy
         for (auto& c : classics) {
-            c.render(renderer);  // Appel sur l'instance
+            c.render(renderer); // Appel sur l'instance
+            c.update(windowWidth);
+            c.shoot(projectiles, now);
         }
-
-
-		// Update projectiles
-		for (auto& p : projectiles) {
-		    p.x += p.speed;
-		}
-		projectiles.erase(std::remove_if(projectiles.begin(), projectiles.end(),
-		    [](const Projectile& p) { return p.x + p.w < 0; }),
-		    projectiles.end());
-
 
 		// Render projectiles
 		SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
@@ -107,9 +85,7 @@ int main(int argc, char** argv) {
 		    SDL_RenderFillRect(renderer, &rect);
 		}
 
-        // --- Update Classic_enemy ---
-        classic.update(windowWidth);
-        classic.shoot(projectiles, now);
+        
 
         // Update projectiles
         for (auto& p : projectiles) {
