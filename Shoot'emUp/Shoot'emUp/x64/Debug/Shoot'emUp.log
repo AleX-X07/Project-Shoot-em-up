@@ -1,4 +1,7 @@
-﻿  Hero.cpp
+﻿  Bullet.cpp
+  Fonction.cpp
+  Hero.cpp
+  Menu.cpp
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(732,103): warning C4244: 'argument' : conversion de '_Ty' en 'float', perte possible de données
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(732,103): warning C4244:         with
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(732,103): warning C4244:         [
@@ -32,4 +35,17 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.3520
               _Objty=Bullet
           ]
   
-  Shoot'emUp.vcxproj -> C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\x64\Debug\Shoot'emUp.exe
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(14,28): warning C4838: la conversion de 'int' en 'float' requiert une conversion restrictive
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(14,28): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(14,32): warning C4838: la conversion de 'int' en 'float' requiert une conversion restrictive
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(14,32): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(14,36): warning C4838: la conversion de 'int' en 'float' requiert une conversion restrictive
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(14,36): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(14,40): warning C4838: la conversion de 'int' en 'float' requiert une conversion restrictive
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(14,40): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+  Screen.cpp
+  Shoot'emUp.cpp
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shoot'emUp.cpp(11,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shoot'emUp.cpp(13,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
+  Génération de code en cours...
+LINK : fatal error LNK1104: impossible d'ouvrir le fichier 'SDL3.lib'
