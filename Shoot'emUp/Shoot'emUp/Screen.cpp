@@ -1,10 +1,11 @@
 #include "Screen.h"
 #include "Menu.h"
+#include "EnemyManager.h"
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
 #include <iostream>
 
-GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window) {
+GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, EnemyManager* enemyManager) {
     int w, h;
     static int menuSelection = 0; // 0 = Play, 1 = Quit
     static bool upPressed = false;
@@ -65,7 +66,6 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
     }
 
     case LEVEL1: {
-
         player.handleInput(keys, dt);
         SDL_GetWindowSize(window, &w, &h);
         player.clampToScreen(w, h);
@@ -78,7 +78,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
         player.render(renderer);
         player.renderBullets(renderer);
         player.DisplayHP(renderer, player.HP);
-
+        enemyManager->DisplayEnnemy(window, renderer, background);
         SDL_RenderPresent(renderer);
 
         if (keys[SDL_SCANCODE_ESCAPE]) {
@@ -96,4 +96,38 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
     }
 
     return screen;
+}
+
+
+
+
+void NavigateMenu(GameState screen, SDL_Event event, bool keepgoing) {
+    int menuSelection = 0;
+    bool enterPressed = false;
+    if (screen == MENU && event.type == SDL_EVENT_KEY_DOWN) {
+        if (event.key.key == SDLK_UP || event.key.key == SDLK_W) {
+            menuSelection = (menuSelection - 1 + 2) % 2;
+        }
+        if (event.key.key == SDLK_DOWN || event.key.key == SDLK_S) {
+            menuSelection = (menuSelection + 1) % 2;
+        }
+        if (event.key.key == SDLK_RETURN && !enterPressed) {
+            enterPressed = true;
+            if (menuSelection == 0) {
+                screen = LEVEL1;
+            }
+            else if (menuSelection == 1) {
+                screen = QUIT;
+            }
+        }
+        if (event.key.key == SDLK_ESCAPE) {
+            screen = QUIT;
+        }
+    }
+
+    if (event.type == SDL_EVENT_KEY_UP) {
+        if (event.key.key == SDLK_RETURN) {
+            enterPressed = false;
+        }
+    }
 }

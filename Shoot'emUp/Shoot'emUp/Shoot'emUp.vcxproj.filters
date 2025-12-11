@@ -1,84 +1,72 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Fichiers sources">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Fichiers de ressources">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Shoot%27emUp.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="ShootMultiple_Enemy.cpp">
+      <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Hero.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Fonction.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="main.cpp">
+      <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="Screen.cpp">
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Classic_enemy.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="ShootMultiple_Enemy.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="Hero.cpp">
+      <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="EnemyManager.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Classic_enemy.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Hero.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Fonction.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="Bullet.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Classic_enemy.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Hero.h">
+      <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="Menu.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="Screen.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="ShootMultiple_Enemy.h">
+      <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Shoot%27emUp.rc">
-      <Filter>Fichiers de ressources</Filter>
-    </ResourceCompile>
-    <ClInclude Include="Enemy.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Classic_enemy.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="ShootMultiple_Enemy.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyManager.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
+    <ResourceCompile Include="Shoot%27emUp.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header">
+      <UniqueIdentifier>{b86e4d2e-c94f-4d82-956e-1aeb456efaac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{602323d2-b15d-4c82-a6dc-12712cbf2f47}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
