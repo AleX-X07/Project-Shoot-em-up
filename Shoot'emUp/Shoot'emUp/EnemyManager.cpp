@@ -127,6 +127,5 @@ void EnemyManager::DisplayEnnemy(SDL_Window* window, SDL_Renderer* renderer, SDL
     SDL_RenderClear(renderer);
     SDL_RenderTexture(renderer, background, NULL, NULL);
     render(renderer);
-    SDL_RenderPresent(renderer);
     SDL_Delay(16);
 }

@@ -46,13 +46,12 @@ int main(int argc, char** argv) {
                 keepGoing = false;
                 screen = QUIT;
             }
-
-            NavigateMenu(screen,event ,keepGoing);
         }
 
-        screen = updateGameState(screen, renderer, background, player, dt, window, enemyManager);
-
-        if (screen == QUIT) keepGoing = false;
+        screen = updateGameState(screen, player, dt, window, enemyManager);
+        if (screen == QUIT) {
+            keepGoing = false;
+        }
     }
 
     SDL_DestroyTexture(background);

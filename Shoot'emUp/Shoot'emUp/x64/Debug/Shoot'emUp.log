@@ -3,4 +3,5 @@
 C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(20,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
 C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(22,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
   Génération de code en cours...
-  Shoot'emUp.vcxproj -> C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\x64\Debug\Shoot'emUp.exe
+Screen.obj : error LNK2001: symbole externe non résolu "int gMenuSelection" (?gMenuSelection@@3HA)
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\x64\Debug\Shoot'emUp.exe : fatal error LNK1120: 1 externes non résolus
