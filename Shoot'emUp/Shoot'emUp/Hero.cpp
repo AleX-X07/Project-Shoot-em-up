@@ -90,7 +90,7 @@ void Entity::renderBullets(SDL_Renderer* renderer) {
 
 void Entity::DisplayHP(SDL_Renderer* renderer, int HP) {
     for (int i = 0; i < HP; ++i) {
-        SDL_FRect hpRect = { 10.0f + i * 35.0f, 10.0f, 30.0f, 30.0f };
+        SDL_FRect hpRect = { 10.0f + i * 35.0f, 10.0f, 30, 30 };
         SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
         SDL_RenderFillRect(renderer, &hpRect);
     }

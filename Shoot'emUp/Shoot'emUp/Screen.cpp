@@ -1,12 +1,14 @@
 #include "Screen.h"
 #include "Menu.h"
+#include "Enemy.h"
+#include <vector>
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
 #include <iostream>
 
-GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window) {
+GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies) {
     int w, h;
-    static int menuSelection = 0; // 0 = Play, 1 = Quit
+    static int menuSelection = 0;
     static bool upPressed = false;
     static bool downPressed = false;
     static bool enterPressed = false;
@@ -28,13 +30,10 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
         SDL_Color white = { 255, 255, 255, 255 };
 		TitleMenu(renderer, w, h, white, "SHOOT'EM UP", font, w / 2 - 200, 200, 400, 80);
 
-        // --- Option PLAY ---
 		ButtonMenu(renderer, w, h, white, "PLAY", font, w / 2 - 100, h / 2 - 60, 200, 50, menuSelection, 0);
 
-        // --- Option QUIT ---
         ButtonMenu(renderer, w, h, white, "QUIT", font, w / 2 - 100, h / 2 + 20, 200, 50, menuSelection, 1);
         
-        // --- Navigation menu ---
         if (keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_W]) {
             if (!upPressed) {
                 menuSelection = (menuSelection - 1 + 2) % 2;
@@ -51,7 +50,6 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
         }
         else downPressed = false;
 
-        // --- Validation ---
         if (keys[SDL_SCANCODE_RETURN]) {
             if (!enterPressed) {
                 enterPressed = true;
@@ -65,11 +63,21 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
     }
 
     case LEVEL1: {
+        static float spawnTimer = 0;
+        const float spawnInterval = 1.5;
 
         player.handleInput(keys, dt);
         SDL_GetWindowSize(window, &w, &h);
         player.clampToScreen(w, h);
         player.updateBullets(dt);
+
+        spawnTimer += dt;
+        if (spawnTimer >= spawnInterval) {
+            Enemy::spawnEnemy(enemies, w, h);
+            spawnTimer = 0;
+        }
+
+        Enemy::updateEnemy(enemies);
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
@@ -77,13 +85,16 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
 
         player.render(renderer);
         player.renderBullets(renderer);
+        Enemy::renderEnemy(renderer, enemies);
         player.DisplayHP(renderer, player.HP);
+
 
         SDL_RenderPresent(renderer);
 
         if (keys[SDL_SCANCODE_ESCAPE]) {
             player.HP = 3;
             player.bullets.clear();
+            enemies.clear();
             player.rect.x = 400.0f;
             player.rect.y = 300.0f;
             return MENU;

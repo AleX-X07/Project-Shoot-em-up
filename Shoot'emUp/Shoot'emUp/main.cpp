@@ -3,10 +3,12 @@
 #include <SDL3_ttf/SDL_ttf.h>
 #include "Hero.h"
 #include "Screen.h"
+#include "Enemy.h"
 
 int main(int argc, char** argv) {
     SDL_Window* window;
     SDL_Renderer* renderer;
+    std::vector<Enemy>enemies;
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0 || !SDL_CreateWindowAndRenderer("SHOOT'EM UP", 640, 480, SDL_WINDOW_FULLSCREEN, &window, &renderer))
         return 1;
@@ -18,7 +20,7 @@ int main(int argc, char** argv) {
     SDL_Texture* background = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
 
-    Entity player(400.0f, 300.0f, 200, 200, SDL_Color{ 255, 0, 0, 255 }, 400);
+    Entity player(400.0f, 300.0f, 150, 150, SDL_Color{ 255, 0, 0, 255 }, 400);
     player.loadTexture(renderer, "picture/player.png");
     player.loadBulletTexture(renderer, "picture/bullet.png");
 
@@ -68,7 +70,7 @@ int main(int argc, char** argv) {
             }
         }
 
-        screen = updateGameState(screen, renderer, background, player, dt, window);
+        screen = updateGameState(screen, renderer, background, player, dt, window, enemies);
 
         if (screen == QUIT) keepGoing = false;
     }
