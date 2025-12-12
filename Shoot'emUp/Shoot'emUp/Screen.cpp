@@ -83,6 +83,8 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
         SDL_RenderClear(renderer);
         SDL_RenderTexture(renderer, background, NULL, NULL);
 
+        player.Collide(enemies);
+
         player.render(renderer);
         player.renderBullets(renderer);
         Enemy::renderEnemy(renderer, enemies);

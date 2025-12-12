@@ -1,12 +1,16 @@
 #pragma once
+#include <iostream>
 #include <SDL3/SDL.h>
 #include <vector>
-#include "Bullet.h"
 #include <SDL3_image/SDL_image.h>
+#include "Enemy.h"
+#include "Bullet.h"
 
 class Entity {
 public:
+
     SDL_FRect rect;
+    SDL_FRect hitbox;
     SDL_Texture* texture;
     SDL_Color color;
     float speed;
@@ -30,6 +34,7 @@ public:
 	void renderBullets(SDL_Renderer* renderer);
     void loadBulletTexture(SDL_Renderer* renderer, const char* filepath);
 	void DisplayHP(SDL_Renderer* renderer, int HP);
+    void Collide(std::vector<Enemy>& enemies);
 
     ~Entity();
 };

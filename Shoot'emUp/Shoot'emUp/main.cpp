@@ -1,6 +1,7 @@
 ﻿#include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
 #include <SDL3_ttf/SDL_ttf.h>
+#include <iostream>
 #include "Hero.h"
 #include "Screen.h"
 #include "Enemy.h"
@@ -9,6 +10,12 @@ int main(int argc, char** argv) {
     SDL_Window* window;
     SDL_Renderer* renderer;
     std::vector<Enemy>enemies;
+
+    const int FPS = 60;
+    const int FRAME_DELAY = 1000 / FPS;
+
+    Uint64 frameStart;
+    int frameTime;
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0 || !SDL_CreateWindowAndRenderer("SHOOT'EM UP", 640, 480, SDL_WINDOW_FULLSCREEN, &window, &renderer))
         return 1;
@@ -34,6 +41,7 @@ int main(int argc, char** argv) {
     while (keepGoing) {
         float dt = (SDL_GetTicks() - last_time) / 1000.0f;
         last_time = SDL_GetTicks();
+        frameStart = SDL_GetTicks();
 
         SDL_Event event;
         while (SDL_PollEvent(&event)) {
@@ -72,8 +80,21 @@ int main(int argc, char** argv) {
 
         screen = updateGameState(screen, renderer, background, player, dt, window, enemies);
 
+        frameTime = SDL_GetTicks() - frameStart;
+
+        if (frameTime < FRAME_DELAY) {
+            SDL_Delay(FRAME_DELAY - frameTime);
+        }
+
+
+        if (player.HP == 0) {
+            std::cout << "Fini !";
+        }
         if (screen == QUIT) keepGoing = false;
     }
+
+
+
 
     SDL_DestroyTexture(background);
     SDL_DestroyRenderer(renderer);

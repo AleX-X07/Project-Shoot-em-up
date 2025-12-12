@@ -1,7 +1,7 @@
 #include "Hero.h"
 
 Entity::Entity(float x, float y, float w, float h, float spd)
-    : rect{ x, y, w, h }, texture(nullptr), color{ 255, 255, 255, 255 }, speed(spd) {
+    : rect{ x, y, w, h }, texture(nullptr), color{255, 255, 255, 255}, speed(spd) {
 }
 
 Entity::Entity(float x, float y, float w, float h, SDL_Texture* tex, float spd)
@@ -84,7 +84,7 @@ void Entity::updateBullets(float dt) {
 
 void Entity::renderBullets(SDL_Renderer* renderer) {
     for (auto& b : bullets) {
-        b.render(renderer);  // Utiliser la méthode render de Bullet
+        b.render(renderer);
     }
 }
 
@@ -93,6 +93,15 @@ void Entity::DisplayHP(SDL_Renderer* renderer, int HP) {
         SDL_FRect hpRect = { 10.0f + i * 35.0f, 10.0f, 30, 30 };
         SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
         SDL_RenderFillRect(renderer, &hpRect);
+    }
+}
+
+void Entity::Collide(std::vector<Enemy>& enemies) {
+    for (auto& e : enemies) {
+        if (SDL_HasRectIntersectionFloat(&rect, &e.rect)) {
+            HP--;
+            printf("F");
+        }
     }
 }
 

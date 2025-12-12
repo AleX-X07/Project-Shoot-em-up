@@ -1,6 +1,6 @@
 #include "Enemy.h"
 Enemy::Enemy() {
-
+	
 }
 
 Enemy::Enemy(float _x, float _y, float _w, float _h, float _speed, SDL_Color _color) {
@@ -45,9 +45,11 @@ void Enemy::spawnEnemy(std::vector<Enemy>& enemies, int windowWidth, int windowH
 	e.x = windowWidth;
 	e.y = randomInt(0, windowHeight - 50);
 	e.color = { 255,0,0,255 };
-	e.speed = 0.01;
+	e.speed = 5;
 	enemies.push_back(e);
 }
+
+
 
 
 
