@@ -140,7 +140,7 @@
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Screen.cpp" />
-    <ClCompile Include="Shoot%27emUp.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
