@@ -23,6 +23,7 @@ int main(int argc, char** argv) {
         SDL_Log("Erreur SDL_ttf : %s", SDL_GetError());
         return 1;
     }
+
     SDL_Surface* surface = IMG_Load("picture/arena.png");
     SDL_Texture* background = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
@@ -86,16 +87,12 @@ int main(int argc, char** argv) {
             SDL_Delay(FRAME_DELAY - frameTime);
         }
 
-
-        if (player.HP == 0) {
-            std::cout << "Fini !";
-        }
         if (screen == QUIT) keepGoing = false;
     }
 
 
 
-
+    
     SDL_DestroyTexture(background);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);

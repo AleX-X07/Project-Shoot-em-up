@@ -22,6 +22,9 @@ int Enemy::randomInt(int min, int max) {
 void Enemy::updateEnemy(std::vector<Enemy>& enemies) {
 	for (auto& e : enemies) {
 		e.x -= e.speed;
+
+		e.rect.x = e.x;
+		e.rect.y = e.y;
 	}
 	for (int i = enemies.size() - 1; i >= 0; i--) {
 		if (enemies[i].x + enemies[i].w < 0) {
@@ -44,6 +47,7 @@ void Enemy::spawnEnemy(std::vector<Enemy>& enemies, int windowWidth, int windowH
 	e.h = 50;
 	e.x = windowWidth;
 	e.y = randomInt(0, windowHeight - 50);
+	e.rect = {e.x,e.y,e.w,e.h};
 	e.color = { 255,0,0,255 };
 	e.speed = 5;
 	enemies.push_back(e);

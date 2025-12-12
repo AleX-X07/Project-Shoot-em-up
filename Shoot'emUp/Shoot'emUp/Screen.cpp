@@ -6,6 +6,9 @@
 #include <SDL3_ttf/SDL_ttf.h>
 #include <iostream>
 
+float collisionCooldown = 0.5f;
+float timeSinceLastHit = 0.0f;
+
 GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies) {
     int w, h;
     static int menuSelection = 0;
@@ -13,6 +16,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
     static bool downPressed = false;
     static bool enterPressed = false;
     static TTF_Font* font = nullptr;
+    SDL_Color white = { 255, 255, 255, 255 };
 
     const bool* keys = SDL_GetKeyboardState(NULL);
 
@@ -27,7 +31,6 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
         SDL_SetRenderDrawColor(renderer, 0, 0, 50, 255);
         SDL_RenderClear(renderer);
         SDL_GetWindowSize(window, &w, &h);
-        SDL_Color white = { 255, 255, 255, 255 };
 		TitleMenu(renderer, w, h, white, "SHOOT'EM UP", font, w / 2 - 200, 200, 400, 80);
 
 		ButtonMenu(renderer, w, h, white, "PLAY", font, w / 2 - 100, h / 2 - 60, 200, 50, menuSelection, 0);
@@ -63,6 +66,11 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
     }
 
     case LEVEL1: {
+        if (player.HP <= 0) {
+            screen = GAMEOVER;
+            break;
+        }
+
         static float spawnTimer = 0;
         const float spawnInterval = 1.5;
 
@@ -83,13 +91,19 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
         SDL_RenderClear(renderer);
         SDL_RenderTexture(renderer, background, NULL, NULL);
 
-        player.Collide(enemies);
-
         player.render(renderer);
         player.renderBullets(renderer);
         Enemy::renderEnemy(renderer, enemies);
         player.DisplayHP(renderer, player.HP);
 
+        timeSinceLastHit += dt;
+        if (timeSinceLastHit < collisionCooldown){
+            
+        }
+        else {
+            timeSinceLastHit = 0;
+            player.Collide(enemies);
+        }
 
         SDL_RenderPresent(renderer);
 
@@ -103,6 +117,30 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
         }
         break;
     }
+    case GAMEOVER:
+        if (!font) {
+            font = TTF_OpenFont("assets/arialmt.ttf", 32);
+            if (!font) {
+                SDL_Log("Erreur chargement police: %s", SDL_GetError());
+            }
+        }
+        SDL_SetRenderDrawColor(renderer, 0, 0, 50, 255);
+        SDL_RenderClear(renderer);
+        SDL_GetWindowSize(window, &w, &h);
+        TitleMenu(renderer, w, h, white, "GAME OVER", font, w / 2 - 200, 200, 400, 80);
+
+        ButtonMenu(renderer, w, h, white, "QUIT", font, w / 2 - 100, h / 2 + 20, 200, 50, menuSelection, 1);
+ 
+        if (keys[SDL_SCANCODE_RETURN]) {
+            if (!enterPressed) {
+                enterPressed = true;
+                if (menuSelection == 0) return LEVEL1;
+                if (menuSelection == 1) return QUIT;
+            }
+        }
+        else enterPressed = false;
+        SDL_RenderPresent(renderer);
+        break;
 
     case QUIT:
         break;

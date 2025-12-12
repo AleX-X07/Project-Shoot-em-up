@@ -100,7 +100,6 @@ void Entity::Collide(std::vector<Enemy>& enemies) {
     for (auto& e : enemies) {
         if (SDL_HasRectIntersectionFloat(&rect, &e.rect)) {
             HP--;
-            printf("F");
         }
     }
 }

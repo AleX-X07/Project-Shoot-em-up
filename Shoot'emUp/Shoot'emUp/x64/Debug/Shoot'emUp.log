@@ -32,4 +32,10 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.3520
               _Objty=Bullet
           ]
   
+  Screen.cpp
+  main.cpp
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(20,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(22,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(84,36): warning C4244: '=' : conversion de 'Uint64' en 'int', perte possible de données
+  Génération de code en cours...
   Shoot'emUp.vcxproj -> C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\x64\Debug\Shoot'emUp.exe
