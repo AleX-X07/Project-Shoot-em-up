@@ -7,7 +7,10 @@ public:
     float x, y;
     float vx, vy;
     int w, h;
-    SDL_Texture* texture = nullptr;  // AJOUT de = nullptr
+
+    Bullet() = default;
+
+    SDL_Texture* texture = nullptr;  
     SDL_Color color;
     Bullet(float startX, float startY, float velX, float velY, int width, int height, SDL_Color col);
     void update(float dt);

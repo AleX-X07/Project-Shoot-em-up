@@ -138,6 +138,8 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="color.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Enemy_Manager.cpp" />
+    <ClCompile Include="Shooter_Enemy.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Screen.cpp" />
@@ -147,6 +149,8 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Enemy_Manager.h" />
+    <ClInclude Include="Shooter_Enemy.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="resource.h" />

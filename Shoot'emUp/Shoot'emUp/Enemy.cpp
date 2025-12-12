@@ -1,15 +1,31 @@
 #include "Enemy.h"
 Enemy::Enemy() {
-
+	
 }
 
-Enemy::Enemy(float _x, float _y, float _w, float _h, float _speed, SDL_Color _color) {
+Enemy::Enemy(float _x, float _y, float _w, float _h, float _speed, int _health, SDL_Color _color) {
 	x = _x;
 	y = _y;
 	w = _w;
 	h = _h;
 	speed = _speed;
+	health = _health;
 	color = _color;
+}
+
+void Enemy::update(int windowWidth) {
+	x -= speed * 2.0f; // déplacement vers la gauche
+}
+
+void Enemy::render(SDL_Renderer* renderer) {
+	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // bleu
+	SDL_FRect rect = {
+		x,
+		y,
+		w,
+		h
+	};
+	SDL_RenderFillRect(renderer, &rect);
 }
 
 int Enemy::randomInt(int min, int max) {
@@ -45,7 +61,7 @@ void Enemy::spawnEnemy(std::vector<Enemy>& enemies, int windowWidth, int windowH
 	e.x = windowWidth;
 	e.y = randomInt(0, windowHeight - 50);
 	e.color = { 255,0,0,255 };
-	e.speed = 0.01;
+	e.speed = 1;
 	enemies.push_back(e);
 }
 
