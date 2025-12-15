@@ -1,6 +1,6 @@
 #include "Enemy.h"
 Enemy::Enemy() {
-	
+	HP = 3;
 }
 
 Enemy::Enemy(float _x, float _y, float _w, float _h, float _speed, SDL_Color _color) {
@@ -34,11 +34,11 @@ void Enemy::updateEnemy(std::vector<Enemy>& enemies) {
 }
 
 void Enemy::renderEnemy(SDL_Renderer* renderer, const std::vector<Enemy>& enemies) {
-	for (const auto& e : enemies) {
-		SDL_FRect rect = { e.x, e.y, e.w, e.h };
-		SDL_SetRenderDrawColor(renderer, e.color.r, e.color.g, e.color.b, e.color.a);
-		SDL_RenderFillRect(renderer, &rect);
-	}
+		for (const auto& e : enemies) {
+			SDL_FRect rect = { e.x, e.y, e.w, e.h };
+			SDL_SetRenderDrawColor(renderer, e.color.r, e.color.g, e.color.b, e.color.a);
+			SDL_RenderFillRect(renderer, &rect);
+		}
 }
 
 void Enemy::spawnEnemy(std::vector<Enemy>& enemies, int windowWidth, int windowHeight) {
@@ -53,6 +53,31 @@ void Enemy::spawnEnemy(std::vector<Enemy>& enemies, int windowWidth, int windowH
 	enemies.push_back(e);
 }
 
+void Enemy::Collide(std::vector<Bullet>& Bullets) {
+	SDL_FRect rectBullets;
+	for (auto& b : Bullets) {
+		rectBullets = { b.x, b.y, b.h ,b.w };
+		if (SDL_HasRectIntersectionFloat(&rect, &rectBullets)) {
+			HP--;
+		}
+	}
+}
+
+void Enemy::Alive(std::vector<Enemy>& enemies) {
+	for (int i = enemies.size() - 1; i >= 0; i--) {
+		if (enemies[i].HP <= 0) {
+			enemies.erase(enemies.begin() + i);
+
+		}
+	}
+}
+
+Enemy::~Enemy() {
+	if (texture) {
+		SDL_DestroyTexture(texture);
+	}
+
+}
 
 
 

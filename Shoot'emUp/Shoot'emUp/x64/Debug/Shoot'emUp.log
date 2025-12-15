@@ -1,5 +1,2 @@
-﻿  main.cpp
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(20,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(22,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(58,36): warning C4244: '=' : conversion de 'Uint64' en 'int', perte possible de données
+﻿  Screen.cpp
   Shoot'emUp.vcxproj -> C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\x64\Debug\Shoot'emUp.exe

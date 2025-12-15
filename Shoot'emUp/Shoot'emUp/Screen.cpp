@@ -1,13 +1,16 @@
 #include "Screen.h"
 #include "Menu.h"
 #include "Enemy.h"
+#include "Bullet.h"
 #include <vector>
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
 #include <iostream>
 
 float collisionCooldown = 0.5f;
+float collisionCooldownEnemy = 0.2f;
 float timeSinceLastHit = 0.0f;
+float timeSinceLastHitBullet = 0.0f;
 
 void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool enterPressed) {
     enterPressed = false;
@@ -40,9 +43,10 @@ void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool ent
     }
 }
 
-GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies) {
+GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets) {
     int w, h;
     static int menuSelection = 0;
+    static int menuDeathSelection = 0;
     static bool upPressed = false;
     static bool downPressed = false;
     static bool enterPressed = false;
@@ -136,6 +140,18 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
             player.Collide(enemies);
         }
 
+        timeSinceLastHitBullet += dt;
+        if (timeSinceLastHitBullet < collisionCooldownEnemy) {
+
+        }
+        else {
+            for (auto& e : enemies) {
+                e.Collide(player.bullets);
+            }
+        }
+        
+        Enemy::Alive(enemies);
+
         SDL_RenderPresent(renderer);
 
         if (keys[SDL_SCANCODE_ESCAPE]) {
@@ -160,19 +176,38 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
         SDL_GetWindowSize(window, &w, &h);
         TitleMenu(renderer, w, h, white, "GAME OVER", font, w / 2 - 200, 200, 400, 80);
 
-        ButtonMenu(renderer, w, h, white, "QUIT", font, w / 2 - 100, h / 2 + 20, 200, 50, menuSelection, 1);
+        ButtonMenu(renderer, w, h, white, "MENU", font, w / 2 - 100, h / 2 - 60, 200, 50, menuDeathSelection, 0);
+
+        ButtonMenu(renderer, w, h, white, "QUIT", font, w / 2 - 100, h / 2 + 20, 200, 50, menuDeathSelection, 1);
  
+        if (keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_W]) {
+            if (!upPressed) {
+                menuDeathSelection = (menuDeathSelection - 1 + 2) % 2;
+                upPressed = true;
+            }
+        }
+        else upPressed = false;
+
+        if (keys[SDL_SCANCODE_DOWN] || keys[SDL_SCANCODE_S]) {
+            if (!downPressed) {
+                menuDeathSelection = (menuDeathSelection - 1 + 2) % 2;
+                downPressed = true;
+            }
+        }
+        else downPressed = false;
+
         if (keys[SDL_SCANCODE_RETURN]) {
             if (!enterPressed) {
                 enterPressed = true;
-                if (menuSelection == 0) return LEVEL1;
-                if (menuSelection == 1) return QUIT;
+                if (menuDeathSelection == 0) {
+                    return MENU;
+                }
+                if (menuDeathSelection == 1) return QUIT;
             }
         }
         else enterPressed = false;
         SDL_RenderPresent(renderer);
         break;
-
     case QUIT:
         break;
     }

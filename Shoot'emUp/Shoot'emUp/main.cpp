@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
     bool keepGoing = true;
     GameState screen = MENU;
 
-    int menuSelection = 0; 
+    int menuSelection = 0;
     bool enterPressed = false;
 
     while (keepGoing) {
@@ -53,7 +53,7 @@ int main(int argc, char** argv) {
             NavigateMenu(screen, event, menuSelection, enterPressed);
         }
 
-        screen = updateGameState(screen, renderer, background, player, dt, window, enemies);
+        screen = updateGameState(screen, renderer, background, player, dt, window, enemies, player.bullets);
 
         frameTime = SDL_GetTicks() - frameStart;
 
@@ -61,7 +61,9 @@ int main(int argc, char** argv) {
             SDL_Delay(FRAME_DELAY - frameTime);
         }
 
-        if (screen == QUIT) keepGoing = false;
+        if (screen == QUIT) {
+            keepGoing = false;
+        }
     }
 
     SDL_DestroyTexture(background);
