@@ -1,16 +1,61 @@
 #include "Shooter_Enemy.h"
 #include <cstdlib>
 
+Shooter_Enemy::Shooter_Enemy() 
+{
 
+}
 
-// Modifie aussi le constructeur pour accepter la santé
-Shooter_Enemy::Shooter_Enemy(float px, float py, float pw, float ph, float ps, int health)
-    : Enemy(px, py, pw, ph, ps, health, color), lastShotTime(0) {
+Shooter_Enemy::Shooter_Enemy(float px, float py, float pw, float ph, float ps, int _health, SDL_Color _color)
+{
+    x = px;
+    y = py;
+    w = pw;
+    h = ph;
+    health = _health;
+    color = _color;
 }
 
 // Déplacement
 void Shooter_Enemy::update(int windowWidth) {
     x -= speed; // déplacement vers la gauche
+}
+
+// Rendu
+void Shooter_Enemy::render(SDL_Renderer* renderer) {
+    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255); // bleu
+    SDL_FRect rect = {
+        x,
+        y,
+        w,
+        h
+    };
+    SDL_RenderFillRect(renderer, &rect);
+}
+
+void Shooter_Enemy::updateShooter_Enemy(std::vector<Shooter_Enemy>& Shooter) {
+    for (auto& s : Shooter) {
+        s.x -= s.speed;
+    }
+    for (int i = Shooter.size() - 1; i >= 0; i--) {
+        if (Shooter[i].x + Shooter[i].w < 0) {
+            Shooter.erase(Shooter.begin() + i);
+        }
+    }
+}
+
+void Shooter_Enemy::spawnShooter_Enemy(std::vector<Shooter_Enemy>& Shooter, int windowWidth, int windowHeight) {
+    Shooter_Enemy s;
+    s.w = 50;
+    s.h = 50;
+    s.x = windowWidth;
+    s.y = randomInt(0, windowHeight - 50);
+    s.color = { 0,0,255,255 };
+    s.speed = 1;
+    Shooter.push_back(s);
+
+    // Santé
+    int health = 3;
 }
 
 // Tir
@@ -27,33 +72,3 @@ void Shooter_Enemy::shoot(std::vector<Bullet>& bullets, Uint32 now) {
         lastShotTime = now;
     }
 }
-
-void Shooter_Enemy::spawnShooter_Enemy(std::vector<Shooter_Enemy>& Shooter, int windowWidth, int windowHeight) {
-    
-    float px = windowWidth - 50.0f;   
-    float py = (rand() % (windowHeight - 50)); 
-    float pw = 40.0f;
-    float ph = 40.0f;
-    float ps = 2.0f;
-
-    // Santé
-    int health = 3;
-
-    // Ajout de l’ennemi
-    Shooter.push_back(Shooter_Enemy(px, py, pw, ph, ps, health));
-}
-
-
-
-// Rendu
-void Shooter_Enemy::render(SDL_Renderer* renderer) {
-    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255); // bleu
-    SDL_FRect rect = {
-        x,
-        y,
-        w,
-        h
-    };
-    SDL_RenderFillRect(renderer, &rect);
-}
-

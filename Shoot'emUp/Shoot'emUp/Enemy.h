@@ -2,7 +2,6 @@
 #include <vector>
 #include <random>
 #include "SDL3/SDL.h"
-#include "color.h"
 
 class Enemy
 {

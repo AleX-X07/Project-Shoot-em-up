@@ -14,11 +14,11 @@ Enemy::Enemy(float _x, float _y, float _w, float _h, float _speed, int _health, 
 }
 
 void Enemy::update(int windowWidth) {
-	x -= speed * 2.0f; // déplacement vers la gauche
+	x -= speed * 1.5f; // déplacement vers la gauche
 }
 
 void Enemy::render(SDL_Renderer* renderer) {
-	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // bleu
+	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // rouge
 	SDL_FRect rect = {
 		x,
 		y,

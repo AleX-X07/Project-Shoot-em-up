@@ -1,26 +1,46 @@
-﻿  Enemy.cpp
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(42,13): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(61,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(62,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-  Enemy_Manager.cpp
+﻿  Enemy_Manager.cpp
 C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(10,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
   (compiler le fichier source 'Enemy_Manager.cpp')
   
 C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(4,16): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
 C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(5,26): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(13,15): error C2597: référence non conforme à un membre non static 'EnemyManager::lastSpawn'
+      C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(13,15):
+      voir la déclaration de 'EnemyManager::lastSpawn'
+  
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(13,15): error C3867: 'EnemyManager::lastSpawn' : syntaxe non-standard ; utilisez '&' pour créer un pointeur vers un membre
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(13,15): error C2568: '-' : impossible de résoudre la surcharge de fonction
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(14,27): error C2597: référence non conforme à un membre non static 'EnemyManager::enemies'
+      C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.h(13,24):
+      voir la déclaration de 'EnemyManager::enemies'
+  
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(15,9): error C2597: référence non conforme à un membre non static 'EnemyManager::lastSpawn'
+      C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.h(18,12):
+      voir la déclaration de 'EnemyManager::lastSpawn'
+  
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(17,15): error C2597: référence non conforme à un membre non static 'EnemyManager::lastShooterEnemySpawn'
+      C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(17,15):
+      voir la déclaration de 'EnemyManager::lastShooterEnemySpawn'
+  
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(17,15): error C3867: 'EnemyManager::lastShooterEnemySpawn' : syntaxe non-standard ; utilisez '&' pour créer un pointeur vers un membre
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(17,15): error C2568: '-' : impossible de résoudre la surcharge de fonction
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(18,43): error C2597: référence non conforme à un membre non static 'EnemyManager::Shooter'
+      C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.h(14,32):
+      voir la déclaration de 'EnemyManager::Shooter'
+  
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(19,9): error C2597: référence non conforme à un membre non static 'EnemyManager::lastShooterEnemySpawn'
+      C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.h(19,12):
+      voir la déclaration de 'EnemyManager::lastShooterEnemySpawn'
+  
 C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(63,39): warning C4838: la conversion de 'int' en 'float' requiert une conversion restrictive
 C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(63,39): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
 C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(63,44): warning C4838: la conversion de 'int' en 'float' requiert une conversion restrictive
 C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(63,44): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
 C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(69,10): warning C4858: abandon de la valeur retournée : The 'remove' and 'remove_if' algorithms return the iterator past the last element that should be kept. You need to call container.erase(result, container.end()) afterwards. In C++20, 'std::erase' and 'std::erase_if' are simpler replacements for these two steps.
-  Shooter_Enemy.cpp
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(10,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
-  (compiler le fichier source 'Shooter_Enemy.cpp')
-  
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.cpp(34,14): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
   Screen.cpp
-  main.cpp
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(13,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(15,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(10,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'Screen.cpp')
+  
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Screen.cpp(77,13): error C2653: 'Enemy_Manager' : n'est pas un nom de classe ni d'espace de noms
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Screen.cpp(77,28): error C3861: 'spawn' : identificateur introuvable
   Génération de code en cours...
-  Shoot'emUp.vcxproj -> C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\x64\Debug\Shoot'emUp.exe

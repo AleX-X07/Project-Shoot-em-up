@@ -5,6 +5,7 @@
 #include "Shooter_Enemy.h"
 //#include "ShootMultiple_Enemy.h"
 #include "Bullet.h"
+#include <algorithm>
 
 
 class EnemyManager {
@@ -13,7 +14,7 @@ private:
     std::vector<Shooter_Enemy> Shooter;
     //std::vector<ShootMultiple_Enemy> triples;
     std::vector<Bullet> bullets;
-
+    std::vector<EnemyManager>Manager;
     Uint32 lastSpawn;
     Uint32 lastShooterEnemySpawn;
     //Uint32 lastTripleSpawn;
@@ -21,11 +22,6 @@ private:
     Uint32 spawnInterval;
     Uint32 ShooterEnemySpawnInterval;
     //Uint32 tripleSpawnInterval;
-
-
-
-
-public:
 
     float x, y;
     float w, h;
@@ -37,11 +33,16 @@ public:
     float barX = x;
     float barY = y - 10;
 
+
+public:
+
+
     EnemyManager();
 
-    void spawn(int windowWidth, int windowHeight, Uint32 now);
+    static void spawn(std::vector<EnemyManager>& Manager, int windowWidth, int windowHeight, Uint32 now);
     void update(int windowWidth, Uint32 now);
     void render(SDL_Renderer* renderer);
     void cleanBullet(std::vector<Bullet>& bullets);
     void renderHealthBar(SDL_Renderer* renderer);
+
 };

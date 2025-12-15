@@ -5,8 +5,10 @@
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
 #include <iostream>
+#include "Enemy_Manager.h"
+#include "Shooter_Enemy.h"
 
-GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies) {
+GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Shooter_Enemy>& Shooter, std::vector<EnemyManager>& Manager, Uint32 now) {
     int w, h;
     static int menuSelection = 0;
     static bool upPressed = false;
@@ -73,11 +75,14 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
 
         spawnTimer += dt;
         if (spawnTimer >= spawnInterval) {
-            Enemy::spawnEnemy(enemies, w, h);
+            //Enemy::spawnEnemy(enemies, w, h);
+            EnemyManager EM;
+            EM.spawn(Manager, w, h, now);
             spawnTimer = 0;
         }
 
         Enemy::updateEnemy(enemies);
+        Shooter_Enemy::updateShooter_Enemy(Shooter);
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
@@ -86,8 +91,9 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
         player.render(renderer);
         player.renderBullets(renderer);
         Enemy::renderEnemy(renderer, enemies);
+        Shooter_Enemy SE;
+        SE.render(renderer);
         player.DisplayHP(renderer, player.HP);
-
 
         SDL_RenderPresent(renderer);
 
@@ -95,6 +101,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
             player.HP = 3;
             player.bullets.clear();
             enemies.clear();
+            Shooter.clear();
             player.rect.x = 400.0f;
             player.rect.y = 300.0f;
             return MENU;

@@ -9,7 +9,8 @@ EnemyManager::EnemyManager()
     /*tripleSpawnInterval(5000)*/ {
 }
 
-void EnemyManager::spawn(int windowWidth, int windowHeight, Uint32 now) {
+void EnemyManager::spawn(std::vector<EnemyManager>& Manager, int windowWidth, int windowHeight, Uint32 now) 
+{
     if (now - lastSpawn > spawnInterval) {
         Enemy::spawnEnemy(enemies, windowWidth, windowHeight);
         lastSpawn = now;
@@ -90,3 +91,4 @@ void EnemyManager::renderHealthBar(SDL_Renderer* renderer)
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderRect(renderer, &bgRect);
 }
+

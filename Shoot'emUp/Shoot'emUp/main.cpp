@@ -4,11 +4,13 @@
 #include "Hero.h"
 #include "Screen.h"
 #include "Enemy.h"
+#include "Shooter_Enemy.h"
 
 int main(int argc, char** argv) {
     SDL_Window* window;
     SDL_Renderer* renderer;
     std::vector<Enemy>enemies;
+    std::vector<Shooter_Enemy>Shooter;
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0 || !SDL_CreateWindowAndRenderer("SHOOT'EM UP", 640, 480, SDL_WINDOW_FULLSCREEN, &window, &renderer))
         return 1;
@@ -70,7 +72,7 @@ int main(int argc, char** argv) {
             }
         }
 
-        screen = updateGameState(screen, renderer, background, player, dt, window, enemies);
+        screen = updateGameState(screen, renderer, background, player, dt, window, enemies, Shooter);
 
         if (screen == QUIT) keepGoing = false;
     }
