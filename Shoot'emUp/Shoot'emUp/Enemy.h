@@ -19,4 +19,5 @@ public:
     static void updateEnemy(std::vector<Enemy>& enemies);
     static void renderEnemy(SDL_Renderer* renderer, const std::vector<Enemy>& enemies);
     static void spawnEnemy(std::vector<Enemy>& enemies, int windowWidth, int windowHeight);
+    /*void Collide(std::vector<Enemy>& enemies);*/
 };

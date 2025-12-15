@@ -9,6 +9,37 @@
 float collisionCooldown = 0.5f;
 float timeSinceLastHit = 0.0f;
 
+void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool enterPressed) {
+    enterPressed = false;
+    menuSelection = 0;
+    if (screen == MENU && event.type == SDL_EVENT_KEY_DOWN) {
+        if (event.key.key == SDLK_UP || event.key.key == SDLK_W) {
+            menuSelection = (menuSelection - 1 + 2) % 2;
+        }
+        if (event.key.key == SDLK_DOWN || event.key.key == SDLK_S) {
+            menuSelection = (menuSelection + 1) % 2;
+        }
+        if (event.key.key == SDLK_RETURN && !enterPressed) {
+            enterPressed = true;
+            if (menuSelection == 0) {
+                screen = LEVEL1;
+            }
+            else if (menuSelection == 1) {
+                screen = QUIT;
+            }
+        }
+        if (event.key.key == SDLK_ESCAPE) {
+            screen = QUIT;
+        }
+    }
+
+    if (event.type == SDL_EVENT_KEY_UP) {
+        if (event.key.key == SDLK_RETURN) {
+            enterPressed = false;
+        }
+    }
+}
+
 GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies) {
     int w, h;
     static int menuSelection = 0;

@@ -11,5 +11,6 @@ enum GameState {
     QUIT
 };
 
+void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool enterPressed);
 GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies);
 

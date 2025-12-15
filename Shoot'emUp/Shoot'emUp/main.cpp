@@ -50,33 +50,7 @@ int main(int argc, char** argv) {
                 keepGoing = false;
                 screen = QUIT;
             }
-
-            if (screen == MENU && event.type == SDL_EVENT_KEY_DOWN) {
-                if (event.key.key == SDLK_UP || event.key.key == SDLK_W) {
-                    menuSelection = (menuSelection - 1 + 2) % 2;
-                }
-                if (event.key.key == SDLK_DOWN || event.key.key == SDLK_S) {
-                    menuSelection = (menuSelection + 1) % 2;
-                }
-                if (event.key.key == SDLK_RETURN && !enterPressed) {
-                    enterPressed = true;
-                    if (menuSelection == 0) {
-                        screen = LEVEL1;
-                    }
-                    else if (menuSelection == 1) {
-                        screen = QUIT;
-                    }
-                }
-                if (event.key.key == SDLK_ESCAPE) {
-                    screen = QUIT;
-                }
-            }
-
-            if (event.type == SDL_EVENT_KEY_UP) {
-                if (event.key.key == SDLK_RETURN) {
-                    enterPressed = false;
-                }
-            }
+            NavigateMenu(screen, event, menuSelection, enterPressed);
         }
 
         screen = updateGameState(screen, renderer, background, player, dt, window, enemies);
@@ -90,9 +64,6 @@ int main(int argc, char** argv) {
         if (screen == QUIT) keepGoing = false;
     }
 
-
-
-    
     SDL_DestroyTexture(background);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
