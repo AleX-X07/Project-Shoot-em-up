@@ -62,8 +62,5 @@ void Enemy::spawnEnemy(std::vector<Enemy>& enemies, int windowWidth, int windowH
 	e.y = randomInt(0, windowHeight - 50);
 	e.color = { 255,0,0,255 };
 	e.speed = 1;
-	enemies.push_back(e);
+	enemies.emplace_back(e);
 }
-
-
-

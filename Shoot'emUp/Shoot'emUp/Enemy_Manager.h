@@ -9,7 +9,7 @@
 
 
 class EnemyManager {
-private:
+public:
     std::vector<Enemy> enemies;
     std::vector<Shooter_Enemy> Shooter;
     //std::vector<ShootMultiple_Enemy> triples;
@@ -33,16 +33,15 @@ private:
     float barX = x;
     float barY = y - 10;
 
-
-public:
+    public:
 
 
     EnemyManager();
 
-    static void spawn(std::vector<EnemyManager>& Manager, int windowWidth, int windowHeight, Uint32 now);
+    void spawn(int windowWidth, int windowHeight, Uint32 now);
     void update(int windowWidth, Uint32 now);
     void render(SDL_Renderer* renderer);
-    void cleanBullet(std::vector<Bullet>& bullets);
+    void cleanBullet();
     void renderHealthBar(SDL_Renderer* renderer);
 
 };

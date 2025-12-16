@@ -8,13 +8,14 @@
 #include "Enemy_Manager.h"
 #include "Shooter_Enemy.h"
 
-GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Shooter_Enemy>& Shooter, std::vector<EnemyManager>& Manager, Uint32 now) {
+GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window) {
     int w, h;
     static int menuSelection = 0;
     static bool upPressed = false;
     static bool downPressed = false;
     static bool enterPressed = false;
     static TTF_Font* font = nullptr;
+    static EnemyManager EM;
 
     const bool* keys = SDL_GetKeyboardState(NULL);
 
@@ -72,17 +73,25 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
         SDL_GetWindowSize(window, &w, &h);
         player.clampToScreen(w, h);
         player.updateBullets(dt);
+        
+        int windowWidth;
+        int windowHeight;
+        float now = SDL_GetTicks();
+        SDL_GetWindowSize(window, &windowWidth, &windowHeight);
+        EM.spawn(windowWidth, windowHeight, now);
+        //spawnTimer += dt;
+        //if (spawnTimer >= spawnInterval) {
+        //    //Enemy::spawnEnemy(enemies, w, h);
+        //    EnemyManager EM;
+        //    EM.spawn(Shooter, enemies, w, h, now);
+        //    spawnTimer = 0;
+        //}
+        EM.update(windowWidth, now);
+        EM.render(renderer);
+        EM.cleanBullet();
 
-        spawnTimer += dt;
-        if (spawnTimer >= spawnInterval) {
-            //Enemy::spawnEnemy(enemies, w, h);
-            EnemyManager EM;
-            EM.spawn(Manager, w, h, now);
-            spawnTimer = 0;
-        }
-
-        Enemy::updateEnemy(enemies);
-        Shooter_Enemy::updateShooter_Enemy(Shooter);
+        /*Enemy::updateEnemy(enemies);
+        Shooter_Enemy::updateShooter_Enemy(Shooter);*/
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
@@ -90,9 +99,9 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
 
         player.render(renderer);
         player.renderBullets(renderer);
-        Enemy::renderEnemy(renderer, enemies);
+       /* Enemy::renderEnemy(renderer, enemies);
         Shooter_Enemy SE;
-        SE.render(renderer);
+        SE.render(renderer);*/
         player.DisplayHP(renderer, player.HP);
 
         SDL_RenderPresent(renderer);
@@ -100,8 +109,8 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
         if (keys[SDL_SCANCODE_ESCAPE]) {
             player.HP = 3;
             player.bullets.clear();
-            enemies.clear();
-            Shooter.clear();
+            /*enemies.clear();
+            Shooter.clear();*/
             player.rect.x = 400.0f;
             player.rect.y = 300.0f;
             return MENU;

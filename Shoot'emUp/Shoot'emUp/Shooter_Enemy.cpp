@@ -52,7 +52,7 @@ void Shooter_Enemy::spawnShooter_Enemy(std::vector<Shooter_Enemy>& Shooter, int 
     s.y = randomInt(0, windowHeight - 50);
     s.color = { 0,0,255,255 };
     s.speed = 1;
-    Shooter.push_back(s);
+    Shooter.emplace_back(s);
 
     // Santé
     int health = 3;
