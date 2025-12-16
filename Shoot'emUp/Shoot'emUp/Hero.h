@@ -16,7 +16,8 @@ public:
     float speed;
     float shootCooldown = 0.15f;      
     float timeSinceLastShot = 0.0f;
-	int HP = 3;
+	int HP = 4;
+    int Score = 0;
 
     Entity();
     Entity(float x, float y, float w, float h, float spd = 200.0f);
@@ -26,10 +27,9 @@ public:
     void move(float dx, float dy, float dt);
     void clampToScreen(int screenWidth, int screenHeight);
     void render(SDL_Renderer* renderer);
-    void loadTexture(SDL_Renderer* renderer, const char* filepath);
     void handleInput(const bool* keys, float dt);
 	void shoot();
-	void DisplayHP(SDL_Renderer* renderer, int HP);
+	void HUD(SDL_Renderer* renderer, SDL_Texture* texture, int HP,  int Score);
     void Collide(std::vector<Enemy>& enemies);
 
     ~Entity();

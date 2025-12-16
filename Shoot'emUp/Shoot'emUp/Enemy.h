@@ -11,18 +11,20 @@ public:
     float w, h;
     float speed;
     SDL_FRect rect;
-    SDL_Texture* texture;
+    SDL_Texture* enemyTexture;
+    SDL_Renderer* renderer;
     SDL_Color color;
     int HP;
+    int Value;
 
     Enemy();
     Enemy(float _x, float _y, float _w, float _h, float _speed, SDL_Color color);
+    Enemy(float _x, float _y, float _w, float _h, float _speed, SDL_Texture* texture);
     static int randomInt(int min, int max);
     static void updateEnemy(std::vector<Enemy>& enemies);
     static void renderEnemy(SDL_Renderer* renderer, const std::vector<Enemy>& enemies);
-    static void spawnEnemy(std::vector<Enemy>& enemies, int windowWidth, int windowHeight);
+    static void spawnEnemy(std::vector<Enemy>& enemies, int windowWidth, int windowHeight, SDL_Renderer* renderer, SDL_Texture* sharedTexture);
     void Collide(std::vector<Bullet>& bullets);
-    static void Alive(std::vector<Enemy>& enemies);
 
     ~Enemy();
 };

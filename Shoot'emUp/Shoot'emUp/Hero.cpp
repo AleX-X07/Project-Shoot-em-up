@@ -5,12 +5,18 @@ Entity::Entity() {
 
 }
 
-Entity::Entity(float x, float y, float w, float h, float spd)
-    : rect{ x, y, w, h }, texture(nullptr), color{255, 255, 255, 255}, speed(spd) {
+Entity::Entity(float x, float y, float w, float h, float _speed) {
+    rect = { x, y, w, h };
+    texture = nullptr;
+    color = { 255, 255, 255, 255 };
+    speed = _speed;
 }
 
-Entity::Entity(float x, float y, float w, float h, SDL_Texture* tex, float spd)
-    : rect{ x, y, w, h }, texture(tex), color{ 255, 255, 255, 255 }, speed(spd) {
+Entity::Entity(float x, float y, float w, float h, SDL_Texture* _texture, float _speed) {
+    rect = { x, y, w, h };
+    texture = _texture;
+    color = { 255, 255, 255, 255 };
+    speed = _speed;
 }
 
 Entity::Entity(float x, float y, float w, float h, SDL_Color col, float spd)
@@ -39,18 +45,6 @@ void Entity::render(SDL_Renderer* renderer) {
     }
 }
 
-void Entity::loadTexture(SDL_Renderer* renderer, const char* filepath) {
-    SDL_Surface* surface = IMG_Load(filepath);
-    if (surface) {
-        texture = SDL_CreateTextureFromSurface(renderer, surface);
-        SDL_DestroySurface(surface);
-        SDL_SetTextureScaleMode(texture, SDL_SCALEMODE_NEAREST);
-    }
-    else {
-        SDL_Log("Erreur chargement texture: %s", SDL_GetError());
-    }
-}
-
 void Entity::handleInput(const bool* keys, float dt) {
     float dx = 0, dy = 0;
     if (keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_W]) dy -= 1;
@@ -72,18 +66,54 @@ void Entity::shoot() {
         bullets.push_back(newBullet);
 }
 
-void Entity::DisplayHP(SDL_Renderer* renderer, int HP) {
+void Entity::HUD(SDL_Renderer* renderer, SDL_Texture* texture, int HP, int Score) {
     for (int i = 0; i < HP; ++i) {
         SDL_FRect hpRect = { 10.0f + i * 35.0f, 10.0f, 30, 30 };
-        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-        SDL_RenderFillRect(renderer, &hpRect);
+        if (texture) {
+            SDL_RenderTexture(renderer, texture, NULL, &hpRect);
+        }
+        else {
+            SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+            SDL_RenderFillRect(renderer, &hpRect);
+        }
     }
+
 }
 
 void Entity::Collide(std::vector<Enemy>& enemies) {
-    for (auto& e : enemies) {
-        if (SDL_HasRectIntersectionFloat(&rect, &e.rect)) {
-            HP--;
+
+    std::vector<bool> bulletToRemove(bullets.size(), false);
+    std::vector<bool> enemyToRemove(enemies.size(), false);
+
+    for (int i = 0; i < bullets.size(); i++) {
+        if (bulletToRemove[i]) continue;
+
+        SDL_FRect rect = { bullets[i].x, bullets[i].y, bullets[i].w, bullets[i].h };
+
+        for (int j = 0; j < enemies.size(); j++) {
+            if (enemyToRemove[j]) continue;
+
+            if (SDL_HasRectIntersectionFloat(&rect, &enemies[j].rect)) {
+                bulletToRemove[i] = true;
+                enemies[j].HP--;
+
+                if (enemies[j].HP <= 0) {
+                    enemyToRemove[j] = true;
+                }
+                break;
+            }
+        }
+    }
+
+    for (int i = bullets.size() - 1; i >= 0; i--) {
+        if (bulletToRemove[i]) {
+            bullets.erase(bullets.begin() + i);
+        }
+    }
+
+    for (int i = enemies.size() - 1; i >= 0; i--) {
+        if (enemyToRemove[i]) {
+            enemies.erase(enemies.begin() + i);
         }
     }
 }

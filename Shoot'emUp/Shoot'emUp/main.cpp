@@ -5,10 +5,12 @@
 #include "Hero.h"
 #include "Screen.h"
 #include "Enemy.h"
+#include "LoadRessource.h"
 
 int main(int argc, char** argv) {
+    bool restart = true;
     SDL_Window* window;
-    SDL_Renderer* renderer;
+    static SDL_Renderer* renderer;
     std::vector<Enemy>enemies;
 
     const int FPS = 60;
@@ -17,6 +19,7 @@ int main(int argc, char** argv) {
     Uint64 frameStart;
     int frameTime;
 
+
     if (SDL_Init(SDL_INIT_VIDEO) < 0 || !SDL_CreateWindowAndRenderer("SHOOT'EM UP", 640, 480, SDL_WINDOW_FULLSCREEN, &window, &renderer))
         return 1;
     if (TTF_Init() < 0) {
@@ -24,13 +27,14 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    SDL_Surface* surface = IMG_Load("picture/arena.png");
-    SDL_Texture* background = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_DestroySurface(surface);
-
+    LoadRessource MyRessources = LoadRessource(renderer);
+    MyRessources.loadAllTexture();
+    MyRessources.loadFont();
+    Menu MyMenu = Menu(MyRessources.backgroundHome);
+    //MyMenu.loadMenuTextures(MyRessources);
     Entity player(400.0f, 300.0f, 150, 150, SDL_Color{ 255, 0, 0, 255 }, 400);
-    player.loadTexture(renderer, "picture/player.png");
-    player.loadBulletTexture(renderer, "picture/bullet.png");
+    player.texture = MyRessources.playerTexture;
+    player.bulletTexture = MyRessources.bulletTexture;
 
     Uint64 last_time = SDL_GetTicks();
     bool keepGoing = true;
@@ -53,7 +57,17 @@ int main(int argc, char** argv) {
             NavigateMenu(screen, event, menuSelection, enterPressed);
         }
 
-        screen = updateGameState(screen, renderer, background, player, dt, window, enemies, player.bullets);
+        screen = updateGameState(screen, renderer, MyRessources.backgroundLevel1, player, dt, window, enemies, player.bullets, MyRessources.enemyTextureBomb, MyRessources.playerTextureHeart, restart, MyRessources.font, MyMenu, MyRessources);
+
+        if (restart) {
+            player.HP = 4;
+            player.bullets.clear();
+            enemies.clear();
+            player.rect.x = 400.0f;
+            player.rect.y = 300.0f;
+            screen = MENU;
+            restart = false;
+        }
 
         frameTime = SDL_GetTicks() - frameStart;
 
@@ -66,7 +80,6 @@ int main(int argc, char** argv) {
         }
     }
 
-    SDL_DestroyTexture(background);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();

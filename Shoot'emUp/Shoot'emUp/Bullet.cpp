@@ -1,4 +1,5 @@
 #include "Bullet.h"
+#include "Enemy.h"
 
 Bullet::Bullet() {
     
@@ -6,6 +7,13 @@ Bullet::Bullet() {
 
 Bullet::Bullet(float startX, float startY, float velX, float velY, int width, int height, SDL_Color col)
     : x(startX), y(startY), vx(velX), vy(velY), w(width), h(height), color(col) {
+    x = startX;
+    y = startY;
+    vx = velX;
+    vy = velY;
+    w = width;
+    h = height;
+    color = col;
 }
 
 void Bullet::renderBullets(SDL_Renderer* renderer) {
@@ -21,18 +29,6 @@ void Bullet::renderBullets(SDL_Renderer* renderer) {
     } 
 }
 
-void Bullet::loadBulletTexture(SDL_Renderer* renderer, const char* filepath) {
-    SDL_Surface* surface = IMG_Load(filepath);
-    if (surface) {
-        bulletTexture = SDL_CreateTextureFromSurface(renderer, surface);
-        SDL_DestroySurface(surface);
-        SDL_SetTextureScaleMode(bulletTexture, SDL_SCALEMODE_NEAREST);
-    }
-    else {
-        SDL_Log("Erreur chargement bullet: %s", SDL_GetError());
-    }
-}
-
 void Bullet::updateBullets(float dt) {
     for (auto& b : bullets) {
         b.x += b.vx * dt;
@@ -40,14 +36,18 @@ void Bullet::updateBullets(float dt) {
     }
 }
 
-void Bullet::BulletCollide(std::vector<Enemy>& enemies) {
-    for (int i = bullets.size() - 1; i >= 0; i--) {<
-        if (SDL_HasRectIntersectionFloat(&rect, &e.rect)) {
-                bullets.erase(bullets.begin() + i);
+void Bullet::BulletCollide(std::vector<Bullet>& bullets, std::vector<Enemy>& enemies) {
+    std::vector<int> bulletErase;
+    for (int i = bullets.size() - 1; i >= 0; i--) {
+        SDL_FRect rect = { bullets[i].x, bullets[i].y , bullets[i].w, bullets[i].h };
+        for (auto& e : enemies) {
+            if (SDL_HasRectIntersectionFloat(&rect, &e.rect)) {
+                bulletErase.push_back(i);
+                break;
+            }
         }
     }
-    
-    for (auto& e : enemies) {
-        
+    for (int i = bulletErase.size() - 1; i >= 0; i--) {
+        bullets.erase(bullets.begin() + bulletErase[i]);
     }
 }

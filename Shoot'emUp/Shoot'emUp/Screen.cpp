@@ -1,16 +1,8 @@
 #include "Screen.h"
-#include "Menu.h"
-#include "Enemy.h"
-#include "Bullet.h"
-#include <vector>
-#include <SDL3/SDL.h>
-#include <SDL3_ttf/SDL_ttf.h>
-#include <iostream>
+
 
 float collisionCooldown = 0.5f;
-float collisionCooldownEnemy = 0.2f;
 float timeSinceLastHit = 0.0f;
-float timeSinceLastHitBullet = 0.0f;
 
 void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool enterPressed) {
     enterPressed = false;
@@ -43,63 +35,23 @@ void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool ent
     }
 }
 
-GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets) {
+GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, SDL_Texture* enemyTexture, SDL_Texture* heart, bool& restart, TTF_Font* font, Menu& menu, LoadRessource Ressources) {
     int w, h;
-    static int menuSelection = 0;
     static int menuDeathSelection = 0;
-    static bool upPressed = false;
-    static bool downPressed = false;
-    static bool enterPressed = false;
-    static TTF_Font* font = nullptr;
+
+    static bool upPressedGameOver = false;
+    static bool downPressedGameOver = false;
+    static bool enterPressedGameOver = false;
+
     SDL_Color white = { 255, 255, 255, 255 };
 
     const bool* keys = SDL_GetKeyboardState(NULL);
 
     switch (screen) {
     case MENU: {
-        if (!font) {
-            font = TTF_OpenFont("assets/arialmt.ttf", 32);
-            if (!font) {
-                SDL_Log("Erreur chargement police: %s", SDL_GetError());
-            }
-        }
-        SDL_SetRenderDrawColor(renderer, 0, 0, 50, 255);
-        SDL_RenderClear(renderer);
-        SDL_GetWindowSize(window, &w, &h);
-		TitleMenu(renderer, w, h, white, "SHOOT'EM UP", font, w / 2 - 200, 200, 400, 80);
-
-		ButtonMenu(renderer, w, h, white, "PLAY", font, w / 2 - 100, h / 2 - 60, 200, 50, menuSelection, 0);
-
-        ButtonMenu(renderer, w, h, white, "QUIT", font, w / 2 - 100, h / 2 + 20, 200, 50, menuSelection, 1);
-        
-        if (keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_W]) {
-            if (!upPressed) {
-                menuSelection = (menuSelection - 1 + 2) % 2;
-                upPressed = true;
-            }
-        }
-        else upPressed = false;
-
-        if (keys[SDL_SCANCODE_DOWN] || keys[SDL_SCANCODE_S]) {
-            if (!downPressed) {
-                menuSelection = (menuSelection - 1 + 2) % 2;
-                downPressed = true;
-            }
-        }
-        else downPressed = false;
-
-        if (keys[SDL_SCANCODE_RETURN]) {
-            if (!enterPressed) {
-                enterPressed = true;
-                if (menuSelection == 0) return LEVEL1;
-                if (menuSelection == 1) return QUIT;
-            }
-        }
-        else enterPressed = false;
-		SDL_RenderPresent(renderer);
+        screen = menu.DisplayMenu(renderer, window, font, Ressources);
         break;
     }
-
     case LEVEL1: {
         if (player.HP <= 0) {
             screen = GAMEOVER;
@@ -116,7 +68,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
 
         spawnTimer += dt;
         if (spawnTimer >= spawnInterval) {
-            Enemy::spawnEnemy(enemies, w, h);
+            Enemy::spawnEnemy(enemies, w, h, renderer, enemyTexture);
             spawnTimer = 0;
         }
 
@@ -129,28 +81,21 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
         player.render(renderer);
         player.renderBullets(renderer);
         Enemy::renderEnemy(renderer, enemies);
-        player.DisplayHP(renderer, player.HP);
+        player.HUD(renderer, heart, player.HP, player.Score);
 
         timeSinceLastHit += dt;
-        if (timeSinceLastHit < collisionCooldown){
-            
-        }
-        else {
+        if (timeSinceLastHit >= collisionCooldown) {
             timeSinceLastHit = 0;
-            player.Collide(enemies);
-        }
 
-        timeSinceLastHitBullet += dt;
-        if (timeSinceLastHitBullet < collisionCooldownEnemy) {
-
-        }
-        else {
             for (auto& e : enemies) {
-                e.Collide(player.bullets);
+                if (SDL_HasRectIntersectionFloat(&player.rect, &e.rect)) {
+                    player.HP--;
+                    break;
+                }
             }
         }
-        
-        Enemy::Alive(enemies);
+
+        player.Collide(enemies);
 
         SDL_RenderPresent(renderer);
 
@@ -174,38 +119,39 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
         SDL_SetRenderDrawColor(renderer, 0, 0, 50, 255);
         SDL_RenderClear(renderer);
         SDL_GetWindowSize(window, &w, &h);
-        TitleMenu(renderer, w, h, white, "GAME OVER", font, w / 2 - 200, 200, 400, 80);
+        //Menu::TitleMenu(renderer, w, h, white, "GAME OVER", font, w / 2 - 200, 200, 400, 80);
 
-        ButtonMenu(renderer, w, h, white, "MENU", font, w / 2 - 100, h / 2 - 60, 200, 50, menuDeathSelection, 0);
+        //Menu::ButtonMenu(renderer, w, h, white, "MENU", font, w / 2 - 100, h / 2 - 60, 200, 50, menuDeathSelection, 0, Ressources);
 
-        ButtonMenu(renderer, w, h, white, "QUIT", font, w / 2 - 100, h / 2 + 20, 200, 50, menuDeathSelection, 1);
+        //Menu::ButtonMenu(renderer, w, h, white, "QUIT", font, w / 2 - 100, h / 2 + 20, 200, 50, menuDeathSelection, 1, Ressources);
  
         if (keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_W]) {
-            if (!upPressed) {
+            if (!upPressedGameOver) {
                 menuDeathSelection = (menuDeathSelection - 1 + 2) % 2;
-                upPressed = true;
+                upPressedGameOver = true;
             }
         }
-        else upPressed = false;
+        else upPressedGameOver = false;
 
         if (keys[SDL_SCANCODE_DOWN] || keys[SDL_SCANCODE_S]) {
-            if (!downPressed) {
+            if (!downPressedGameOver) {
                 menuDeathSelection = (menuDeathSelection - 1 + 2) % 2;
-                downPressed = true;
+                downPressedGameOver = true;
             }
         }
-        else downPressed = false;
+        else downPressedGameOver = false;
 
         if (keys[SDL_SCANCODE_RETURN]) {
-            if (!enterPressed) {
-                enterPressed = true;
+            if (!enterPressedGameOver) {
+                enterPressedGameOver = true;
                 if (menuDeathSelection == 0) {
+                    restart = true;
                     return MENU;
                 }
                 if (menuDeathSelection == 1) return QUIT;
             }
         }
-        else enterPressed = false;
+        else enterPressedGameOver = false;
         SDL_RenderPresent(renderer);
         break;
     case QUIT:

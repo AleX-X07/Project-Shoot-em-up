@@ -12,16 +12,12 @@ public:
     float x, y;
     float vx, vy;
     float h, w;
-    //SDL_Texture* texture = nullptr;  // AJOUT de = nullptr
     SDL_Color color;
     SDL_Texture* bulletTexture = nullptr;
     std::vector<Bullet> bullets;
     Bullet();
     Bullet(float startX, float startY, float velX, float velY, int width, int height, SDL_Color col);
-    //void update(float dt);
     void renderBullets(SDL_Renderer* renderer);
-    void updateBullets(float dt);/*
-    void renderBullets(SDL_Renderer* renderer);*/
-    void loadBulletTexture(SDL_Renderer* renderer, const char* filepath);
-    void BulletCollide(std::vector<Enemy>& enemies);
+    void updateBullets(float dt);
+    void BulletCollide(std::vector<Bullet>& bullets, std::vector<Enemy>& enemies);
 };
