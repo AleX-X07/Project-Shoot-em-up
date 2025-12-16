@@ -1,11 +1,8 @@
 #include "Shooter_Enemy.h"
 #include <cstdlib>
-
-Shooter_Enemy::Shooter_Enemy() 
-{
+Shooter_Enemy::Shooter_Enemy() {
 
 }
-
 Shooter_Enemy::Shooter_Enemy(float px, float py, float pw, float ph, float ps, int _health, SDL_Color _color)
 {
     x = px;
