@@ -117,9 +117,3 @@ void Entity::Collide(std::vector<Enemy>& enemies) {
         }
     }
 }
-
-//Entity::~Entity() {
-//    if (texture) {
-//        SDL_DestroyTexture(texture);
-//    }
-//}
