@@ -31,6 +31,4 @@ public:
 	void shoot();
 	void HUD(SDL_Renderer* renderer, SDL_Texture* texture, int HP,  int Score);
     void Collide(std::vector<Enemy>& enemies);
-
-    /*~Entity();*/
 };

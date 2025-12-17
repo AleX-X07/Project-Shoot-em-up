@@ -28,6 +28,12 @@ int main(int argc, char** argv) {
         return 1;
     }
 
+    TTF_Font* font = TTF_OpenFont("assets/arialmt.ttf", 32);
+    if (!font) {
+        SDL_Log("Erreur chargement police: %s", SDL_GetError());
+        return 1;
+    }
+
     LoadRessource MyRessources = LoadRessource(renderer);
     MyRessources.loadAllTexture();
     //MyRessources.loadFont();
@@ -58,7 +64,7 @@ int main(int argc, char** argv) {
             NavigateMenu(screen, event, menuSelection, enterPressed);
         }
 
-        screen = updateGameState(screen, renderer, MyRessources.backgroundLevel1, player, dt, window, enemies, player.bullets, MyRessources.enemyTextureBomb, MyRessources.playerTextureHeart, restart, MyMenu, MyRessources);
+        screen = updateGameState(screen, renderer, MyRessources.backgroundLevel1, player, dt, window, enemies, player.bullets, MyRessources.enemyTextureBomb, MyRessources.playerTextureHeart, restart, MyMenu, MyRessources, font);
 
         if (restart) {
             player.HP = 4;
@@ -81,6 +87,7 @@ int main(int argc, char** argv) {
         }
     }
 
+    TTF_CloseFont(font);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();

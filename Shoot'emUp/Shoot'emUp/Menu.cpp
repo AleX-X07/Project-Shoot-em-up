@@ -18,13 +18,6 @@ Menu::~Menu() {
     if (quitTexture) SDL_DestroyTexture(quitTexture);
 }
 
-//void Menu::loadMenuTextures(LoadRessource& resources) {
-//    SDL_Color white = { 255, 255, 255, 255 };
-//    titleTexture = resources.createTextTexture("SHOOT'EM UP", white);
-//    playTexture = resources.createTextTexture("PLAY", white);
-//    quitTexture = resources.createTextTexture("QUIT", white);
-//}
-
 void Menu::TitleMenu(SDL_Renderer* renderer, int w, int h, SDL_Color color, const char* text, TTF_Font* font, int x2, int y2, int w2, int h2) {
     std::string str(text);
     int size = str.size();
@@ -94,17 +87,14 @@ GameState Menu::DisplayMenu(SDL_Renderer* renderer, SDL_Window* window, TTF_Font
 
     const bool* keys = SDL_GetKeyboardState(NULL);
 
-    //SDL_RenderTexture(renderer, background, NULL, NULL);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 50, 255);
     SDL_RenderClear(renderer);
     SDL_GetWindowSize(window, &w, &h);
-    SDL_SetRenderDrawColor(renderer, 0, 0, 50, 255); // Fond bleu foncé
+
     if (background) {
         SDL_RenderTexture(renderer, background, NULL, NULL);
     }
-    SDL_RenderClear(renderer);
     
-    
-
     TitleMenu(renderer, w, h, white, "SHOOT'EM UP", font, w / 2 - 200, 200, 400, 80);
 
     ButtonMenu(renderer, w, h, white, "PLAY", font, w / 2 - 100, h / 2 - 60, 200, 50, menuSelection, 0);
@@ -132,7 +122,7 @@ GameState Menu::DisplayMenu(SDL_Renderer* renderer, SDL_Window* window, TTF_Font
             enterPressed = true;
             if (menuSelection == 0) {
                 menuSelection = 0;
-                return LEVEL1;
+                return LEVEL1   ;
             }
             if (menuSelection == 1) {
                 return QUIT;

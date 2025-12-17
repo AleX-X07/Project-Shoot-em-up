@@ -37,12 +37,7 @@ void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool ent
     }
 }
 
-GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, SDL_Texture* enemyTexture, SDL_Texture* heart, bool& restart, Menu& menu, LoadRessource Ressources) {
-    
-    font = TTF_OpenFont("assets/arialmt.ttf", 32);
-    if (!font) {
-        SDL_Log("Erreur chargement police: %s", SDL_GetError());
-    }
+GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, SDL_Texture* enemyTexture, SDL_Texture* heart, bool& restart, Menu& menu, LoadRessource Ressources, TTF_Font* font) {
     int w, h;
     static int menuDeathSelection = 0;
 
