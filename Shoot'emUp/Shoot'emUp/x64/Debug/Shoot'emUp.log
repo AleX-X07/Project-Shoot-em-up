@@ -1,11 +1,2 @@
-﻿  Menu.cpp
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(23,14): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(29,28): warning C4838: la conversion de 'int' en 'float' requiert une conversion restrictive
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(29,28): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(29,32): warning C4838: la conversion de 'int' en 'float' requiert une conversion restrictive
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(29,32): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(29,36): warning C4838: la conversion de 'int' en 'float' requiert une conversion restrictive
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(29,36): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(29,40): warning C4838: la conversion de 'int' en 'float' requiert une conversion restrictive
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(29,40): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+﻿  Screen.cpp
   Shoot'emUp.vcxproj -> C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\x64\Debug\Shoot'emUp.exe

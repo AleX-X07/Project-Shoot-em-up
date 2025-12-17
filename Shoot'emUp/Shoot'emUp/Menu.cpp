@@ -122,7 +122,7 @@ GameState Menu::DisplayMenu(SDL_Renderer* renderer, SDL_Window* window, TTF_Font
             enterPressed = true;
             if (menuSelection == 0) {
                 menuSelection = 0;
-                return LEVEL1   ;
+                return LEVEL1;
             }
             if (menuSelection == 1) {
                 return QUIT;
