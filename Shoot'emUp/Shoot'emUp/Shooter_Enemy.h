@@ -6,6 +6,7 @@
 class Shooter_Enemy : public Enemy {
 public:
     Uint32 lastShotTime;
+
     Uint32 lastSpawnTime = 0;
     Uint32 now = SDL_GetTicks();
     Shooter_Enemy();

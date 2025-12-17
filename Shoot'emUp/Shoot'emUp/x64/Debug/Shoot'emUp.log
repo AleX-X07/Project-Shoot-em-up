@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  ShootMultiple_Enemy.cpp
 C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(10,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
   (compiler le fichier source 'ShootMultiple_Enemy.cpp')
@@ -77,3 +78,38 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.3520
   
 ShootMultiple_Enemy.obj : error LNK2005: "public: __cdecl Shooter_Enemy::Shooter_Enemy(void)" (??0Shooter_Enemy@@QEAA@XZ) déjà défini(e) dans Shooter_Enemy.obj
 C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\x64\Debug\Shoot'emUp.exe : fatal error LNK1169: un ou plusieurs symboles définis à différentes reprises ont été rencontrés
+=======
+﻿  Shooter_Enemy.cpp
+C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(11,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'Shooter_Enemy.cpp')
+  
+C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.cpp(37,16): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.cpp(48,11): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.cpp(49,20): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+  Screen.cpp
+C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(11,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'Screen.cpp')
+  
+C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Screen.cpp(80,19): warning C4244: 'initialisation' : conversion de 'Uint64' en 'float', perte possible de données
+C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Screen.cpp(82,45): warning C4244: 'argument' : conversion de 'float' en 'Uint32', perte possible de données
+C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Screen.cpp(83,32): warning C4244: 'argument' : conversion de 'float' en 'Uint32', perte possible de données
+C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Screen.cpp(87,12): error C2660: 'Shooter_Enemy::spawnShooter_Enemy' : la fonction ne prend pas 2 arguments
+      C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(18,17):
+      voir la déclaration de 'Shooter_Enemy::spawnShooter_Enemy'
+      C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Screen.cpp(87,12):
+      lors de la tentative de mise en correspondance de la liste des arguments '(int, int)'
+  
+C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Screen.cpp(88,12): error C2660: 'Shooter_Enemy::updateShooter_Enemy' : la fonction ne prend pas 0 arguments
+      C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(19,17):
+      voir la déclaration de 'Shooter_Enemy::updateShooter_Enemy'
+      C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Screen.cpp(88,12):
+      lors de la tentative de mise en correspondance de la liste des arguments '()'
+  
+  main.cpp
+C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(11,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'main.cpp')
+  
+C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(17,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
+C:\Users\fifil\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(19,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
+  Génération de code en cours...
+>>>>>>> 6b492029b84388f2ee313662d4a7c317ac7d449f

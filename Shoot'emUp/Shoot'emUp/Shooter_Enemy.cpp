@@ -1,12 +1,16 @@
 #include "Shooter_Enemy.h"
 #include <cstdlib>
+<<<<<<< HEAD
 
 Shooter_Enemy::Shooter_Enemy()
 {
     lastShotTime = 0;
     lastSpawnTime = 0;
-}
+=======
+Shooter_Enemy::Shooter_Enemy() {
 
+>>>>>>> 6b492029b84388f2ee313662d4a7c317ac7d449f
+}
 Shooter_Enemy::Shooter_Enemy(float px, float py, float pw, float ph, float ps, int _health, SDL_Color _color)
 {
     x = px;

@@ -16,6 +16,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
     static bool enterPressed = false;
     static TTF_Font* font = nullptr;
     static EnemyManager EM;
+    static Shooter_Enemy SE;
 
     const bool* keys = SDL_GetKeyboardState(NULL);
 
@@ -83,7 +84,15 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
         EM.update(windowWidth, now);
         EM.cleanBullet();
 
+<<<<<<< HEAD
         // Effacer l'écran
+=======
+        SE.spawnShooter_Enemy(Shooter, windowWidth, windowHeight);
+        SE.updateShooter_Enemy(Shooter);
+        //Enemy::updateEnemy(enemies);
+        //Shooter_Enemy::updateShooter_Enemy(Shooter);
+
+>>>>>>> 6b492029b84388f2ee313662d4a7c317ac7d449f
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
 
