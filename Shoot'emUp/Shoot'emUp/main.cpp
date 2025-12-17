@@ -19,6 +19,7 @@ int main(int argc, char** argv) {
     Uint64 frameStart;
     int frameTime;
 
+    SDL_Color blue = { 0,0,255,255 };
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0 || !SDL_CreateWindowAndRenderer("SHOOT'EM UP", 640, 480, SDL_WINDOW_FULLSCREEN, &window, &renderer))
         return 1;
@@ -30,7 +31,7 @@ int main(int argc, char** argv) {
     LoadRessource MyRessources = LoadRessource(renderer);
     MyRessources.loadAllTexture();
     MyRessources.loadFont();
-    Menu MyMenu = Menu(MyRessources.backgroundHome);
+    Menu MyMenu = Menu(blue);
     //MyMenu.loadMenuTextures(MyRessources);
     Entity player(400.0f, 300.0f, 150, 150, SDL_Color{ 255, 0, 0, 255 }, 400);
     player.texture = MyRessources.playerTexture;

@@ -13,12 +13,14 @@ public:
 	bool downPressed;
 	bool enterPressed;
 
-	SDL_Texture* background;
+	SDL_Color color;
+	//SDL_Texture* background;
 	SDL_Texture* titleTexture;
 	SDL_Texture* playTexture;
 	SDL_Texture* quitTexture;
 
-	Menu(SDL_Texture* _background);
+	//Menu(SDL_Texture* background);
+	Menu(SDL_Color color);
 	~Menu();
 	void loadMenuTextures(LoadRessource& resources);
 	static void ButtonMenu(SDL_Renderer* renderer, int w, int h, SDL_Color color, const char* text, TTF_Font* font, int x2, int y2, int w2, int h2, int menuSelection, int Selection);

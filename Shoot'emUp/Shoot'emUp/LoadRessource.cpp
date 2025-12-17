@@ -66,28 +66,28 @@ void LoadRessource::loadFont() { // Load font for write
     }
 }
 
-SDL_Texture* LoadRessource::createTextTexture(const char* text, SDL_Color color, int *h, int *w) {
-    if (!font) {
-        SDL_Log("ERREUR: Police non chargée!");
-        return nullptr;
-    }
-
-    SDL_Surface* texteSurface = TTF_RenderText_Blended(font, text, 0, color);
-    if (!texteSurface) {
-        SDL_Log("Erreur création surface texte: %s", SDL_GetError());
-        return nullptr;
-    }
-
-    *w = texteSurface->w;
-    *h = texteSurface->h;
-
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, texteSurface);
-    SDL_DestroySurface(texteSurface);
-
-    if (!texture) {
-        SDL_Log("Erreur création texture texte: %s", SDL_GetError());
-        return nullptr;
-    }
-
-    return texture;
-}
+//SDL_Texture* LoadRessource::createTextTexture(const char* text, SDL_Color color, int *h, int *w) {
+//    if (!font) {
+//        SDL_Log("ERREUR: Police non chargée!");
+//        return nullptr;
+//    }
+//
+//    SDL_Surface* texteSurface = TTF_RenderText_Blended(font, text, 0, color);
+//    if (!texteSurface) {
+//        SDL_Log("Erreur création surface texte: %s", SDL_GetError());
+//        return nullptr;
+//    }
+//
+//    *w = texteSurface->w;
+//    *h = texteSurface->h;
+//
+//    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, texteSurface);
+//    SDL_DestroySurface(texteSurface);
+//
+//    if (!texture) {
+//        SDL_Log("Erreur création texture texte: %s", SDL_GetError());
+//        return nullptr;
+//    }
+//
+//    return texture;
+//}

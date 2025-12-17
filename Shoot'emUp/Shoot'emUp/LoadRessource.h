@@ -29,7 +29,7 @@ public:
 
     void loadAllTexture();
     void loadFont();
-    SDL_Texture* createTextTexture(const char* text, SDL_Color color, int* h, int* w);
+    //SDL_Texture* createTextTexture(const char* text, SDL_Color color, int* h, int* w);
 };
 
 enum GameState {
