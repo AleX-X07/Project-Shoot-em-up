@@ -30,8 +30,8 @@ int main(int argc, char** argv) {
 
     LoadRessource MyRessources = LoadRessource(renderer);
     MyRessources.loadAllTexture();
-    MyRessources.loadFont();
-    Menu MyMenu = Menu(blue);
+    //MyRessources.loadFont();
+    Menu MyMenu = Menu(MyRessources.backgroundHome);
     //MyMenu.loadMenuTextures(MyRessources);
     Entity player(400.0f, 300.0f, 150, 150, SDL_Color{ 255, 0, 0, 255 }, 400);
     player.texture = MyRessources.playerTexture;
@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
             NavigateMenu(screen, event, menuSelection, enterPressed);
         }
 
-        screen = updateGameState(screen, renderer, MyRessources.backgroundLevel1, player, dt, window, enemies, player.bullets, MyRessources.enemyTextureBomb, MyRessources.playerTextureHeart, restart, MyRessources.font, MyMenu, MyRessources);
+        screen = updateGameState(screen, renderer, MyRessources.backgroundLevel1, player, dt, window, enemies, player.bullets, MyRessources.enemyTextureBomb, MyRessources.playerTextureHeart, restart, MyMenu, MyRessources);
 
         if (restart) {
             player.HP = 4;

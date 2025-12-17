@@ -22,14 +22,13 @@ public:
     SDL_Texture* texteTexture;
 
     // Font for write
-    TTF_Font* font; 
+    //TTF_Font* font; 
 
     LoadRessource(SDL_Renderer* rend);
     ~LoadRessource();
 
     void loadAllTexture();
-    void loadFont();
-    //SDL_Texture* createTextTexture(const char* text, SDL_Color color, int* h, int* w);
+    //void loadFont();
 };
 
 enum GameState {

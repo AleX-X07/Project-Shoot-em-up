@@ -4,6 +4,8 @@
 float collisionCooldown = 0.5f;
 float timeSinceLastHit = 0.0f;
 
+TTF_Font* font = nullptr;
+
 void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool enterPressed) {
     enterPressed = false;
     menuSelection = 0;
@@ -35,7 +37,12 @@ void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool ent
     }
 }
 
-GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, SDL_Texture* enemyTexture, SDL_Texture* heart, bool& restart, TTF_Font* font, Menu& menu, LoadRessource Ressources) {
+GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, SDL_Texture* enemyTexture, SDL_Texture* heart, bool& restart, Menu& menu, LoadRessource Ressources) {
+    
+    font = TTF_OpenFont("assets/arialmt.ttf", 32);
+    if (!font) {
+        SDL_Log("Erreur chargement police: %s", SDL_GetError());
+    }
     int w, h;
     static int menuDeathSelection = 0;
 

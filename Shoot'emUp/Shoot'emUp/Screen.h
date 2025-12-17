@@ -11,5 +11,5 @@
 #include "LoadRessource.h"
 
 void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool enterPressed);
-GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, SDL_Texture* enemyTexture, SDL_Texture* heart, bool& restart, TTF_Font* font, Menu& menu, LoadRessource REssources);
+GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, SDL_Texture* enemyTexture, SDL_Texture* heart, bool& restart, Menu& menu, LoadRessource REssources);
 

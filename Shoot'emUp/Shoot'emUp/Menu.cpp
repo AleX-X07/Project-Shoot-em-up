@@ -1,8 +1,8 @@
 #include "Menu.h"
 
-Menu::Menu(SDL_Color _color) {
+Menu::Menu(SDL_Texture* _background) {
 
-    color = _color;
+    background = _background;
     menuSelection = 0;
     upPressed = false;
     downPressed = false;
@@ -94,10 +94,16 @@ GameState Menu::DisplayMenu(SDL_Renderer* renderer, SDL_Window* window, TTF_Font
 
     const bool* keys = SDL_GetKeyboardState(NULL);
 
-    SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer,0,0,255,255);
     //SDL_RenderTexture(renderer, background, NULL, NULL);
+    SDL_RenderClear(renderer);
     SDL_GetWindowSize(window, &w, &h);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 50, 255); // Fond bleu foncé
+    if (background) {
+        SDL_RenderTexture(renderer, background, NULL, NULL);
+    }
+    SDL_RenderClear(renderer);
+    
+    
 
     TitleMenu(renderer, w, h, white, "SHOOT'EM UP", font, w / 2 - 200, 200, 400, 80);
 
