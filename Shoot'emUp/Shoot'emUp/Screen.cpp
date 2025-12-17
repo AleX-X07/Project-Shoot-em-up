@@ -66,51 +66,51 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
     }
 
     case LEVEL1: {
-        static float spawnTimer = 0;
-        const float spawnInterval = 1.5;
 
+        // Input et mise à jour du joueur
         player.handleInput(keys, dt);
         SDL_GetWindowSize(window, &w, &h);
         player.clampToScreen(w, h);
         player.updateBullets(dt);
-        
+
+        // Mise à jour des ennemis
         int windowWidth;
         int windowHeight;
-        float now = SDL_GetTicks();
+        Uint32 now = SDL_GetTicks();
         SDL_GetWindowSize(window, &windowWidth, &windowHeight);
+
         EM.spawn(windowWidth, windowHeight, now);
-        //spawnTimer += dt;
-        //if (spawnTimer >= spawnInterval) {
-        //    //Enemy::spawnEnemy(enemies, w, h);
-        //    EnemyManager EM;
-        //    EM.spawn(Shooter, enemies, w, h, now);
-        //    spawnTimer = 0;
-        //}
         EM.update(windowWidth, now);
-        EM.render(renderer);
         EM.cleanBullet();
 
-        /*Enemy::updateEnemy(enemies);
-        Shooter_Enemy::updateShooter_Enemy(Shooter);*/
-
+        // Effacer l'écran
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
+
+        // Fond
         SDL_RenderTexture(renderer, background, NULL, NULL);
 
+        // Ennemis (en arrière-plan)
+        EM.render(renderer);
+
+        // Joueur et ses bullets (au premier plan)
         player.render(renderer);
         player.renderBullets(renderer);
-       /* Enemy::renderEnemy(renderer, enemies);
-        Shooter_Enemy SE;
-        SE.render(renderer);*/
         player.DisplayHP(renderer, player.HP);
 
+        // Présenter tout à l'écran
         SDL_RenderPresent(renderer);
 
+        // Retour au menu
         if (keys[SDL_SCANCODE_ESCAPE]) {
             player.HP = 3;
             player.bullets.clear();
-            /*enemies.clear();
-            Shooter.clear();*/
+
+            // Nettoyage des enemies
+            EM.enemies.clear();
+            EM.Shooter.clear();
+            EM.bullets.clear();
+
             player.rect.x = 400.0f;
             player.rect.y = 300.0f;
             return MENU;

@@ -3,7 +3,7 @@
 #include <SDL3/SDL.h>
 #include "Enemy.h"
 #include "Shooter_Enemy.h"
-//#include "ShootMultiple_Enemy.h"
+#include "ShootMultiple_Enemy.h"
 #include "Bullet.h"
 #include <algorithm>
 
@@ -12,16 +12,16 @@ class EnemyManager {
 public:
     std::vector<Enemy> enemies;
     std::vector<Shooter_Enemy> Shooter;
-    //std::vector<ShootMultiple_Enemy> triples;
+    std::vector<ShootMultiple_Enemy> triples;
     std::vector<Bullet> bullets;
     std::vector<EnemyManager>Manager;
     Uint32 lastSpawn;
     Uint32 lastShooterEnemySpawn;
-    //Uint32 lastTripleSpawn;
+    Uint32 lastTripleSpawn;
 
     Uint32 spawnInterval;
     Uint32 ShooterEnemySpawnInterval;
-    //Uint32 tripleSpawnInterval;
+    Uint32 tripleSpawnInterval;
 
     float x, y;
     float w, h;

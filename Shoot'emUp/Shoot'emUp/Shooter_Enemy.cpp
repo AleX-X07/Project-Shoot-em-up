@@ -1,9 +1,10 @@
 #include "Shooter_Enemy.h"
 #include <cstdlib>
 
-Shooter_Enemy::Shooter_Enemy() 
+Shooter_Enemy::Shooter_Enemy()
 {
-
+    lastShotTime = 0;
+    lastSpawnTime = 0;
 }
 
 Shooter_Enemy::Shooter_Enemy(float px, float py, float pw, float ph, float ps, int _health, SDL_Color _color)
@@ -12,8 +13,11 @@ Shooter_Enemy::Shooter_Enemy(float px, float py, float pw, float ph, float ps, i
     y = py;
     w = pw;
     h = ph;
+    speed = ps;  
     health = _health;
     color = _color;
+    lastShotTime = 0; 
+    lastSpawnTime = 0;
 }
 
 // Déplacement
@@ -32,7 +36,7 @@ void Shooter_Enemy::render(SDL_Renderer* renderer) {
     };
     SDL_RenderFillRect(renderer, &rect);
 }
-
+// Update de l'enemy pour savoir sa vitesse et la prédéfinir, et de savoir quand les faire disparaitre
 void Shooter_Enemy::updateShooter_Enemy(std::vector<Shooter_Enemy>& Shooter) {
     for (auto& s : Shooter) {
         s.x -= s.speed;
@@ -43,7 +47,7 @@ void Shooter_Enemy::updateShooter_Enemy(std::vector<Shooter_Enemy>& Shooter) {
         }
     }
 }
-
+//spawn du shooter enemy avec ses fonctions de base
 void Shooter_Enemy::spawnShooter_Enemy(std::vector<Shooter_Enemy>& Shooter, int windowWidth, int windowHeight) {
     Shooter_Enemy s;
     s.w = 50;
@@ -68,7 +72,7 @@ void Shooter_Enemy::shoot(std::vector<Bullet>& bullets, Uint32 now) {
         b.w = 10;
         b.h = 5;
         b.vx = -6; 
-        bullets.push_back(b);
+        bullets.emplace_back(b);
         lastShotTime = now;
     }
 }

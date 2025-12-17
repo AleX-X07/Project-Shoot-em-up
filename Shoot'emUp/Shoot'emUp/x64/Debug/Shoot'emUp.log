@@ -1,26 +1,79 @@
-﻿  Enemy_Manager.cpp
+﻿  ShootMultiple_Enemy.cpp
 C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(10,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
-  (compiler le fichier source 'Enemy_Manager.cpp')
+  (compiler le fichier source 'ShootMultiple_Enemy.cpp')
   
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(4,16): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(5,26): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(64,39): warning C4838: la conversion de 'int' en 'float' requiert une conversion restrictive
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(64,39): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(64,44): warning C4838: la conversion de 'int' en 'float' requiert une conversion restrictive
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(64,44): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(70,10): warning C4858: abandon de la valeur retournée : The 'remove' and 'remove_if' algorithms return the iterator past the last element that should be kept. You need to call container.erase(result, container.end()) afterwards. In C++20, 'std::erase' and 'std::erase_if' are simpler replacements for these two steps.
-  Screen.cpp
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(10,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
-  (compiler le fichier source 'Screen.cpp')
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\ShootMultiple_Enemy.h(9,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'ShootMultiple_Enemy.cpp')
   
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Screen.cpp(79,19): warning C4244: 'initialisation' : conversion de 'Uint64' en 'float', perte possible de données
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Screen.cpp(81,45): warning C4244: 'argument' : conversion de 'float' en 'Uint32', perte possible de données
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Screen.cpp(89,32): warning C4244: 'argument' : conversion de 'float' en 'Uint32', perte possible de données
-  main.cpp
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(10,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
-  (compiler le fichier source 'main.cpp')
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(462,85): warning C4244: 'argument' : conversion de '_Ty' en 'float', perte possible de données
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(462,85): warning C4244:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(462,85): warning C4244:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(462,85): warning C4244:             _Ty=int
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(462,85): warning C4244:         ]
+  (compiler le fichier source 'ShootMultiple_Enemy.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(462,85):
+      le contexte d’instanciation du modèle (le plus ancien) est
+          C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\ShootMultiple_Enemy.cpp(15,13):
+          voir la référence à l'instanciation de la fonction modèle 'ShootMultiple_Enemy &std::vector<ShootMultiple_Enemy,std::allocator<ShootMultiple_Enemy>>::emplace_back<int&,int,int,int,int>(int &,int &&,int &&,int &&,int &&)' en cours de compilation
+              C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\ShootMultiple_Enemy.cpp(15,25):
+              voir la première référence à « std::vector<ShootMultiple_Enemy,std::allocator<ShootMultiple_Enemy>>::emplace_back » dans « ShootMultiple_Enemy::spawnShootMultipleEnemy »
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\vector(924,24):
+          voir la référence à l'instanciation de la fonction modèle '_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_one_at_back<int&,int,int,int,int>(int &,int &&,int &&,int &&,int &&)' en cours de compilation
+          with
+          [
+              _Ty=ShootMultiple_Enemy
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\vector(845,20):
+          voir la référence à l'instanciation de la fonction modèle '_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_back_with_unused_capacity<int&,int,int,int,int>(int &,int &&,int &&,int &&,int &&)' en cours de compilation
+          with
+          [
+              _Ty=ShootMultiple_Enemy
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\vector(863,27):
+          voir la référence à l'instanciation de la fonction modèle 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,int&,int,int,int,int>(_Alloc &,_Objty *const ,int &,int &&,int &&,int &&,int &&)' en cours de compilation
+          with
+          [
+              _Alloc=std::allocator<ShootMultiple_Enemy>,
+              _Ty=ShootMultiple_Enemy,
+              _Objty=ShootMultiple_Enemy
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(730,14):
+          voir la référence à l'instanciation de la fonction modèle '_Ty *std::construct_at<_Objty,int&,int,int,int,int>(_Ty *const ,int &,int &&,int &&,int &&,int &&) noexcept(<expr>)' en cours de compilation
+          with
+          [
+              _Ty=ShootMultiple_Enemy,
+              _Objty=ShootMultiple_Enemy
+          ]
   
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(17,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
-C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(19,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
-  Génération de code en cours...
-  Shoot'emUp.vcxproj -> C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\x64\Debug\Shoot'emUp.exe
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(462,85): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+  (compiler le fichier source 'ShootMultiple_Enemy.cpp')
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(463,90): warning C4244: 'argument' : conversion de '_Ty' en 'float', perte possible de données
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(463,90): warning C4244:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(463,90): warning C4244:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(463,90): warning C4244:             _Ty=int
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(463,90): warning C4244:         ]
+  (compiler le fichier source 'ShootMultiple_Enemy.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(463,90):
+      le contexte d’instanciation du modèle (le plus ancien) est
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\vector(863,27):
+          voir la référence à l'instanciation de la fonction modèle 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,int&,int,int,int,int>(_Alloc &,_Objty *const ,int &,int &&,int &&,int &&,int &&)' en cours de compilation
+          with
+          [
+              _Alloc=std::allocator<ShootMultiple_Enemy>,
+              _Ty=ShootMultiple_Enemy,
+              _Objty=ShootMultiple_Enemy
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(730,14):
+          voir la référence à l'instanciation de la fonction modèle '_Ty *std::construct_at<_Objty,int&,int,int,int,int>(_Ty *const ,int &,int &&,int &&,int &&,int &&) noexcept(false)' en cours de compilation
+          with
+          [
+              _Ty=ShootMultiple_Enemy,
+              _Objty=ShootMultiple_Enemy
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(463,90): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+  (compiler le fichier source 'ShootMultiple_Enemy.cpp')
+  
+ShootMultiple_Enemy.obj : error LNK2005: "public: __cdecl Shooter_Enemy::Shooter_Enemy(void)" (??0Shooter_Enemy@@QEAA@XZ) déjà défini(e) dans Shooter_Enemy.obj
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\x64\Debug\Shoot'emUp.exe : fatal error LNK1169: un ou plusieurs symboles définis à différentes reprises ont été rencontrés

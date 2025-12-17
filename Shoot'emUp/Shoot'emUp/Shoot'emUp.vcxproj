@@ -147,6 +147,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ShootMultiple_Enemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
@@ -157,6 +158,7 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Screen.h" />
+    <ClInclude Include="ShootMultiple_Enemy.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Shoot%27emUp.rc" />
