@@ -43,7 +43,7 @@ void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool ent
     }
 }
 
-GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, SDL_Texture* enemyTexture, SDL_Texture* heart, bool& restart) {
+GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, SDL_Texture* enemyTexture, SDL_Texture* heart, bool& restart, SDL_Texture* home) {
     int w, h;
     static int menuSelection = 0;
     static int menuDeathSelection = 0;
@@ -63,8 +63,11 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
                 SDL_Log("Erreur chargement police: %s", SDL_GetError());
             }
         }
-        SDL_SetRenderDrawColor(renderer, 0, 0, 50, 255);
+
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
+        SDL_RenderTexture(renderer, home, NULL, NULL);
+
         SDL_GetWindowSize(window, &w, &h);
 		TitleMenu(renderer, w, h, white, "SHOOT'EM UP", font, w / 2 - 200, 200, 400, 80);
 

@@ -55,6 +55,17 @@ int main(int argc, char** argv) {
         SDL_Log("Erreur chargement bullet: %s", SDL_GetError());
     }
 
+    SDL_Texture* home = nullptr;
+    SDL_Surface* surface4 = IMG_Load("picture/home.png");
+    if (surface4) {
+        home = SDL_CreateTextureFromSurface(renderer, surface4);
+        SDL_DestroySurface(surface4);
+        SDL_SetTextureScaleMode(home, SDL_SCALEMODE_NEAREST);
+    }
+    else {
+        SDL_Log("Erreur chargement bullet: %s", SDL_GetError());
+    }
+
     Uint64 last_time = SDL_GetTicks();
     bool keepGoing = true;
     GameState screen = MENU;
@@ -86,7 +97,7 @@ int main(int argc, char** argv) {
             NavigateMenu(screen, event, menuSelection, enterPressed);
         }
 
-        screen = updateGameState(screen, renderer, background, player, dt, window, enemies, player.bullets, enemyTexture, heart, restart);
+        screen = updateGameState(screen, renderer, background, player, dt, window, enemies, player.bullets, enemyTexture, heart, restart, home);
 
         frameTime = SDL_GetTicks() - frameStart;
 
