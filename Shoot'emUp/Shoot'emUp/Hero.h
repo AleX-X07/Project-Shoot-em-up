@@ -16,7 +16,7 @@ public:
     float speed;
     float shootCooldown = 0.15f;      
     float timeSinceLastShot = 0.0f;
-	int HP = 3;
+	int HP = 4;
     int Score = 0;
 
     Entity();

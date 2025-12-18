@@ -7,6 +7,7 @@
 #include "Enemy.h"
 
 int main(int argc, char** argv) {
+    bool restart = true;
     SDL_Window* window;
     SDL_Renderer* renderer;
     std::vector<Enemy>enemies;
@@ -62,6 +63,16 @@ int main(int argc, char** argv) {
     bool enterPressed = false;
 
     while (keepGoing) {
+        if (restart) {
+            player.HP = 4;
+            player.Score = 0;
+            player.bullets.clear();
+            player.rect.x = 400.0f;
+            player.rect.y = 300.0f;
+            player.timeSinceLastShot = 0.0f;
+            enemies.clear();
+            restart = false;
+        }
         float dt = (SDL_GetTicks() - last_time) / 1000.0f;
         last_time = SDL_GetTicks();
         frameStart = SDL_GetTicks();
@@ -75,7 +86,7 @@ int main(int argc, char** argv) {
             NavigateMenu(screen, event, menuSelection, enterPressed);
         }
 
-        screen = updateGameState(screen, renderer, background, player, dt, window, enemies, player.bullets, enemyTexture, heart);
+        screen = updateGameState(screen, renderer, background, player, dt, window, enemies, player.bullets, enemyTexture, heart, restart);
 
         frameTime = SDL_GetTicks() - frameStart;
 

@@ -43,7 +43,7 @@ void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool ent
     }
 }
 
-GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, SDL_Texture* enemyTexture, SDL_Texture* heart) {
+GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, SDL_Texture* enemyTexture, SDL_Texture* heart, bool& restart) {
     int w, h;
     static int menuSelection = 0;
     static int menuDeathSelection = 0;
@@ -194,9 +194,12 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
             if (!enterPressed) {
                 enterPressed = true;
                 if (menuDeathSelection == 0) {
+                    restart = true;
                     return MENU;
                 }
-                if (menuDeathSelection == 1) return QUIT;
+                if (menuDeathSelection == 1) {
+                    return QUIT;
+                }
             }
         }
         else enterPressed = false;

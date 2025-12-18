@@ -72,12 +72,18 @@ void Entity::shoot() {
         bullets.push_back(newBullet);
 }
 
-void Entity::HUD(SDL_Renderer* renderer, SDL_Texture* heart, int HP, int Score) {
+void Entity::HUD(SDL_Renderer* renderer, SDL_Texture* texture, int HP, int Score) {
     for (int i = 0; i < HP; ++i) {
         SDL_FRect hpRect = { 10.0f + i * 35.0f, 10.0f, 30, 30 };
-        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-        SDL_RenderFillRect(renderer, &hpRect);
+        if (texture) {
+            SDL_RenderTexture(renderer, texture, NULL, &hpRect);
+        }
+        else {
+            SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+            SDL_RenderFillRect(renderer, &hpRect);
+        }
     }
+
 }
 
 void Entity::Collide(std::vector<Enemy>& enemies) {
