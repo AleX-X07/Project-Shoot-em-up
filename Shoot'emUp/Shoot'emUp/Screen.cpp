@@ -113,7 +113,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
 
         int nbr_bomb = 10;
         int nbr_shooter = 10;
-        int nbr_shooter_V2 = 0;
+        int nbr_shooter_V2 = 10;
 
         spawnTimer += dt;
         /*if (spawnTimer >= spawnInterval) {
@@ -133,7 +133,12 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
 
         // Faire tirer les ennemis
         for (auto& e : enemies) {
-            e.shoot(e.enemiesBullet);
+            if (e.numEnemy == 2) {
+                e.shoot(e.enemiesBullet);
+            }
+            else if (e.numEnemy == 3) {
+                e.shootV2(e.enemiesBullet);
+            }
         }
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);

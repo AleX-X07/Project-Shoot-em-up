@@ -86,8 +86,32 @@ void Enemy::renderEnemy(SDL_Renderer* renderer, const std::vector<Enemy>& enemie
 					SDL_RenderFillRect(renderer, &bulletRect);
 				}
 			}
+
 		}
-		
+		else if (e.numEnemy == 3) {
+			// Rendu de l'ennemi
+			SDL_FRect rect = { e.x, e.y, e.w, e.h };
+			if (e.enemyTextureShooter) {
+				SDL_RenderTexture(renderer, e.enemyTextureShooter, NULL, &rect);
+			}
+			else {
+				SDL_SetRenderDrawColor(renderer, e.color.r, e.color.g, e.color.b, e.color.a);
+				SDL_RenderFillRect(renderer, &rect);
+			}
+
+			// Rendu des balles de l'ennemi
+			SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+			for (const auto& b : e.enemiesBullet) {
+				SDL_FRect bulletRect = { b.x, b.y, b.w, b.h };
+				if (e.bulletEnemyTexture) {
+					SDL_RenderTexture(renderer, e.bulletEnemyTexture, NULL, &bulletRect);
+				}
+				else {
+					SDL_SetRenderDrawColor(renderer, e.color.r, e.color.g, e.color.b, e.color.a);
+					SDL_RenderFillRect(renderer, &bulletRect);
+				}
+			}
+		}
 	}
 }
 
@@ -122,6 +146,22 @@ void Enemy::spawnEnemyShooter(std::vector<Enemy>& enemies, int windowWidth, int 
 	enemies.emplace_back(e);
 }
 
+void Enemy::spawnEnemyShooterV2(std::vector<Enemy>& enemies, int windowWidth, int windowHeight, SDL_Renderer* renderer, SDL_Texture* sharedTexture, SDL_Texture* sharedTextureBulet) {
+	Enemy e;
+	e.numEnemy = 3;
+	e.HP = 7;
+	e.w = 75;
+	e.h = 75;
+	e.x = windowWidth;
+	e.y = randomInt(0, windowHeight - 50);
+	e.rect = { e.x, e.y, e.w, e.h };
+	e.enemyTextureShooter = sharedTexture;
+	e.bulletEnemyTexture = sharedTextureBulet;
+	e.speed = 200.0f; // Vitesse en pixels par seconde
+	e.lastShotTime = SDL_GetTicks();
+	enemies.emplace_back(e);
+}
+
 void Enemy::shoot(std::vector<Bullet>& enemiesBullet) {
 	now = SDL_GetTicks();
 	if (now - lastShotTime >= 1500) {
@@ -138,8 +178,26 @@ void Enemy::shoot(std::vector<Bullet>& enemiesBullet) {
 	}
 }
 
+void Enemy::shootV2(std::vector<Bullet>& bullets)
+{
+	if (now - lastShotTime >= 1500) {
+		float centerY = y + h / 2;
+
+		// Tout droit - RALENTI
+		bullets.emplace_back(x, centerY, -1, 0, 10, 5, color);
+
+		// Vers le haut (20°) - RALENTI
+		bullets.emplace_back(x, centerY, -1, -0.5, 10, 5, color);
+
+		// Vers le bas (20°) - RALENTI
+		bullets.emplace_back(x, centerY, -1, 0.5, 10, 5, color);
+
+		lastShotTime = now;
+	}
+}
+
 void Enemy::EnemyManager(std::vector<Enemy>& enemies, SDL_Renderer* renderer, int windowWidth, int windowHeight, LoadRessource& MyRessource, int& nbr_enemies_bomb, int& nbr_enemies_shoot, int& nbr_enemies_shoot_multiple) {
-	int choice = randomInt(1,2);
+	int choice = randomInt(1,3);
 	if (choice == 1 && nbr_enemies_bomb > 0) {
 		Enemy::spawnEnemyBomb(enemies, windowWidth, windowHeight, renderer, MyRessource.bomb);
 		nbr_enemies_bomb--;
@@ -147,6 +205,10 @@ void Enemy::EnemyManager(std::vector<Enemy>& enemies, SDL_Renderer* renderer, in
 	if (choice == 2 && nbr_enemies_shoot > 0) {
 		Enemy::spawnEnemyShooter(enemies, windowWidth, windowHeight, renderer, MyRessource.ship, MyRessource.bulletEnemyTexture);
 		nbr_enemies_bomb--;
+	}
+	if (choice == 3 && nbr_enemies_shoot_multiple > 0) {
+		Enemy::spawnEnemyShooterV2(enemies, windowWidth, windowHeight, renderer, MyRessource.heart, MyRessource.bulletEnemyTexture);
+		nbr_enemies_shoot_multiple--;
 	}
 }
 
