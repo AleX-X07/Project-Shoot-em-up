@@ -13,45 +13,57 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Entity">
+      <UniqueIdentifier>{e3c17535-93cd-4ece-ac0f-6de29e348b3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Window">
+      <UniqueIdentifier>{41b5f660-bce9-4bd9-b9bb-4d5d373dbe89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Entity">
+      <UniqueIdentifier>{9bf82ecc-627f-49af-ba5b-368b861c1220}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Window">
+      <UniqueIdentifier>{28d428db-d270-4824-a077-bdf074beaae2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Fichiers sources\Entity</Filter>
+    </ClCompile>
     <ClCompile Include="Hero.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Entity</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Entity</Filter>
     </ClCompile>
     <ClCompile Include="Menu.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Window</Filter>
     </ClCompile>
     <ClCompile Include="Screen.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Window</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Hero.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Screen.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Entity</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Hero.h">
+      <Filter>Fichiers d%27en-tête\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Fichiers d%27en-tête\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Screen.h">
+      <Filter>Fichiers d%27en-tête\Window</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
