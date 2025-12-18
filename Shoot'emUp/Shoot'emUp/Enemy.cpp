@@ -1,4 +1,4 @@
-#include "Enemy.h"
+ï»¿#include "Enemy.h"
 
 Enemy::Enemy() {
 	HP = 3;
@@ -28,13 +28,13 @@ void Enemy::updateEnemy(std::vector<Enemy>& enemies, float dt) {
 		e.rect.x = e.x;
 		e.rect.y = e.y;
 
-		// Mise à jour des balles de l'ennemi
+		// Mise Ã  jour des balles de l'ennemi
 		for (auto& b : e.enemiesBullet) {
 			b.x += b.vx * dt;
 			b.y += b.vy * dt;
 		}
 
-		// Supprimer les balles hors écran
+		// Supprimer les balles hors Ã©cran
 		e.enemiesBullet.erase(
 			std::remove_if(e.enemiesBullet.begin(), e.enemiesBullet.end(),
 				[](const Bullet& b) { return b.x < -100 || b.x > 2000; }),
@@ -42,7 +42,7 @@ void Enemy::updateEnemy(std::vector<Enemy>& enemies, float dt) {
 		);
 	}
 
-	// Supprimer les ennemis hors écran
+	// Supprimer les ennemis hors Ã©cran
 	for (int i = enemies.size() - 1; i >= 0; i--) {
 		if (enemies[i].x + enemies[i].w < 0) {
 			enemies.erase(enemies.begin() + i);
@@ -178,19 +178,44 @@ void Enemy::shoot(std::vector<Bullet>& enemiesBullet) {
 	}
 }
 
-void Enemy::shootV2(std::vector<Bullet>& bullets)
+void Enemy::shootV2(std::vector<Bullet>& enemiesBullet)
 {
+	now = SDL_GetTicks();
 	if (now - lastShotTime >= 1500) {
-		float centerY = y + h / 2;
+		float centerY = y + h / 2 - 12.5f;
 
-		// Tout droit - RALENTI
-		bullets.emplace_back(x, centerY, -1, 0, 10, 5, color);
+		// Tout droit
+		Bullet b1;
+		b1.x = x;
+		b1.y = centerY;
+		b1.w = 25;
+		b1.h = 25;
+		b1.vx = -300.0f;
+		b1.vy = 0;
+		b1.color = { 255, 255, 0, 255 };
+		enemiesBullet.emplace_back(b1);
 
-		// Vers le haut (20°) - RALENTI
-		bullets.emplace_back(x, centerY, -1, -0.5, 10, 5, color);
+		// Vers le haut (angle ~30Â°)
+		Bullet b2;
+		b2.x = x;
+		b2.y = centerY;
+		b2.w = 25;
+		b2.h = 25;
+		b2.vx = -300.0f;
+		b2.vy = -150.0f;
+		b2.color = { 255, 255, 0, 255 };
+		enemiesBullet.emplace_back(b2);
 
-		// Vers le bas (20°) - RALENTI
-		bullets.emplace_back(x, centerY, -1, 0.5, 10, 5, color);
+		// Vers le bas (angle ~30Â°)
+		Bullet b3;
+		b3.x = x;
+		b3.y = centerY;
+		b3.w = 25;
+		b3.h = 25;
+		b3.vx = -300.0f;
+		b3.vy = 150.0f;
+		b3.color = { 255, 255, 0, 255 };
+		enemiesBullet.emplace_back(b3);
 
 		lastShotTime = now;
 	}
@@ -207,7 +232,7 @@ void Enemy::EnemyManager(std::vector<Enemy>& enemies, SDL_Renderer* renderer, in
 		nbr_enemies_bomb--;
 	}
 	if (choice == 3 && nbr_enemies_shoot_multiple > 0) {
-		Enemy::spawnEnemyShooterV2(enemies, windowWidth, windowHeight, renderer, MyRessource.heart, MyRessource.bulletEnemyTexture);
+		Enemy::spawnEnemyShooterV2(enemies, windowWidth, windowHeight, renderer, MyRessource.ship, MyRessource.bulletEnemyTexture);
 		nbr_enemies_shoot_multiple--;
 	}
 }
