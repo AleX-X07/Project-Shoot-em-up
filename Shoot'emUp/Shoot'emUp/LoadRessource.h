@@ -13,9 +13,11 @@ public:
 	SDL_Texture* backgroundHome;
 	SDL_Texture* backgroundLevel1;
 	SDL_Texture* heart;
-	SDL_Texture* enemyTexture;
+	SDL_Texture* bomb;
 	SDL_Texture* entityTexture;
 	SDL_Texture* bulletTexture;
+	SDL_Texture* ship;
+	SDL_Texture* bulletEnemyTexture;
 
 	void loadAllTexture();
 

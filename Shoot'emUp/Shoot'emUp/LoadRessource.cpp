@@ -6,9 +6,11 @@ LoadRessource::LoadRessource(SDL_Renderer* rend) : renderer(rend) {
 	backgroundHome = nullptr;
 	backgroundLevel1 = nullptr;
 	heart = nullptr;
-	enemyTexture = nullptr;
+    bomb = nullptr;
 	entityTexture = nullptr;
 	bulletTexture = nullptr;
+    ship = nullptr;
+    bulletEnemyTexture = nullptr;
 }
 
 void LoadRessource::loadAllTexture() {
@@ -30,11 +32,11 @@ void LoadRessource::loadAllTexture() {
     heart = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
 
-    // Enemy
+    // Bomb
     surface = IMG_Load("picture/bomb.png");
-    enemyTexture = SDL_CreateTextureFromSurface(renderer, surface);
+    bomb = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
-    SDL_SetTextureScaleMode(enemyTexture, SDL_SCALEMODE_NEAREST);
+    SDL_SetTextureScaleMode(bomb, SDL_SCALEMODE_NEAREST);
 
     // Player
     surface = IMG_Load("picture/player.png");
@@ -46,13 +48,27 @@ void LoadRessource::loadAllTexture() {
     surface = IMG_Load("picture/bullet.png");
     bulletTexture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
+
+    // Ship
+    surface = IMG_Load("picture/ship.png");
+    ship = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_DestroySurface(surface);
+    SDL_SetTextureScaleMode(ship, SDL_SCALEMODE_NEAREST);
+
+    // Bullet enemy
+    surface = IMG_Load("picture/bulletEnemy.png");
+    bulletEnemyTexture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_DestroySurface(surface);
+    SDL_SetTextureScaleMode(bulletEnemyTexture, SDL_SCALEMODE_NEAREST);
 }
 
 LoadRessource::~LoadRessource() {
 	if (backgroundLevel1) SDL_DestroyTexture(backgroundLevel1);
 	if (backgroundHome) SDL_DestroyTexture(backgroundHome);
-	if (enemyTexture) SDL_DestroyTexture(entityTexture);
+	if (bomb) SDL_DestroyTexture(entityTexture);
 	if (bulletTexture) SDL_DestroyTexture(bulletTexture);
 	if (entityTexture) SDL_DestroyTexture(entityTexture);
 	if (heart) SDL_DestroyTexture(heart);
+    if (ship) SDL_DestroyTexture(ship);
+    if (bulletEnemyTexture) SDL_DestroyTexture(bulletEnemyTexture);
 }

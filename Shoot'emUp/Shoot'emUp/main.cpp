@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
 
     LoadRessource MyRessource = LoadRessource(renderer);
     MyRessource.loadAllTexture();
-    Entity player(400.0f, 300.0f, 150, 150, SDL_Color{ 255, 0, 0, 255 }, 400);
+    Entity player(400.0f, 300.0f, 100, 100, SDL_Color{ 255, 0, 0, 255 }, 400);
     player.texture = MyRessource.entityTexture;
     player.bulletTexture = MyRessource.bulletTexture;
 

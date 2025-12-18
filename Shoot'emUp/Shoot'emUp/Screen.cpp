@@ -62,12 +62,12 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
         SDL_RenderTexture(renderer, MyRessource.backgroundHome, NULL, NULL);
 
         SDL_GetWindowSize(window, &w, &h);
-		TitleMenu(renderer, w, h, white, "SHOOT'EM UP", font, w / 2 - 200, 200, 400, 80);
+        TitleMenu(renderer, w, h, white, "SHOOT'EM UP", font, w / 2 - 200, 200, 400, 80);
 
-		ButtonMenu(renderer, w, h, white, "PLAY", font, w / 2 - 100, h / 2 - 60, 200, 50, menuSelection, 0);
+        ButtonMenu(renderer, w, h, white, "PLAY", font, w / 2 - 100, h / 2 - 60, 200, 50, menuSelection, 0);
 
         ButtonMenu(renderer, w, h, white, "QUIT", font, w / 2 - 100, h / 2 + 20, 200, 50, menuSelection, 1);
-        
+
         if (keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_W]) {
             if (!upPressed) {
                 menuSelection = (menuSelection - 1 + 2) % 2;
@@ -92,7 +92,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
             }
         }
         else enterPressed = false;
-		SDL_RenderPresent(renderer);
+        SDL_RenderPresent(renderer);
         break;
     }
 
@@ -111,13 +111,30 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
         player.clampToScreen(w, h);
         player.updateBullets(dt);
 
+        int nbr_bomb = 10;
+        int nbr_shooter = 10;
+        int nbr_shooter_V2 = 0;
+
         spawnTimer += dt;
-        if (spawnTimer >= spawnInterval) {
-            Enemy::spawnEnemy(enemies, w, h, renderer, MyRessource.enemyTexture);
+        /*if (spawnTimer >= spawnInterval) {
+            Enemy::spawnEnemyBomb(enemies, w, h, renderer, MyRessource.enemyTexture);
+            spawnTimer = 0;
+        }*/
+
+        if (spawnTimer >= spawnInterval && nbr_bomb > 0 && nbr_shooter > 0) {
+            Enemy::EnemyManager(enemies, renderer, w, h, MyRessource, nbr_bomb, nbr_shooter, nbr_shooter_V2);
             spawnTimer = 0;
         }
 
-        Enemy::updateEnemy(enemies);
+
+
+        // Mise à jour des ennemis avec dt
+        Enemy::updateEnemy(enemies, dt);
+
+        // Faire tirer les ennemis
+        for (auto& e : enemies) {
+            e.shoot(e.enemiesBullet);
+        }
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
@@ -140,12 +157,29 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
             }
         }
 
+        // Collision avec les balles ennemies
+        timeSinceLastHitBullet += dt;
+        if (timeSinceLastHitBullet >= collisionCooldownEnemy) {
+            for (auto& e : enemies) {
+                for (int i = e.enemiesBullet.size() - 1; i >= 0; i--) {
+                    SDL_FRect bulletRect = { e.enemiesBullet[i].x, e.enemiesBullet[i].y,
+                                             e.enemiesBullet[i].w, e.enemiesBullet[i].h };
+                    if (SDL_HasRectIntersectionFloat(&player.rect, &bulletRect)) {
+                        player.HP--;
+                        e.enemiesBullet.erase(e.enemiesBullet.begin() + i);  // Supprime la balle
+                        timeSinceLastHitBullet = 0;
+                        break;
+                    }
+                }
+            }
+        }
+
         player.Collide(enemies);
 
         SDL_RenderPresent(renderer);
 
         if (keys[SDL_SCANCODE_ESCAPE]) {
-            player.HP = 3;
+            player.HP = 4;
             player.bullets.clear();
             enemies.clear();
             player.rect.x = 400.0f;
@@ -169,7 +203,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
         ButtonMenu(renderer, w, h, white, "MENU", font, w / 2 - 100, h / 2 - 60, 200, 50, menuDeathSelection, 0);
 
         ButtonMenu(renderer, w, h, white, "QUIT", font, w / 2 - 100, h / 2 + 20, 200, 50, menuDeathSelection, 1);
- 
+
         if (keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_W]) {
             if (!upPressed) {
                 menuDeathSelection = (menuDeathSelection - 1 + 2) % 2;

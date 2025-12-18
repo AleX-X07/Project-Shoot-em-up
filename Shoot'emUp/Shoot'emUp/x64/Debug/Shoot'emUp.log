@@ -1,5 +1,13 @@
-﻿  main.cpp
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(21,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(23,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(102,36): warning C4244: '=' : conversion de 'Uint64' en 'int', perte possible de données
+﻿  Enemy.cpp
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(28,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'Enemy.cpp')
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(46,13): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(100,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(101,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(105,31): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(115,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(116,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(121,31): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(126,20): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
   Shoot'emUp.vcxproj -> C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\x64\Debug\Shoot'emUp.exe
