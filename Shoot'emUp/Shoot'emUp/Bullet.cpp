@@ -22,18 +22,6 @@ void Bullet::renderBullets(SDL_Renderer* renderer) {
     } 
 }
 
-void Bullet::loadBulletTexture(SDL_Renderer* renderer, const char* filepath) {
-    SDL_Surface* surface = IMG_Load(filepath);
-    if (surface) {
-        bulletTexture = SDL_CreateTextureFromSurface(renderer, surface);
-        SDL_DestroySurface(surface);
-        SDL_SetTextureScaleMode(bulletTexture, SDL_SCALEMODE_NEAREST);
-    }
-    else {
-        SDL_Log("Erreur chargement bullet: %s", SDL_GetError());
-    }
-}
-
 void Bullet::updateBullets(float dt) {
     for (auto& b : bullets) {
         b.x += b.vx * dt;

@@ -1,11 +1,4 @@
 #include "Screen.h"
-#include "Menu.h"
-#include "Enemy.h"
-#include "Bullet.h"
-#include <vector>
-#include <SDL3/SDL.h>
-#include <SDL3_ttf/SDL_ttf.h>
-#include <iostream>
 
 float collisionCooldown = 0.5f;
 float collisionCooldownEnemy = 0.2f;
@@ -43,7 +36,7 @@ void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool ent
     }
 }
 
-GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, SDL_Texture* enemyTexture, SDL_Texture* heart, bool& restart, SDL_Texture* home) {
+GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, bool& restart) {
     int w, h;
     static int menuSelection = 0;
     static int menuDeathSelection = 0;
@@ -66,7 +59,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
-        SDL_RenderTexture(renderer, home, NULL, NULL);
+        SDL_RenderTexture(renderer, MyRessource.backgroundHome, NULL, NULL);
 
         SDL_GetWindowSize(window, &w, &h);
 		TitleMenu(renderer, w, h, white, "SHOOT'EM UP", font, w / 2 - 200, 200, 400, 80);
@@ -120,7 +113,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
 
         spawnTimer += dt;
         if (spawnTimer >= spawnInterval) {
-            Enemy::spawnEnemy(enemies, w, h, renderer, enemyTexture);
+            Enemy::spawnEnemy(enemies, w, h, renderer, MyRessource.enemyTexture);
             spawnTimer = 0;
         }
 
@@ -128,12 +121,12 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
-        SDL_RenderTexture(renderer, background, NULL, NULL);
+        SDL_RenderTexture(renderer, MyRessource.backgroundLevel1, NULL, NULL);
 
         player.render(renderer);
         player.renderBullets(renderer);
         Enemy::renderEnemy(renderer, enemies);
-        player.HUD(renderer, heart, player.HP, player.Score);
+        player.HUD(renderer, MyRessource.heart, player.HP, player.Score);
 
         timeSinceLastHit += dt;
         if (timeSinceLastHit >= collisionCooldown) {

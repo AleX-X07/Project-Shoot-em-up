@@ -27,7 +27,6 @@ public:
     void move(float dx, float dy, float dt);
     void clampToScreen(int screenWidth, int screenHeight);
     void render(SDL_Renderer* renderer);
-    void loadTexture(SDL_Renderer* renderer, const char* filepath);
     void handleInput(const bool* keys, float dt);
 	void shoot();
 	void HUD(SDL_Renderer* renderer, SDL_Texture* heart, int HP, int Score);

@@ -1,7 +1,13 @@
 #pragma once
-#include <SDL3/SDL.h>
 #include "Hero.h"
 #include "Enemy.h"
+#include "Menu.h"
+#include "Bullet.h"
+#include "LoadRessource.h"
+#include <vector>
+#include <SDL3/SDL.h>
+#include <SDL3_ttf/SDL_ttf.h>
+#include <iostream>
 
 enum GameState {
     MENU,
@@ -12,5 +18,5 @@ enum GameState {
 };
 
 void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool enterPressed);
-GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, SDL_Texture* enemyTexture, SDL_Texture* heart, bool& restart, SDL_Texture* home);
+GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets,bool& restart);
 

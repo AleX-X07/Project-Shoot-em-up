@@ -45,6 +45,9 @@
     <ClCompile Include="Screen.cpp">
       <Filter>Fichiers sources\Window</Filter>
     </ClCompile>
+    <ClCompile Include="LoadRessource.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -64,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="Screen.h">
       <Filter>Fichiers d%27en-tête\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadRessource.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

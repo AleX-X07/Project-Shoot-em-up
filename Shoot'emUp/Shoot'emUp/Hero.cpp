@@ -39,18 +39,6 @@ void Entity::render(SDL_Renderer* renderer) {
     }
 }
 
-void Entity::loadTexture(SDL_Renderer* renderer, const char* filepath) {
-    SDL_Surface* surface = IMG_Load(filepath);
-    if (surface) {
-        texture = SDL_CreateTextureFromSurface(renderer, surface);
-        SDL_DestroySurface(surface);
-        SDL_SetTextureScaleMode(texture, SDL_SCALEMODE_NEAREST);
-    }
-    else {
-        SDL_Log("Erreur chargement texture: %s", SDL_GetError());
-    }
-}
-
 void Entity::handleInput(const bool* keys, float dt) {
     float dx = 0, dy = 0;
     if (keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_W]) dy -= 1;

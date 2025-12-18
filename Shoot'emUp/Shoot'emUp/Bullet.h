@@ -19,5 +19,4 @@ public:
     Bullet(float startX, float startY, float velX, float velY, int width, int height, SDL_Color col);
     void renderBullets(SDL_Renderer* renderer);
     void updateBullets(float dt);
-    void loadBulletTexture(SDL_Renderer* renderer, const char* filepath);
 };

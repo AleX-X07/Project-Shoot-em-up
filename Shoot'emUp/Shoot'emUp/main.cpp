@@ -5,6 +5,7 @@
 #include "Hero.h"
 #include "Screen.h"
 #include "Enemy.h"
+#include "LoadRessource.h"
 
 int main(int argc, char** argv) {
     bool restart = true;
@@ -25,46 +26,11 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    SDL_Surface* surface = IMG_Load("picture/arena.png");
-    SDL_Texture* background = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_DestroySurface(surface);
-
+    LoadRessource MyRessource = LoadRessource(renderer);
+    MyRessource.loadAllTexture();
     Entity player(400.0f, 300.0f, 150, 150, SDL_Color{ 255, 0, 0, 255 }, 400);
-    player.loadTexture(renderer, "picture/player.png");
-    player.loadBulletTexture(renderer, "picture/bullet.png");
-
-    SDL_Texture* heart = nullptr;
-    SDL_Surface* surface2 = IMG_Load("picture/heart.png");
-    if (surface2) {
-        heart = SDL_CreateTextureFromSurface(renderer, surface2);
-        SDL_DestroySurface(surface);
-        SDL_SetTextureScaleMode(heart, SDL_SCALEMODE_NEAREST);
-    }
-    else {
-        SDL_Log("Erreur chargement bullet: %s", SDL_GetError());
-    }
-
-    SDL_Texture* enemyTexture = nullptr;
-    SDL_Surface* surface3 = IMG_Load("picture/bomb.png");
-    if (surface3) {
-        enemyTexture = SDL_CreateTextureFromSurface(renderer, surface3);
-        SDL_DestroySurface(surface3);
-        SDL_SetTextureScaleMode(enemyTexture, SDL_SCALEMODE_NEAREST);
-    }
-    else {
-        SDL_Log("Erreur chargement bullet: %s", SDL_GetError());
-    }
-
-    SDL_Texture* home = nullptr;
-    SDL_Surface* surface4 = IMG_Load("picture/home.png");
-    if (surface4) {
-        home = SDL_CreateTextureFromSurface(renderer, surface4);
-        SDL_DestroySurface(surface4);
-        SDL_SetTextureScaleMode(home, SDL_SCALEMODE_NEAREST);
-    }
-    else {
-        SDL_Log("Erreur chargement bullet: %s", SDL_GetError());
-    }
+    player.texture = MyRessource.entityTexture;
+    player.bulletTexture = MyRessource.bulletTexture;
 
     Uint64 last_time = SDL_GetTicks();
     bool keepGoing = true;
@@ -97,7 +63,7 @@ int main(int argc, char** argv) {
             NavigateMenu(screen, event, menuSelection, enterPressed);
         }
 
-        screen = updateGameState(screen, renderer, background, player, dt, window, enemies, player.bullets, enemyTexture, heart, restart, home);
+        screen = updateGameState(screen, renderer, MyRessource, player, dt, window, enemies, player.bullets, restart);
 
         frameTime = SDL_GetTicks() - frameStart;
 
@@ -110,7 +76,6 @@ int main(int argc, char** argv) {
         }
     }
 
-    SDL_DestroyTexture(background);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
