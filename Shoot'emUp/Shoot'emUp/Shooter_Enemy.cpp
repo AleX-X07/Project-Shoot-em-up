@@ -1,16 +1,12 @@
 #include "Shooter_Enemy.h"
 #include <cstdlib>
-<<<<<<< HEAD
 
 Shooter_Enemy::Shooter_Enemy()
 {
     lastShotTime = 0;
     lastSpawnTime = 0;
-=======
-Shooter_Enemy::Shooter_Enemy() {
-
->>>>>>> 6b492029b84388f2ee313662d4a7c317ac7d449f
 }
+
 Shooter_Enemy::Shooter_Enemy(float px, float py, float pw, float ph, float ps, int _health, SDL_Color _color)
 {
     x = px;
@@ -59,7 +55,7 @@ void Shooter_Enemy::spawnShooter_Enemy(std::vector<Shooter_Enemy>& Shooter, int 
     s.x = windowWidth;
     s.y = randomInt(0, windowHeight - 50);
     s.color = { 0,0,255,255 };
-    s.speed = 1;
+    s.speed = 0.5;
     Shooter.emplace_back(s);
 
     // Santé
@@ -75,7 +71,7 @@ void Shooter_Enemy::shoot(std::vector<Bullet>& bullets, Uint32 now) {
         b.y = y + h / 2;
         b.w = 10;
         b.h = 5;
-        b.vx = -6; 
+        b.vx = -1; 
         bullets.emplace_back(b);
         lastShotTime = now;
     }

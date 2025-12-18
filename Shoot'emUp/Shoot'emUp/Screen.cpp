@@ -84,15 +84,14 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
         EM.update(windowWidth, now);
         EM.cleanBullet();
 
-<<<<<<< HEAD
+
         // Effacer l'écran
-=======
-        SE.spawnShooter_Enemy(Shooter, windowWidth, windowHeight);
-        SE.updateShooter_Enemy(Shooter);
+
+        //SE.spawnShooter_Enemy(Shooter, windowWidth, windowHeight);
+        //SE.updateShooter_Enemy(Shooter);
         //Enemy::updateEnemy(enemies);
         //Shooter_Enemy::updateShooter_Enemy(Shooter);
 
->>>>>>> 6b492029b84388f2ee313662d4a7c317ac7d449f
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
 
@@ -119,6 +118,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
             EM.enemies.clear();
             EM.Shooter.clear();
             EM.bullets.clear();
+            EM.triples.clear();
 
             player.rect.x = 400.0f;
             player.rect.y = 300.0f;

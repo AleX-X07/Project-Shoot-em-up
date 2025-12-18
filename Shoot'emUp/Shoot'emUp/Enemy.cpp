@@ -61,7 +61,7 @@ void Enemy::spawnEnemy(std::vector<Enemy>& enemies, int windowWidth, int windowH
 	e.x = windowWidth;
 	e.y = randomInt(0, windowHeight - 50);
 	e.color = { 255, 0, 0, 255 };
-	e.speed = 1.5;
+	e.speed = 0.6;
 	e.health = 1;  // Ajoutez ceci
 	enemies.emplace_back(e);
 }

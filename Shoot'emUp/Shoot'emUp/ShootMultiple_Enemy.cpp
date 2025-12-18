@@ -1,7 +1,7 @@
 #include "ShootMultiple_Enemy.h"
 
 
-Shooter_Enemy::Shooter_Enemy()
+ShootMultiple_Enemy::ShootMultiple_Enemy()
 {
     lastShotTime = 0;
     lastSpawnTime = 0;
@@ -11,28 +11,38 @@ ShootMultiple_Enemy::ShootMultiple_Enemy(float px, float py, float pw, float ph,
     : lastShotTime(0) {
 }
 
-void ShootMultiple_Enemy::spawnShootMultipleEnemy(std::vector<ShootMultiple_Enemy>& triples, int windowWidth, int windowHeight) {
-    triples.emplace_back(windowWidth, std::rand() % (windowHeight - 50), 50, 50, 2);
-}
+void ShootMultiple_Enemy::spawnShootMultiple_Enemy(std::vector<ShootMultiple_Enemy>& triples, int windowWidth, int windowHeight) {
+    ShootMultiple_Enemy t;
+    t.w = 50;
+    t.h = 50;
+    t.x = windowWidth;
+    t.y = randomInt(0, windowHeight - 50);
+    t.color = { 0,0,255,255 };
+    t.speed = 0.25;
+    triples.emplace_back(t);
 
+    // Santé
+    int health = 3;
+}
 
 
 void ShootMultiple_Enemy::update(int windowWidth) {
     x -= speed; // x, y, speed viennent de Enemy !
 }
 
-void ShootMultiple_Enemy::shoot(std::vector<Bullet>& bullets, Uint32 now) {
+void ShootMultiple_Enemy::shoot(std::vector<Bullet>& bullets, Uint32 now) 
+{
     if (now - lastShotTime >= 1500) {
         float centerY = y + h / 2;
 
-        // Tout droit - ordre : startX, startY, velX, velY, width, height, color
-        bullets.emplace_back(x, centerY, -6, 0, 10, 5, color);
+        // Tout droit - RALENTI
+        bullets.emplace_back(x, centerY, -1, 0, 10, 5, color);
 
-        // Vers le haut (45°)
-        bullets.emplace_back(x, centerY, -6, -4, 10, 5, color);
+        // Vers le haut (20°) - RALENTI
+        bullets.emplace_back(x, centerY, -1, -0.5, 10, 5, color);
 
-        // Vers le bas (45°)
-        bullets.emplace_back(x, centerY, -6, 4, 10, 5, color);
+        // Vers le bas (20°) - RALENTI
+        bullets.emplace_back(x, centerY, -1, 0.5, 10, 5, color);
 
         lastShotTime = now;
     }

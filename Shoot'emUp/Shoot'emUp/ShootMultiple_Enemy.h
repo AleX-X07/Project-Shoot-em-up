@@ -14,5 +14,5 @@ public:
     void update(int windowWidth);
     void shoot(std::vector<Bullet>& bullets, Uint32 now);
     void render(SDL_Renderer* renderer);
-    static void spawnShootMultipleEnemy(std::vector<ShootMultiple_Enemy>& triples, int windowWidth, int windowHeight);
+    static void spawnShootMultiple_Enemy(std::vector<ShootMultiple_Enemy>& triples, int windowWidth, int windowHeight);
 };

@@ -5,8 +5,8 @@
 }
 
 void Bullet::update(float dt) {
-    x += vx * dt;
-    y += vy * dt;
+    x += vx * speedMultiplier * dt;
+    y += vy * speedMultiplier * dt;
 }
 
 void Bullet::render(SDL_Renderer* renderer) {
@@ -19,4 +19,8 @@ void Bullet::render(SDL_Renderer* renderer) {
         SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
         SDL_RenderFillRect(renderer, &dst);
     }
+}
+
+void Bullet::setSpeed(float multiplier) {
+    speedMultiplier = multiplier;
 }

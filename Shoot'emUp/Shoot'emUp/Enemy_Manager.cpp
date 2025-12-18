@@ -20,7 +20,7 @@ void EnemyManager::spawn(int windowWidth, int windowHeight, Uint32 now)
         lastShooterEnemySpawn = now;
     }
     if (now - lastTripleSpawn > tripleSpawnInterval) {
-        ShootMultiple_Enemy::spawnShootMultipleEnemy(triples, windowWidth, windowHeight);
+        ShootMultiple_Enemy::spawnShootMultiple_Enemy(triples, windowWidth, windowHeight);
         lastTripleSpawn = now;
     }
 }
