@@ -12,6 +12,7 @@ public:
     float speed;
     SDL_FRect rect;
     SDL_Texture* enemyTexture;
+    std::vector<Enemy>enemies;
     SDL_Color color;
     int HP;
     int Value;
