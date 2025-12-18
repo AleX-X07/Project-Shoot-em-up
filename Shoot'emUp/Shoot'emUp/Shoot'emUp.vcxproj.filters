@@ -46,19 +46,18 @@
       <Filter>Fichiers sources\Window</Filter>
     </ClCompile>
     <ClCompile Include="LoadRessource.cpp">
+	<Filter>Fichiers sources</Filter>
+	</ClCompile>
+    <ClCompile Include="Enemy.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="resource.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Fichiers d%27en-tête\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Fichiers d%27en-tête\Entity</Filter>
-    </ClInclude>
+    <ClCompile Include="Shooter_Enemy.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_Manager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ShootMultiple_Enemy.cpp">
     <ClInclude Include="Hero.h">
       <Filter>Fichiers d%27en-tête\Entity</Filter>
     </ClInclude>

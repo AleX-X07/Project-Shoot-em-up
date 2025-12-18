@@ -6,12 +6,16 @@
 #include "Screen.h"
 #include "Enemy.h"
 #include "LoadRessource.h"
+#include "Shooter_Enemy.h"
+#include "Enemy_Manager.h"
 
 int main(int argc, char** argv) {
     bool restart = true;
     SDL_Window* window;
     SDL_Renderer* renderer;
-    std::vector<Enemy>enemies;
+    EnemyManager Manager;
+    /*std::vector<Enemy>enemies;
+    std::vector<Shooter_Enemy>Shooter;*/
 
     const int FPS = 60;
     const int FRAME_DELAY = 1000 / FPS;

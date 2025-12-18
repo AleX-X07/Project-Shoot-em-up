@@ -8,6 +8,7 @@
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
 #include <iostream>
+#include "Enemy_Manager.h"
 
 enum GameState {
     MENU,
@@ -19,4 +20,3 @@ enum GameState {
 
 void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool enterPressed);
 GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets,bool& restart);
-

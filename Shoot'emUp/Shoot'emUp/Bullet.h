@@ -12,6 +12,7 @@ public:
     float x, y;
     float vx, vy;
     float h, w;
+
     SDL_Color color;
     SDL_Texture* bulletTexture = nullptr;
     std::vector<Bullet> bullets;

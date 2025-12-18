@@ -10,6 +10,7 @@ public:
     float x, y;
     float w, h;
     float speed;
+    int health;
     SDL_FRect rect;
     SDL_Texture* enemyTexture;
     SDL_Color color;
@@ -17,7 +18,11 @@ public:
     int Value;
 
     Enemy();
-    Enemy(float _x, float _y, float _w, float _h, float _speed, SDL_Color color);
+    Enemy(float _x, float _y, float _w, float _h, float _speed, int _health, SDL_Color color );
+
+    virtual void update(int windowWidth);
+    virtual void render(SDL_Renderer* renderer);
+
     static int randomInt(int min, int max);
     static void updateEnemy(std::vector<Enemy>& enemies);
     static void renderEnemy(SDL_Renderer* renderer, const std::vector<Enemy>& enemies);

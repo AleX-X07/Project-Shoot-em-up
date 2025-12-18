@@ -20,7 +20,6 @@ void Bullet::renderBullets(SDL_Renderer* renderer) {
             SDL_RenderFillRect(renderer, &dst);
         }
     } 
-}
 
 void Bullet::updateBullets(float dt) {
     for (auto& b : bullets) {
@@ -28,3 +27,4 @@ void Bullet::updateBullets(float dt) {
         b.y += b.vy * dt;
     }
 }
+

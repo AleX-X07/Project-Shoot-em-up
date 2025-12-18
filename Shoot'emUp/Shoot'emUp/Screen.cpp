@@ -1,4 +1,12 @@
 #include "Screen.h"
+#include "Menu.h"
+#include "Enemy.h"
+#include <vector>
+#include <SDL3/SDL.h>
+#include <SDL3_ttf/SDL_ttf.h>
+#include <iostream>
+#include "Enemy_Manager.h"
+#include "Shooter_Enemy.h"
 
 float collisionCooldown = 0.5f;
 float collisionCooldownEnemy = 0.2f;
@@ -45,7 +53,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
     static bool enterPressed = false;
     static TTF_Font* font = nullptr;
     SDL_Color white = { 255, 255, 255, 255 };
-
+    static EnemyManager EM;
     const bool* keys = SDL_GetKeyboardState(NULL);
 
     switch (screen) {
@@ -97,34 +105,38 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
     }
 
     case LEVEL1: {
-
         if (player.HP <= 0) {
             screen = GAMEOVER;
             break;
         }
 
-        static float spawnTimer = 0;
-        const float spawnInterval = 1.5;
-
+        // Input et mise à jour du joueur
         player.handleInput(keys, dt);
         SDL_GetWindowSize(window, &w, &h);
         player.clampToScreen(w, h);
         player.updateBullets(dt);
 
-        spawnTimer += dt;
-        if (spawnTimer >= spawnInterval) {
-            Enemy::spawnEnemy(enemies, w, h, renderer, MyRessource.enemyTexture);
-            spawnTimer = 0;
-        }
+        // Mise à jour des ennemis
+        int windowWidth;
+        int windowHeight;
+        Uint32 now = SDL_GetTicks();
+        SDL_GetWindowSize(window, &windowWidth, &windowHeight);
 
-        Enemy::updateEnemy(enemies);
+        EM.spawn(windowWidth, windowHeight, now);
+        EM.update(windowWidth, now);
+        EM.cleanBullet();
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
         SDL_RenderTexture(renderer, MyRessource.backgroundLevel1, NULL, NULL);
 
+        // Ennemis (en arrière-plan)
+        EM.render(renderer);
+
+        // Joueur et ses bullets (au premier plan)
         player.render(renderer);
         player.renderBullets(renderer);
+
         Enemy::renderEnemy(renderer, enemies);
         player.HUD(renderer, MyRessource.heart, player.HP, player.Score);
 
@@ -142,12 +154,20 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
 
         player.Collide(enemies);
 
+        // Présenter tout à l'écran
         SDL_RenderPresent(renderer);
 
+        // Retour au menu
         if (keys[SDL_SCANCODE_ESCAPE]) {
             player.HP = 3;
             player.bullets.clear();
-            enemies.clear();
+
+            // Nettoyage des enemies
+            EM.enemies.clear();
+            EM.Shooter.clear();
+            EM.bullets.clear();
+            EM.triples.clear();
+
             player.rect.x = 400.0f;
             player.rect.y = 300.0f;
             return MENU;

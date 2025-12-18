@@ -4,16 +4,23 @@ Enemy::Enemy() {
 	Value = 5;
 }
 
-Enemy::Enemy(float _x, float _y, float _w, float _h, float _speed, SDL_Color _color) {
+Enemy::Enemy(float _x, float _y, float _w, float _h, float _speed, int _health, SDL_Color _color) {
 	x = _x;
 	y = _y;
 	w = _w;
 	h = _h;
 	speed = _speed;
+	health = _health;
 	color = _color;
 	Value = 5;
 }
 
+// Update de l'enemy avec sa vitesse
+void Enemy::update(int windowWidth) {
+	x -= speed * 1.5f; // déplacement vers la gauche
+}
+
+// Fonction de random sur la position d'apparition de l'enemy
 int Enemy::randomInt(int min, int max) {
 	static std::random_device rd;
 	static std::mt19937 gen(rd());
@@ -21,6 +28,7 @@ int Enemy::randomInt(int min, int max) {
 	return dis(gen);
 }
 
+//Update de l'enemy pour savoir quand il commence d'apparaitre ou disparaitre (A gauche de l'ecran puis à droite)
 void Enemy::updateEnemy(std::vector<Enemy>& enemies) {
 	for (auto& e : enemies) {
 		e.x -= e.speed;
@@ -34,7 +42,7 @@ void Enemy::updateEnemy(std::vector<Enemy>& enemies) {
 		}
 	}
 }
-
+//Affichage de l'enemy avec ses couleurs et sa forme
 void Enemy::renderEnemy(SDL_Renderer* renderer, const std::vector<Enemy>& enemies) {
 		for (const auto& e : enemies) {
 			SDL_FRect rect = { e.x, e.y, e.w, e.h };
@@ -57,13 +65,10 @@ void Enemy::spawnEnemy(std::vector<Enemy>& enemies, int windowWidth, int windowH
 	e.rect = { e.x,e.y,e.w,e.h };
 	e.enemyTexture = sharedTexture;
 	e.speed = 5;
-	enemies.push_back(e);
+	e.HP = 1;
+	enemies.emplace_back(e);
 }
 
 Enemy::~Enemy() {
 	
 }
-
-
-
-
