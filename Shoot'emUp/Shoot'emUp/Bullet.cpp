@@ -19,7 +19,8 @@ void Bullet::renderBullets(SDL_Renderer* renderer) {
             SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
             SDL_RenderFillRect(renderer, &dst);
         }
-    } 
+    }
+}
 
 void Bullet::updateBullets(float dt) {
     for (auto& b : bullets) {

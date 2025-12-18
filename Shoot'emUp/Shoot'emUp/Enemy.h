@@ -21,7 +21,7 @@ public:
     Enemy(float _x, float _y, float _w, float _h, float _speed, int _health, SDL_Color color );
 
     virtual void update(int windowWidth);
-    virtual void render(SDL_Renderer* renderer);
+    virtual void renderEnemy(SDL_Renderer* renderer, const std::vector<Enemy>& enemies);
 
     static int randomInt(int min, int max);
     static void updateEnemy(std::vector<Enemy>& enemies);

@@ -12,7 +12,7 @@ EnemyManager::EnemyManager()
 void EnemyManager::spawn(int windowWidth, int windowHeight, Uint32 now)
 {
     if (now - lastSpawn > spawnInterval) {
-        Enemy::spawnEnemy(enemies, windowWidth, windowHeight);
+        Enemy::spawnEnemy(enemies, windowWidth, windowHeight, renderer, enemyTexture);
         lastSpawn = now;
     }
     if (now - lastShooterEnemySpawn > ShooterEnemySpawnInterval) {

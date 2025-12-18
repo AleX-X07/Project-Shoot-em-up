@@ -12,8 +12,8 @@
 int main(int argc, char** argv) {
     bool restart = true;
     SDL_Window* window;
-    SDL_Renderer* renderer;
-    EnemyManager Manager;
+    SDL_Renderer* renderer; 
+    EnemyManager EM;
     /*std::vector<Enemy>enemies;
     std::vector<Shooter_Enemy>Shooter;*/
 
@@ -51,7 +51,7 @@ int main(int argc, char** argv) {
             player.rect.x = 400.0f;
             player.rect.y = 300.0f;
             player.timeSinceLastShot = 0.0f;
-            enemies.clear();
+            EM.enemies.clear();
             restart = false;
         }
         float dt = (SDL_GetTicks() - last_time) / 1000.0f;
@@ -67,7 +67,7 @@ int main(int argc, char** argv) {
             NavigateMenu(screen, event, menuSelection, enterPressed);
         }
 
-        screen = updateGameState(screen, renderer, MyRessource, player, dt, window, enemies, player.bullets, restart);
+        screen = updateGameState(screen, renderer, MyRessource, player, dt, window, restart , EM);
 
         frameTime = SDL_GetTicks() - frameStart;
 

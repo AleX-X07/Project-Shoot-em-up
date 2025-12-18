@@ -44,7 +44,7 @@ void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool ent
     }
 }
 
-GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, bool& restart) {
+GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, bool& restart, EnemyManager& EM) {
     int w, h;
     static int menuSelection = 0;
     static int menuDeathSelection = 0;
@@ -53,7 +53,6 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
     static bool enterPressed = false;
     static TTF_Font* font = nullptr;
     SDL_Color white = { 255, 255, 255, 255 };
-    static EnemyManager EM;
     const bool* keys = SDL_GetKeyboardState(NULL);
 
     switch (screen) {
@@ -137,14 +136,14 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
         player.render(renderer);
         player.renderBullets(renderer);
 
-        Enemy::renderEnemy(renderer, enemies);
+        Enemy::renderEnemy(renderer, EM.enemies);
         player.HUD(renderer, MyRessource.heart, player.HP, player.Score);
 
         timeSinceLastHit += dt;
         if (timeSinceLastHit >= collisionCooldown) {
             timeSinceLastHit = 0;
 
-            for (auto& e : enemies) {
+            for (auto& e : EM.enemies) {
                 if (SDL_HasRectIntersectionFloat(&player.rect, &e.rect)) {
                     player.HP--;
                     break;
@@ -152,7 +151,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
             }
         }
 
-        player.Collide(enemies);
+        player.Collide(EM.enemies);
 
         // Présenter tout à l'écran
         SDL_RenderPresent(renderer);

@@ -1,5 +1,134 @@
-﻿  main.cpp
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(21,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(23,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(102,36): warning C4244: '=' : conversion de 'Uint64' en 'int', perte possible de données
-  Shoot'emUp.vcxproj -> C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\x64\Debug\Shoot'emUp.exe
+﻿  Bullet.cpp
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(28,17): error C2686: impossible de surcharger les fonctions membres static et non static avec les mêmes types de paramètres
+  (compiler le fichier source 'Bullet.cpp')
+      C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(28,17):
+      est peut-être 'void Enemy::renderEnemy(SDL_Renderer *,const std::vector<Enemy,std::allocator<Enemy>> &)'
+      C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(24,18):
+      ou       'void Enemy::renderEnemy(SDL_Renderer *,const std::vector<Enemy,std::allocator<Enemy>> &)'
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Bullet.cpp(9,60): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Bullet.cpp(9,50): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+  Enemy.cpp
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(28,17): error C2686: impossible de surcharger les fonctions membres static et non static avec les mêmes types de paramètres
+  (compiler le fichier source 'Enemy.cpp')
+      C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(28,17):
+      est peut-être 'void Enemy::renderEnemy(SDL_Renderer *,const std::vector<Enemy,std::allocator<Enemy>> &)'
+      C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(24,18):
+      ou       'void Enemy::renderEnemy(SDL_Renderer *,const std::vector<Enemy,std::allocator<Enemy>> &)'
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(39,13): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(63,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(64,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+  Enemy_Manager.cpp
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(28,17): error C2686: impossible de surcharger les fonctions membres static et non static avec les mêmes types de paramètres
+  (compiler le fichier source 'Enemy_Manager.cpp')
+      C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(28,17):
+      est peut-être 'void Enemy::renderEnemy(SDL_Renderer *,const std::vector<Enemy,std::allocator<Enemy>> &)'
+      C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(24,18):
+      ou       'void Enemy::renderEnemy(SDL_Renderer *,const std::vector<Enemy,std::allocator<Enemy>> &)'
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(17,10): error C3668: 'Shooter_Enemy::render' : la méthode comprenant le spécificateur de substitution 'override' n'a substitué aucune méthode de la classe de base
+  (compiler le fichier source 'Enemy_Manager.cpp')
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(11,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'Enemy_Manager.cpp')
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\ShootMultiple_Enemy.h(9,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'Enemy_Manager.cpp')
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(4,16): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(5,26): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(6,20): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy_Manager.cpp(65,11): error C2039: 'render' n'est pas membre de 'Enemy'
+      C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(7,7):
+      voir la déclaration de 'Enemy'
+  
+  Hero.cpp
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(28,17): error C2686: impossible de surcharger les fonctions membres static et non static avec les mêmes types de paramètres
+  (compiler le fichier source 'Hero.cpp')
+      C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(28,17):
+      est peut-être 'void Enemy::renderEnemy(SDL_Renderer *,const std::vector<Enemy,std::allocator<Enemy>> &)'
+      C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(24,18):
+      ou       'void Enemy::renderEnemy(SDL_Renderer *,const std::vector<Enemy,std::allocator<Enemy>> &)'
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Hero.cpp(102,16): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Hero.cpp(108,16): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+  Screen.cpp
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(28,17): error C2686: impossible de surcharger les fonctions membres static et non static avec les mêmes types de paramètres
+  (compiler le fichier source 'Screen.cpp')
+      C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(28,17):
+      est peut-être 'void Enemy::renderEnemy(SDL_Renderer *,const std::vector<Enemy,std::allocator<Enemy>> &)'
+      C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(24,18):
+      ou       'void Enemy::renderEnemy(SDL_Renderer *,const std::vector<Enemy,std::allocator<Enemy>> &)'
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(17,10): error C3668: 'Shooter_Enemy::render' : la méthode comprenant le spécificateur de substitution 'override' n'a substitué aucune méthode de la classe de base
+  (compiler le fichier source 'Screen.cpp')
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(11,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'Screen.cpp')
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\ShootMultiple_Enemy.h(9,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'Screen.cpp')
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Screen.cpp(121,20): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Screen.cpp(139,16): error C2352: « Enemy::renderEnemy » : un appel d’une fonction membre non statique nécessite un objet
+      C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(24,18):
+      voir la déclaration de 'Enemy::renderEnemy'
+  
+  ShootMultiple_Enemy.cpp
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(28,17): error C2686: impossible de surcharger les fonctions membres static et non static avec les mêmes types de paramètres
+  (compiler le fichier source 'ShootMultiple_Enemy.cpp')
+      C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(28,17):
+      est peut-être 'void Enemy::renderEnemy(SDL_Renderer *,const std::vector<Enemy,std::allocator<Enemy>> &)'
+      C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(24,18):
+      ou       'void Enemy::renderEnemy(SDL_Renderer *,const std::vector<Enemy,std::allocator<Enemy>> &)'
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(17,10): error C3668: 'Shooter_Enemy::render' : la méthode comprenant le spécificateur de substitution 'override' n'a substitué aucune méthode de la classe de base
+  (compiler le fichier source 'ShootMultiple_Enemy.cpp')
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(11,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'ShootMultiple_Enemy.cpp')
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\ShootMultiple_Enemy.h(9,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'ShootMultiple_Enemy.cpp')
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\ShootMultiple_Enemy.cpp(18,11): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\ShootMultiple_Enemy.cpp(19,20): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+  Shooter_Enemy.cpp
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(28,17): error C2686: impossible de surcharger les fonctions membres static et non static avec les mêmes types de paramètres
+  (compiler le fichier source 'Shooter_Enemy.cpp')
+      C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(28,17):
+      est peut-être 'void Enemy::renderEnemy(SDL_Renderer *,const std::vector<Enemy,std::allocator<Enemy>> &)'
+      C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(24,18):
+      ou       'void Enemy::renderEnemy(SDL_Renderer *,const std::vector<Enemy,std::allocator<Enemy>> &)'
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(17,10): error C3668: 'Shooter_Enemy::render' : la méthode comprenant le spécificateur de substitution 'override' n'a substitué aucune méthode de la classe de base
+  (compiler le fichier source 'Shooter_Enemy.cpp')
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(11,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'Shooter_Enemy.cpp')
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.cpp(44,16): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.cpp(55,11): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.cpp(56,20): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+  main.cpp
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(28,17): error C2686: impossible de surcharger les fonctions membres static et non static avec les mêmes types de paramètres
+  (compiler le fichier source 'main.cpp')
+      C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(28,17):
+      est peut-être 'void Enemy::renderEnemy(SDL_Renderer *,const std::vector<Enemy,std::allocator<Enemy>> &)'
+      C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(24,18):
+      ou       'void Enemy::renderEnemy(SDL_Renderer *,const std::vector<Enemy,std::allocator<Enemy>> &)'
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(17,10): error C3668: 'Shooter_Enemy::render' : la méthode comprenant le spécificateur de substitution 'override' n'a substitué aucune méthode de la classe de base
+  (compiler le fichier source 'main.cpp')
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Shooter_Enemy.h(11,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'main.cpp')
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\ShootMultiple_Enemy.h(9,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'main.cpp')
+  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(26,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(28,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(72,36): warning C4244: '=' : conversion de 'Uint64' en 'int', perte possible de données
+  Génération de code en cours...

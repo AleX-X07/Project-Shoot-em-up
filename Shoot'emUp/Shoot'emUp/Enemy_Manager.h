@@ -19,6 +19,9 @@ public:
     Uint32 lastShooterEnemySpawn;
     Uint32 lastTripleSpawn;
 
+    SDL_Renderer* renderer;
+    SDL_Texture* enemyTexture;
+
     Uint32 spawnInterval;
     Uint32 ShooterEnemySpawnInterval;
     Uint32 tripleSpawnInterval;
