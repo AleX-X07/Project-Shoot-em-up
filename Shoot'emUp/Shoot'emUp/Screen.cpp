@@ -43,7 +43,7 @@ void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool ent
     }
 }
 
-GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets) {
+GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture* background, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, SDL_Texture* enemyTexture, SDL_Texture* heart) {
     int w, h;
     static int menuSelection = 0;
     static int menuDeathSelection = 0;
@@ -101,6 +101,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
     }
 
     case LEVEL1: {
+
         if (player.HP <= 0) {
             screen = GAMEOVER;
             break;
@@ -116,7 +117,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
 
         spawnTimer += dt;
         if (spawnTimer >= spawnInterval) {
-            Enemy::spawnEnemy(enemies, w, h);
+            Enemy::spawnEnemy(enemies, w, h, renderer, enemyTexture);
             spawnTimer = 0;
         }
 
@@ -129,28 +130,21 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, SDL_Texture*
         player.render(renderer);
         player.renderBullets(renderer);
         Enemy::renderEnemy(renderer, enemies);
-        player.DisplayHP(renderer, player.HP);
+        player.HUD(renderer, heart, player.HP, player.Score);
 
         timeSinceLastHit += dt;
-        if (timeSinceLastHit < collisionCooldown){
-            
-        }
-        else {
+        if (timeSinceLastHit >= collisionCooldown) {
             timeSinceLastHit = 0;
-            player.Collide(enemies);
-        }
 
-        timeSinceLastHitBullet += dt;
-        if (timeSinceLastHitBullet < collisionCooldownEnemy) {
-
-        }
-        else {
             for (auto& e : enemies) {
-                e.Collide(player.bullets);
+                if (SDL_HasRectIntersectionFloat(&player.rect, &e.rect)) {
+                    player.HP--;
+                    break;
+                }
             }
         }
-        
-        Enemy::Alive(enemies);
+
+        player.Collide(enemies);
 
         SDL_RenderPresent(renderer);
 

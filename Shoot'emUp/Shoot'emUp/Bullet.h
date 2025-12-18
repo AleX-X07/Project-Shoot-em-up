@@ -20,5 +20,4 @@ public:
     void renderBullets(SDL_Renderer* renderer);
     void updateBullets(float dt);
     void loadBulletTexture(SDL_Renderer* renderer, const char* filepath);
-    void BulletCollide(std::vector<Bullet>& bullets, std::vector<Enemy>& enemies);
 };

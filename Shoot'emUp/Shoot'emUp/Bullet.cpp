@@ -1,4 +1,5 @@
 #include "Bullet.h"
+#include "Enemy.h"
 
 Bullet::Bullet() {
     
@@ -37,21 +38,5 @@ void Bullet::updateBullets(float dt) {
     for (auto& b : bullets) {
         b.x += b.vx * dt;
         b.y += b.vy * dt;
-    }
-}
-
-void Bullet::BulletCollide(std::vector<Bullet>& bullets, std::vector<Enemy>& enemies) {
-    std::vector<int> bulletErase;
-    for (int i = bullets.size() - 1; i >= 0; i--) {
-        SDL_FRect rect = { bullets[i].x, bullets[i].y , bullets[i].w, bullets[i].h };
-        for (auto& e : enemies) {
-            if (SDL_HasRectIntersectionFloat(&rect, &e.rect)) {
-                bulletErase.push_back(i);
-                break;
-            }
-        }
-    }
-    for (int i = bulletErase.size() - 1; i >= 0; i--) {
-        bullets.erase(bullets.begin() + bulletErase[i]);
     }
 }

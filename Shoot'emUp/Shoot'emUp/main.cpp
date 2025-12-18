@@ -32,6 +32,28 @@ int main(int argc, char** argv) {
     player.loadTexture(renderer, "picture/player.png");
     player.loadBulletTexture(renderer, "picture/bullet.png");
 
+    SDL_Texture* heart = nullptr;
+    SDL_Surface* surface2 = IMG_Load("picture/heart.png");
+    if (surface2) {
+        heart = SDL_CreateTextureFromSurface(renderer, surface2);
+        SDL_DestroySurface(surface);
+        SDL_SetTextureScaleMode(heart, SDL_SCALEMODE_NEAREST);
+    }
+    else {
+        SDL_Log("Erreur chargement bullet: %s", SDL_GetError());
+    }
+
+    SDL_Texture* enemyTexture = nullptr;
+    SDL_Surface* surface3 = IMG_Load("picture/bomb.png");
+    if (surface3) {
+        enemyTexture = SDL_CreateTextureFromSurface(renderer, surface3);
+        SDL_DestroySurface(surface3);
+        SDL_SetTextureScaleMode(enemyTexture, SDL_SCALEMODE_NEAREST);
+    }
+    else {
+        SDL_Log("Erreur chargement bullet: %s", SDL_GetError());
+    }
+
     Uint64 last_time = SDL_GetTicks();
     bool keepGoing = true;
     GameState screen = MENU;
@@ -53,7 +75,7 @@ int main(int argc, char** argv) {
             NavigateMenu(screen, event, menuSelection, enterPressed);
         }
 
-        screen = updateGameState(screen, renderer, background, player, dt, window, enemies, player.bullets);
+        screen = updateGameState(screen, renderer, background, player, dt, window, enemies, player.bullets, enemyTexture, heart);
 
         frameTime = SDL_GetTicks() - frameStart;
 

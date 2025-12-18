@@ -1,6 +1,7 @@
 #include "Enemy.h"
 Enemy::Enemy() {
 	HP = 3;
+	Value = 5;
 }
 
 Enemy::Enemy(float _x, float _y, float _w, float _h, float _speed, SDL_Color _color) {
@@ -10,6 +11,7 @@ Enemy::Enemy(float _x, float _y, float _w, float _h, float _speed, SDL_Color _co
 	h = _h;
 	speed = _speed;
 	color = _color;
+	Value = 5;
 }
 
 int Enemy::randomInt(int min, int max) {
@@ -46,54 +48,20 @@ void Enemy::renderEnemy(SDL_Renderer* renderer, const std::vector<Enemy>& enemie
 		}
 }
 
-void Enemy::spawnEnemy(std::vector<Enemy>& enemies, int windowWidth, int windowHeight) {
+void Enemy::spawnEnemy(std::vector<Enemy>& enemies, int windowWidth, int windowHeight, SDL_Renderer* renderer, SDL_Texture* sharedTexture) {
 	Enemy e;
 	e.w = 50;
 	e.h = 50;
 	e.x = windowWidth;
 	e.y = randomInt(0, windowHeight - 50);
-	e.rect = {e.x,e.y,e.w,e.h};
-	e.color = { 255,0,0,255 };
+	e.rect = { e.x,e.y,e.w,e.h };
+	e.enemyTexture = sharedTexture;
 	e.speed = 5;
 	enemies.push_back(e);
 }
 
-void Enemy::Collide(std::vector<Bullet>& Bullets) {
-	SDL_FRect rectBullets;
-	for (auto& b : Bullets) {
-		rectBullets = { b.x, b.y, b.h ,b.w };
-		if (SDL_HasRectIntersectionFloat(&rect, &rectBullets)) {
-			HP--;
-		}
-	}
-}
-//void Enemy::Collide(std::vector<Bullet>& Bullets) {
-//	SDL_FRect rectBullets;
-//	for (auto& b : Bullets) {
-//		rectBullets = { b.x, b.y, b.h ,b.w };
-//		if (SDL_HasRectIntersectionFloat(&rect, &rectBullets)) {
-//			HP--;
-//
-//		}
-//	}
-//	for (int i = Bullets.size() - 1; i >= 0; i--) {
-//
-//	}
-//}
-
-void Enemy::Alive(std::vector<Enemy>& enemies) {
-	for (int i = enemies.size() - 1; i >= 0; i--) {
-		if (enemies[i].HP <= 0) {
-			enemies.erase(enemies.begin() + i);
-
-		}
-	}
-}
-
 Enemy::~Enemy() {
-	if (enemyTexture) {
-		SDL_DestroyTexture(enemyTexture);
-	}
+	
 }
 
 

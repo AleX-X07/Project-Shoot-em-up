@@ -72,7 +72,7 @@ void Entity::shoot() {
         bullets.push_back(newBullet);
 }
 
-void Entity::DisplayHP(SDL_Renderer* renderer, int HP) {
+void Entity::HUD(SDL_Renderer* renderer, SDL_Texture* heart, int HP, int Score) {
     for (int i = 0; i < HP; ++i) {
         SDL_FRect hpRect = { 10.0f + i * 35.0f, 10.0f, 30, 30 };
         SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
@@ -81,9 +81,39 @@ void Entity::DisplayHP(SDL_Renderer* renderer, int HP) {
 }
 
 void Entity::Collide(std::vector<Enemy>& enemies) {
-    for (auto& e : enemies) {
-        if (SDL_HasRectIntersectionFloat(&rect, &e.rect)) {
-            HP--;
+
+    std::vector<bool> bulletToRemove(bullets.size(), false);
+    std::vector<bool> enemyToRemove(enemies.size(), false);
+
+    for (int i = 0; i < bullets.size(); i++) {
+        if (bulletToRemove[i]) continue;
+
+        SDL_FRect rect = { bullets[i].x, bullets[i].y, bullets[i].w, bullets[i].h };
+
+        for (int j = 0; j < enemies.size(); j++) {
+            if (enemyToRemove[j]) continue;
+
+            if (SDL_HasRectIntersectionFloat(&rect, &enemies[j].rect)) {
+                bulletToRemove[i] = true;
+                enemies[j].HP--;
+
+                if (enemies[j].HP <= 0) {
+                    enemyToRemove[j] = true;
+                }
+                break;
+            }
+        }
+    }
+
+    for (int i = bullets.size() - 1; i >= 0; i--) {
+        if (bulletToRemove[i]) {
+            bullets.erase(bullets.begin() + i);
+        }
+    }
+
+    for (int i = enemies.size() - 1; i >= 0; i--) {
+        if (enemyToRemove[i]) {
+            enemies.erase(enemies.begin() + i);
         }
     }
 }

@@ -17,6 +17,7 @@ public:
     float shootCooldown = 0.15f;      
     float timeSinceLastShot = 0.0f;
 	int HP = 3;
+    int Score = 0;
 
     Entity();
     Entity(float x, float y, float w, float h, float spd = 200.0f);
@@ -29,7 +30,7 @@ public:
     void loadTexture(SDL_Renderer* renderer, const char* filepath);
     void handleInput(const bool* keys, float dt);
 	void shoot();
-	void DisplayHP(SDL_Renderer* renderer, int HP);
+	void HUD(SDL_Renderer* renderer, SDL_Texture* heart, int HP, int Score);
     void Collide(std::vector<Enemy>& enemies);
 
     ~Entity();
