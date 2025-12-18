@@ -39,15 +39,3 @@ void Bullet::updateBullets(float dt) {
         b.y += b.vy * dt;
     }
 }
-
-void Bullet::BulletCollide(std::vector<Enemy>& enemies) {
-    for (int i = bullets.size() - 1; i >= 0; i--) {<
-        if (SDL_HasRectIntersectionFloat(&rect, &e.rect)) {
-                bullets.erase(bullets.begin() + i);
-        }
-    }
-    
-    for (auto& e : enemies) {
-        
-    }
-}
