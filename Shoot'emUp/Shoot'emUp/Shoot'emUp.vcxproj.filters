@@ -25,12 +25,6 @@
     <Filter Include="Fichiers sources\Window">
       <UniqueIdentifier>{28d428db-d270-4824-a077-bdf074beaae2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers d%27en-tête\Entity\Enemy">
-      <UniqueIdentifier>{4eb533c1-b5a6-49ad-a470-06e07eb78b45}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\Entity\Enemy">
-      <UniqueIdentifier>{bb14bea6-79a2-43c7-b30b-33b814b0cf03}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -52,7 +46,7 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>Fichiers sources\Entity\Enemy</Filter>
+      <Filter>Fichiers sources\Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -75,7 +69,7 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>Fichiers d%27en-tête\Entity\Enemy</Filter>
+      <Filter>Fichiers d%27en-tête\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -62,7 +62,7 @@ void LoadRessource::loadAllTexture() {
     SDL_SetTextureScaleMode(bulletEnemyTexture, SDL_SCALEMODE_NEAREST);
 }
 
-LoadRessource::~LoadRessource() {
+LoadRessource::~LoadRessource() { // Destroy all texture
 	if (backgroundLevel1) SDL_DestroyTexture(backgroundLevel1);
 	if (backgroundHome) SDL_DestroyTexture(backgroundHome);
 	if (bomb) SDL_DestroyTexture(entityTexture);

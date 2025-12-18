@@ -1,4 +1,4 @@
-﻿#include <SDL3/SDL.h>
+﻿#include <SDL3/SDL.h> // Librairie externe
 #include <SDL3_image/SDL_image.h>
 #include <SDL3_ttf/SDL_ttf.h>
 #include <iostream>
@@ -8,6 +8,7 @@
 #include "LoadRessource.h"
 
 int main(int argc, char** argv) {
+
     bool restart = true;
     SDL_Window* window;
     SDL_Renderer* renderer;
@@ -19,14 +20,14 @@ int main(int argc, char** argv) {
     Uint64 frameStart;
     int frameTime;
 
-    if (SDL_Init(SDL_INIT_VIDEO) < 0 || !SDL_CreateWindowAndRenderer("SHOOT'EM UP", 640, 480, SDL_WINDOW_FULLSCREEN, &window, &renderer))
+    if (SDL_Init(SDL_INIT_VIDEO) < 0 || !SDL_CreateWindowAndRenderer("SHOOT'EM UP", 640, 480, SDL_WINDOW_FULLSCREEN, &window, &renderer)) // Initialisation window
         return 1;
     if (TTF_Init() < 0) {
         SDL_Log("Erreur SDL_ttf : %s", SDL_GetError());
         return 1;
     }
 
-    LoadRessource MyRessource = LoadRessource(renderer);
+    LoadRessource MyRessource = LoadRessource(renderer); 
     MyRessource.loadAllTexture();
     Entity player(400.0f, 300.0f, 100, 100, SDL_Color{ 255, 0, 0, 255 }, 400);
     player.texture = MyRessource.entityTexture;
@@ -39,7 +40,7 @@ int main(int argc, char** argv) {
     int menuSelection = 0;
     bool enterPressed = false;
 
-    while (keepGoing) {
+    while (keepGoing) { // Loop for reload level
         if (restart) {
             player.HP = 4;
             player.Score = 0;
@@ -50,12 +51,12 @@ int main(int argc, char** argv) {
             MyEnemy.enemies.clear();
             restart = false;
         }
-        float dt = (SDL_GetTicks() - last_time) / 1000.0f;
+        float dt = (SDL_GetTicks() - last_time) / 1000.0f; // Computes the time elapsed (in seconds) since the previous frame.
         last_time = SDL_GetTicks();
         frameStart = SDL_GetTicks();
 
         SDL_Event event;
-        while (SDL_PollEvent(&event)) {
+        while (SDL_PollEvent(&event)) {  // Touch keyboard for choice in menu
             if (event.type == SDL_EVENT_QUIT) {
                 keepGoing = false;
                 screen = QUIT;
@@ -63,11 +64,11 @@ int main(int argc, char** argv) {
             NavigateMenu(screen, event, menuSelection, enterPressed);
         }
 
-        screen = updateGameState(screen, renderer, MyRessource, player, dt, window, MyEnemy.enemies, player.bullets, restart);
+        screen = updateGameState(screen, renderer, MyRessource, player, dt, window, MyEnemy.enemies, player.bullets, restart); // Update the game (Menu,Level1,Level2,GameOver)
 
         frameTime = SDL_GetTicks() - frameStart;
 
-        if (frameTime < FRAME_DELAY) {
+        if (frameTime < FRAME_DELAY) { // Delay for 60FPS
             SDL_Delay(FRAME_DELAY - frameTime);
         }
 

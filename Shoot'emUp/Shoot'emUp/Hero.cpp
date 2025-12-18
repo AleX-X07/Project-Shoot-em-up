@@ -5,31 +5,27 @@ Entity::Entity() {
 
 }
 
-Entity::Entity(float x, float y, float w, float h, float spd)
-    : rect{ x, y, w, h }, texture(nullptr), color{255, 255, 255, 255}, speed(spd) {
-}
-
-Entity::Entity(float x, float y, float w, float h, SDL_Texture* tex, float spd)
+Entity::Entity(float x, float y, float w, float h, SDL_Texture* tex, float spd) // Constructor with texture
     : rect{ x, y, w, h }, texture(tex), color{ 255, 255, 255, 255 }, speed(spd) {
 }
 
-Entity::Entity(float x, float y, float w, float h, SDL_Color col, float spd)
+Entity::Entity(float x, float y, float w, float h, SDL_Color col, float spd) // Constructor without texture
     : rect{ x, y, w, h }, texture(nullptr), color(col), speed(spd) {
 }
 
-void Entity::move(float dx, float dy, float dt) {
+void Entity::move(float dx, float dy, float dt) { // Function for move player
     rect.x += dx * speed * dt;
     rect.y += dy * speed * dt;
 }
 
-void Entity::clampToScreen(int screenWidth, int screenHeight) {
+void Entity::clampToScreen(int screenWidth, int screenHeight) { // Function for lock player in the window
     if (rect.x < 0) rect.x = 0;
     if (rect.y < 0) rect.y = 0;
     if (rect.x + rect.w > screenWidth) rect.x = screenWidth - rect.w;
     if (rect.y + rect.h > screenHeight) rect.y = screenHeight - rect.h;
 }
 
-void Entity::render(SDL_Renderer* renderer) {
+void Entity::render(SDL_Renderer* renderer) { // Function for display sprite of player
     if (texture) {
         SDL_RenderTexture(renderer, texture, NULL, &rect);
     }
@@ -39,7 +35,7 @@ void Entity::render(SDL_Renderer* renderer) {
     }
 }
 
-void Entity::handleInput(const bool* keys, float dt) {
+void Entity::handleInput(const bool* keys, float dt) { // Function for interation with the keyboard
     float dx = 0, dy = 0;
     if (keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_W]) dy -= 1;
     if (keys[SDL_SCANCODE_DOWN] || keys[SDL_SCANCODE_S]) dy += 1;
@@ -54,13 +50,13 @@ void Entity::handleInput(const bool* keys, float dt) {
     move(dx, dy, dt);
 }
 
-void Entity::shoot() {
+void Entity::shoot() { // Function for shoot
         Bullet newBullet(rect.x + rect.w, rect.y + rect.h / 2 - 30, 800, 0, 120, 60, SDL_Color{ 0, 0, 255, 255 });
         newBullet.bulletTexture = bulletTexture;
         bullets.push_back(newBullet);
 }
 
-void Entity::HUD(SDL_Renderer* renderer, SDL_Texture* texture, int HP, int Score) {
+void Entity::HUD(SDL_Renderer* renderer, SDL_Texture* texture, int HP, int Score) { // Function for display HUD
     for (int i = 0; i < HP; ++i) {
         SDL_FRect hpRect = { 10.0f + i * 35.0f, 10.0f, 30, 30 };
         if (texture) {
@@ -74,7 +70,7 @@ void Entity::HUD(SDL_Renderer* renderer, SDL_Texture* texture, int HP, int Score
 
 }
 
-void Entity::Collide(std::vector<Enemy>& enemies) {
+void Entity::Collide(std::vector<Enemy>& enemies) { // Function for check collision
 
     std::vector<bool> bulletToRemove(bullets.size(), false);
     std::vector<bool> enemyToRemove(enemies.size(), false);
@@ -113,7 +109,5 @@ void Entity::Collide(std::vector<Enemy>& enemies) {
 }
 
 Entity::~Entity() {
-    if (texture) {
-        SDL_DestroyTexture(texture);
-    }
+
 }

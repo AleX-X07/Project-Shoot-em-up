@@ -7,7 +7,7 @@
 
 class Enemy;
 
-class Entity : public Bullet {
+class Entity : public Bullet { // Class for player
 public:
 
     SDL_FRect rect;
@@ -20,17 +20,16 @@ public:
     int Score = 0;
 
     Entity();
-    Entity(float x, float y, float w, float h, float spd = 200.0f);
     Entity(float x, float y, float w, float h, SDL_Texture* tex, float spd = 200.0f);
     Entity(float x, float y, float w, float h, SDL_Color col, float spd = 200.0f);
 
-    void move(float dx, float dy, float dt);
-    void clampToScreen(int screenWidth, int screenHeight);
-    void render(SDL_Renderer* renderer);
-    void handleInput(const bool* keys, float dt);
-	void shoot();
-	void HUD(SDL_Renderer* renderer, SDL_Texture* heart, int HP, int Score);
-    void Collide(std::vector<Enemy>& enemies);
+    void move(float dx, float dy, float dt); // Function for move player
+    void clampToScreen(int screenWidth, int screenHeight); // Function for lock player in the window
+    void render(SDL_Renderer* renderer); // Function for display sprite of player
+    void handleInput(const bool* keys, float dt); // Function for interation with the keyboard
+	void shoot(); // Function for shoot
+	void HUD(SDL_Renderer* renderer, SDL_Texture* heart, int HP, int Score); // Function for display HUD
+    void Collide(std::vector<Enemy>& enemies); // Function for check collision
 
     ~Entity();
 };

@@ -3,7 +3,7 @@
 #include <SDL3_image/SDL_image.h>
 #include <SDL3_ttf/SDL_ttf.h>
 
-class LoadRessource
+class LoadRessource // Class for sprite for entity
 {
 public:
 	//Surfce
@@ -19,9 +19,9 @@ public:
 	SDL_Texture* ship;
 	SDL_Texture* bulletEnemyTexture;
 
-	void loadAllTexture();
+	void loadAllTexture(); // Load all texture
 
 	LoadRessource(SDL_Renderer* rend);
-	~LoadRessource();
+	~LoadRessource(); 
 };
 
