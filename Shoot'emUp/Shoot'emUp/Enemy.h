@@ -11,7 +11,7 @@ public:
     float w, h;
     float speed;
     SDL_FRect rect;
-    SDL_Texture* texture;
+    SDL_Texture* enemyTexture;
     SDL_Color color;
     int HP;
 
