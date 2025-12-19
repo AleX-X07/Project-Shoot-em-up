@@ -1,82 +1,20 @@
 ﻿  Enemy.cpp
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(28,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(30,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
   (compiler le fichier source 'Enemy.cpp')
   
 C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(46,13): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(99,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(100,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(104,31): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(114,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(115,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(120,31): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(130,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(131,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(136,31): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(141,20): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(732,103): warning C4244: 'argument' : conversion de '_Ty' en 'float', perte possible de données
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(732,103): warning C4244:         with
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(732,103): warning C4244:         [
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(732,103): warning C4244:             _Ty=int
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(732,103): warning C4244:         ]
-  (compiler le fichier source 'Enemy.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(732,103):
-      le contexte d’instanciation du modèle (le plus ancien) est
-          C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(162,11):
-          voir la référence à l'instanciation de la fonction modèle 'void std::vector<Bullet,std::allocator<Bullet>>::emplace_back<float&,float&,int,int,int,int,SDL_Color&>(float &,float &,int &&,int &&,int &&,int &&,SDL_Color &)' en cours de compilation
-              C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(162,23):
-              voir la première référence à « std::vector<Bullet,std::allocator<Bullet>>::emplace_back » dans « Enemy::shootV2 »
-          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\vector(924,24):
-          voir la référence à l'instanciation de la fonction modèle '_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_one_at_back<float&,float&,int,int,int,int,SDL_Color&>(float &,float &,int &&,int &&,int &&,int &&,SDL_Color &)' en cours de compilation
-          with
-          [
-              _Ty=Bullet
-          ]
-          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\vector(845,20):
-          voir la référence à l'instanciation de la fonction modèle '_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_back_with_unused_capacity<float&,float&,int,int,int,int,SDL_Color&>(float &,float &,int &&,int &&,int &&,int &&,SDL_Color &)' en cours de compilation
-          with
-          [
-              _Ty=Bullet
-          ]
-          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\vector(863,27):
-          voir la référence à l'instanciation de la fonction modèle 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,float&,float&,int,int,int,int,SDL_Color&>(_Alloc &,_Objty *const ,float &,float &,int &&,int &&,int &&,int &&,SDL_Color &)' en cours de compilation
-          with
-          [
-              _Alloc=std::allocator<Bullet>,
-              _Ty=Bullet,
-              _Objty=Bullet
-          ]
-  
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(732,103): warning C4244: 'argument' : conversion de '_Ty' en 'float', perte possible de données
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(732,103): warning C4244:         with
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(732,103): warning C4244:         [
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(732,103): warning C4244:             _Ty=double
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(732,103): warning C4244:         ]
-  (compiler le fichier source 'Enemy.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(732,103):
-      le contexte d’instanciation du modèle (le plus ancien) est
-          C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(165,11):
-          voir la référence à l'instanciation de la fonction modèle 'void std::vector<Bullet,std::allocator<Bullet>>::emplace_back<float&,float&,int,double,int,int,SDL_Color&>(float &,float &,int &&,double &&,int &&,int &&,SDL_Color &)' en cours de compilation
-              C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(165,23):
-              voir la première référence à « std::vector<Bullet,std::allocator<Bullet>>::emplace_back » dans « Enemy::shootV2 »
-          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\vector(924,24):
-          voir la référence à l'instanciation de la fonction modèle '_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_one_at_back<float&,float&,int,double,int,int,SDL_Color&>(float &,float &,int &&,double &&,int &&,int &&,SDL_Color &)' en cours de compilation
-          with
-          [
-              _Ty=Bullet
-          ]
-          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\vector(845,20):
-          voir la référence à l'instanciation de la fonction modèle '_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_back_with_unused_capacity<float&,float&,int,double,int,int,SDL_Color&>(float &,float &,int &&,double &&,int &&,int &&,SDL_Color &)' en cours de compilation
-          with
-          [
-              _Ty=Bullet
-          ]
-          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\vector(863,27):
-          voir la référence à l'instanciation de la fonction modèle 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,float&,float&,int,double,int,int,SDL_Color&>(_Alloc &,_Objty *const ,float &,float &,int &&,double &&,int &&,int &&,SDL_Color &)' en cours de compilation
-          with
-          [
-              _Alloc=std::allocator<Bullet>,
-              _Ty=Bullet,
-              _Objty=Bullet
-          ]
-  
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(149,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(150,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(154,31): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(164,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(165,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(170,31): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(180,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(181,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(186,31): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(196,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(197,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(202,31): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(207,20): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(224,20): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
   Shoot'emUp.vcxproj -> C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\x64\Debug\Shoot'emUp.exe

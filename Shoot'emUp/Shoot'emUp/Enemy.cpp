@@ -112,7 +112,32 @@ void Enemy::renderEnemy(SDL_Renderer* renderer, const std::vector<Enemy>& enemie
 				}
 			}
 		}
+		else if (e.numEnemy == -1) {
+			// Rendu de l'ennemi
+			SDL_FRect rect = { e.x, e.y, e.w, e.h };
+			if (e.bossTexture) {
+				SDL_RenderTexture(renderer, e.bossTexture, NULL, &rect);
+			}
+			else {
+				SDL_SetRenderDrawColor(renderer, e.color.r, e.color.g, e.color.b, e.color.a);
+				SDL_RenderFillRect(renderer, &rect);
+			}
+
+			// Rendu des balles de l'ennemi
+			SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+			for (const auto& b : e.enemiesBullet) {
+				SDL_FRect bulletRect = { b.x, b.y, b.w, b.h };
+				if (e.bulletEnemyTexture) {
+					SDL_RenderTexture(renderer, e.bulletEnemyTexture, NULL, &bulletRect);
+				}
+				else {
+					SDL_SetRenderDrawColor(renderer, e.color.r, e.color.g, e.color.b, e.color.a);
+					SDL_RenderFillRect(renderer, &bulletRect);
+				}
+			}
+		}
 	}
+
 }
 
 void Enemy::spawnEnemyBomb(std::vector<Enemy>& enemies, int windowWidth, int windowHeight, SDL_Renderer* renderer, SDL_Texture* sharedTexture) {
@@ -250,6 +275,9 @@ void Enemy::EnemyManager(std::vector<Enemy>& enemies, SDL_Renderer* renderer, in
 	if (choice == 3 && MyLevel1.nbr_shooter_V2 > 0) {
 		Enemy::spawnEnemyShooterV2(enemies, windowWidth, windowHeight, renderer, MyRessource.ship, MyRessource.bulletEnemyTexture);
 		MyLevel1.nbr_shooter_V2--;
+	}
+	else {
+		Enemy::spawnEnemyBoss(enemies, windowWidth, windowHeight, renderer, MyRessource);
 	}
 }
 

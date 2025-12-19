@@ -23,6 +23,7 @@ public:
     SDL_Texture* enemyTextureBomb;
     SDL_Texture* enemyTextureShooter;
     SDL_Texture* bulletEnemyTexture;
+    SDL_Texture* bossTexture;
 
     Uint32 lastShotTime = 0;
     Uint32 lastSpawnTime = 0;
