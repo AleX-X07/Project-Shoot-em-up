@@ -70,19 +70,15 @@ void Entity::HUD(SDL_Renderer* renderer, SDL_Texture* texture, int HP, int Score
 
 }
 
-void Entity::Collide(std::vector<Enemy>& enemies) { // Function for check collision
+void Entity::CollideBullet(std::vector<Enemy>& enemies) { // Function for check collision
 
     std::vector<bool> bulletToRemove(bullets.size(), false);
     std::vector<bool> enemyToRemove(enemies.size(), false);
 
     for (int i = 0; i < bullets.size(); i++) {
-        if (bulletToRemove[i]) continue;
-
         SDL_FRect rect = { bullets[i].x, bullets[i].y, bullets[i].w, bullets[i].h };
 
         for (int j = 0; j < enemies.size(); j++) {
-            if (enemyToRemove[j]) continue;
-
             if (SDL_HasRectIntersectionFloat(&rect, &enemies[j].rect)) {
                 bulletToRemove[i] = true;
                 enemies[j].HP--;

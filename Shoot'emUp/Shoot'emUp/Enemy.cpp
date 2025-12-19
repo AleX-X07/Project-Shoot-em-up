@@ -225,7 +225,7 @@ void Enemy::shootV2(std::vector<Bullet>& enemiesBullet)
 	if (now - lastShotTime >= 1500) {
 		float centerY = y + h / 2 - 12.5f;
 
-		// Tout droit
+		// in front
 		Bullet b1;
 		b1.x = x;
 		b1.y = centerY;
@@ -236,7 +236,7 @@ void Enemy::shootV2(std::vector<Bullet>& enemiesBullet)
 		b1.color = { 255, 255, 0, 255 };
 		enemiesBullet.emplace_back(b1);
 
-		// Vers le haut (angle ~30°)
+		// Up (angle ~30°)
 		Bullet b2;
 		b2.x = x;
 		b2.y = centerY;
@@ -247,7 +247,7 @@ void Enemy::shootV2(std::vector<Bullet>& enemiesBullet)
 		b2.color = { 255, 255, 0, 255 };
 		enemiesBullet.emplace_back(b2);
 
-		// Vers le bas (angle ~30°)
+		// Down (angle ~30°)
 		Bullet b3;
 		b3.x = x;
 		b3.y = centerY;
@@ -276,9 +276,9 @@ void Enemy::EnemyManager(std::vector<Enemy>& enemies, SDL_Renderer* renderer, in
 		Enemy::spawnEnemyShooterV2(enemies, windowWidth, windowHeight, renderer, MyRessource.ship, MyRessource.bulletEnemyTexture);
 		MyLevel1.nbr_shooter_V2--;
 	}
-	else {
+	/*if () {
 		Enemy::spawnEnemyBoss(enemies, windowWidth, windowHeight, renderer, MyRessource);
-	}
+	}*/
 }
 
 Enemy::~Enemy() {

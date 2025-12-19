@@ -29,7 +29,7 @@ public:
     void handleInput(const bool* keys, float dt); // Function for interation with the keyboard
 	void shoot(); // Function for shoot
 	void HUD(SDL_Renderer* renderer, SDL_Texture* heart, int HP, int Score); // Function for display HUD
-    void Collide(std::vector<Enemy>& enemies); // Function for check collision
+    void CollideBullet(std::vector<Enemy>& enemies); // Function for check collision
 
     ~Entity();
 };

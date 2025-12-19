@@ -149,7 +149,6 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
             }
         }
 
-        // Collision avec les balles ennemies
         timeSinceLastHitBullet += dt;
         if (timeSinceLastHitBullet >= collisionCooldownEnemy) {
             for (auto& e : enemies) {
@@ -158,7 +157,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
                                              e.enemiesBullet[i].w, e.enemiesBullet[i].h };
                     if (SDL_HasRectIntersectionFloat(&player.rect, &bulletRect)) {
                         player.HP--;
-                        e.enemiesBullet.erase(e.enemiesBullet.begin() + i);  // Supprime la balle
+                        e.enemiesBullet.erase(e.enemiesBullet.begin() + i);
                         timeSinceLastHitBullet = 0;
                         break;
                     }
@@ -166,7 +165,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
             }
         }
 
-        player.Collide(enemies);
+        player.CollideBullet(enemies);
 
         SDL_RenderPresent(renderer);
 
@@ -181,6 +180,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
         break;
     }
     case GAMEOVER:
+
         if (!font) {
             font = TTF_OpenFont("assets/arialmt.ttf", 32);
             if (!font) {
@@ -190,6 +190,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
         SDL_SetRenderDrawColor(renderer, 0, 0, 50, 255);
         SDL_RenderClear(renderer);
         SDL_GetWindowSize(window, &w, &h);
+
         TitleMenu(renderer, w, h, white, "GAME OVER", font, w / 2 - 200, 200, 400, 80);
 
         ButtonMenu(renderer, w, h, white, "MENU", font, w / 2 - 100, h / 2 - 60, 200, 50, menuDeathSelection, 0);
@@ -202,16 +203,18 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
                 upPressed = true;
             }
         }
-        else upPressed = false;
-
+        else {
+            upPressed = false;
+        }
         if (keys[SDL_SCANCODE_DOWN] || keys[SDL_SCANCODE_S]) {
             if (!downPressed) {
                 menuDeathSelection = (menuDeathSelection - 1 + 2) % 2;
                 downPressed = true;
             }
         }
-        else downPressed = false;
-
+        else {
+            downPressed = false;
+        }
         if (keys[SDL_SCANCODE_RETURN]) {
             if (!enterPressed) {
                 enterPressed = true;
@@ -224,12 +227,13 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
                 }
             }
         }
-        else enterPressed = false;
+        else {
+            enterPressed = false;
+        }
         SDL_RenderPresent(renderer);
         break;
     case QUIT:
         break;
     }
-
     return screen;
 }
