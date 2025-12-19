@@ -18,6 +18,7 @@ public:
 	SDL_Texture* bulletTexture;
 	SDL_Texture* ship;
 	SDL_Texture* bulletEnemyTexture;
+	SDL_Texture* bossTexture;
 
 	void loadAllTexture(); // Load all texture
 

@@ -11,6 +11,7 @@ LoadRessource::LoadRessource(SDL_Renderer* rend) : renderer(rend) {
 	bulletTexture = nullptr;
     ship = nullptr;
     bulletEnemyTexture = nullptr;
+    bossTexture = nullptr;
 }
 
 void LoadRessource::loadAllTexture() {
@@ -60,6 +61,11 @@ void LoadRessource::loadAllTexture() {
     bulletEnemyTexture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
     SDL_SetTextureScaleMode(bulletEnemyTexture, SDL_SCALEMODE_NEAREST);
+
+    // Boss
+    surface = IMG_Load("picture/bulletEnemy.png");
+    bossTexture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_DestroySurface(surface);
 }
 
 LoadRessource::~LoadRessource() { // Destroy all texture
@@ -71,4 +77,6 @@ LoadRessource::~LoadRessource() { // Destroy all texture
 	if (heart) SDL_DestroyTexture(heart);
     if (ship) SDL_DestroyTexture(ship);
     if (bulletEnemyTexture) SDL_DestroyTexture(bulletEnemyTexture);
+    if (bossTexture) SDL_DestroyTexture(bossTexture);
+
 }

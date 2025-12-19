@@ -36,7 +36,7 @@ void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool ent
     }
 }
 
-GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, bool& restart) {
+GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, bool& restart, Level& MyLevel1) {
     int w, h;
     static int menuSelection = 0;
     static int menuDeathSelection = 0;
@@ -111,28 +111,15 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
         player.clampToScreen(w, h);
         player.updateBullets(dt);
 
-        int nbr_bomb = 10;
-        int nbr_shooter = 10;
-        int nbr_shooter_V2 = 10;
-
-        spawnTimer += dt;
-        /*if (spawnTimer >= spawnInterval) {
-            Enemy::spawnEnemyBomb(enemies, w, h, renderer, MyRessource.enemyTexture);
-            spawnTimer = 0;
-        }*/
-
-        if (spawnTimer >= spawnInterval && nbr_bomb > 0 && nbr_shooter > 0) {
-            Enemy::EnemyManager(enemies, renderer, w, h, MyRessource, nbr_bomb, nbr_shooter, nbr_shooter_V2);
+        spawnTimer += dt; // Spawn enemies
+        if (spawnTimer >= spawnInterval) {
+            Enemy::EnemyManager(enemies, renderer, w, h, MyRessource, MyLevel1);
             spawnTimer = 0;
         }
 
-
-
-        // Mise à jour des ennemis avec dt
         Enemy::updateEnemy(enemies, dt);
 
-        // Faire tirer les ennemis
-        for (auto& e : enemies) {
+        for (auto& e : enemies) { // Shoot for enemies
             if (e.numEnemy == 2) {
                 e.shoot(e.enemiesBullet);
             }

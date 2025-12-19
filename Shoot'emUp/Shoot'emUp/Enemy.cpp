@@ -162,6 +162,22 @@ void Enemy::spawnEnemyShooterV2(std::vector<Enemy>& enemies, int windowWidth, in
 	enemies.emplace_back(e);
 }
 
+void Enemy::spawnEnemyBoss(std::vector<Enemy>& enemies, int windowWidth, int windowHeight, SDL_Renderer* renderer, LoadRessource& MyRessource) {
+	Enemy e;
+	e.numEnemy = -1;
+	e.HP = 30;
+	e.w = 200;
+	e.h = 200;
+	e.x = windowWidth;
+	e.y = randomInt(0, windowHeight - 50);
+	e.rect = { e.x, e.y, e.w, e.h };
+	e.enemyTextureShooter = MyRessource.bossTexture;
+	e.bulletEnemyTexture = MyRessource.bulletEnemyTexture;
+	e.speed = 200.0f; // Vitesse en pixels par seconde
+	e.lastShotTime = SDL_GetTicks();
+	enemies.emplace_back(e);
+}
+
 void Enemy::shoot(std::vector<Bullet>& enemiesBullet) {
 	now = SDL_GetTicks();
 	if (now - lastShotTime >= 1500) {
@@ -221,19 +237,19 @@ void Enemy::shootV2(std::vector<Bullet>& enemiesBullet)
 	}
 }
 
-void Enemy::EnemyManager(std::vector<Enemy>& enemies, SDL_Renderer* renderer, int windowWidth, int windowHeight, LoadRessource& MyRessource, int& nbr_enemies_bomb, int& nbr_enemies_shoot, int& nbr_enemies_shoot_multiple) {
+void Enemy::EnemyManager(std::vector<Enemy>& enemies, SDL_Renderer* renderer, int windowWidth, int windowHeight, LoadRessource& MyRessource, Level& MyLevel1) {
 	int choice = randomInt(1,3);
-	if (choice == 1 && nbr_enemies_bomb > 0) {
+	if (choice == 1 && MyLevel1.nbr_enemy > 0) {
 		Enemy::spawnEnemyBomb(enemies, windowWidth, windowHeight, renderer, MyRessource.bomb);
-		nbr_enemies_bomb--;
+		MyLevel1.nbr_enemy--;
 	}
-	if (choice == 2 && nbr_enemies_shoot > 0) {
+	if (choice == 2 && MyLevel1.nbr_shooter > 0) {
 		Enemy::spawnEnemyShooter(enemies, windowWidth, windowHeight, renderer, MyRessource.ship, MyRessource.bulletEnemyTexture);
-		nbr_enemies_bomb--;
+		MyLevel1.nbr_shooter--;
 	}
-	if (choice == 3 && nbr_enemies_shoot_multiple > 0) {
+	if (choice == 3 && MyLevel1.nbr_shooter_V2 > 0) {
 		Enemy::spawnEnemyShooterV2(enemies, windowWidth, windowHeight, renderer, MyRessource.ship, MyRessource.bulletEnemyTexture);
-		nbr_enemies_shoot_multiple--;
+		MyLevel1.nbr_shooter_V2--;
 	}
 }
 

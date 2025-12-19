@@ -4,6 +4,7 @@
 #include "SDL3/SDL.h"
 #include "Hero.h"
 #include "LoadRessource.h"
+#include "Level.h"
 
 class Enemy
 {
@@ -35,10 +36,10 @@ public:
     static void spawnEnemyBomb(std::vector<Enemy>& enemies, int windowWidth, int windowHeight, SDL_Renderer* renderer, SDL_Texture* sharedTexture);
     static void spawnEnemyShooter(std::vector<Enemy>& enemies, int windowWidth, int windowHeight, SDL_Renderer* renderer, SDL_Texture* sharedTexture, SDL_Texture* sharedTextureBulet);
     static void spawnEnemyShooterV2(std::vector<Enemy>& enemies, int windowWidth, int windowHeight, SDL_Renderer* renderer, SDL_Texture* sharedTexture, SDL_Texture* sharedTextureBulet);
+    static void spawnEnemyBoss(std::vector<Enemy>& enemies, int windowWidth, int windowHeight, SDL_Renderer* renderer, LoadRessource& MyRessource);
     void shoot(std::vector<Bullet>& enemiesBullet);
     void shootV2(std::vector<Bullet>& enemiesBullet);
-    static void EnemyManager(std::vector<Enemy>& enemies, SDL_Renderer* renderer, int windowWidth, int windowHeight, LoadRessource& MyRessource, int& nbr_enemies_bomb, int& nbr_enemies_shoot, int& nbr_enemies_shoot_multiple);
-
+    static void EnemyManager(std::vector<Enemy>& enemies, SDL_Renderer* renderer, int windowWidth, int windowHeight, LoadRessource& MyRessource, Level& MyLevel1);
 
     ~Enemy();
 };
