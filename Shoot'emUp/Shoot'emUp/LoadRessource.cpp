@@ -63,7 +63,7 @@ void LoadRessource::loadAllTexture() {
     SDL_SetTextureScaleMode(bulletEnemyTexture, SDL_SCALEMODE_NEAREST);
 
     // Boss
-    surface = IMG_Load("picture/boss.png");
+    surface = IMG_Load("picture/FinalBoss.png");
     bossTexture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
 }
@@ -78,5 +78,4 @@ LoadRessource::~LoadRessource() { // Destroy all texture
     if (ship) SDL_DestroyTexture(ship);
     if (bulletEnemyTexture) SDL_DestroyTexture(bulletEnemyTexture);
     if (bossTexture) SDL_DestroyTexture(bossTexture);
-
 }

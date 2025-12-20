@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
     }
 
     LoadRessource MyRessource = LoadRessource(renderer);
-    Level MyLevel1 = Level(2,2,2);
+    Level MyLevel1 = Level(2,2,2,1);
     MyRessource.loadAllTexture();
     Entity player(400.0f, 300.0f, 100, 100, SDL_Color{ 255, 0, 0, 255 }, 400);
     player.texture = MyRessource.entityTexture;
