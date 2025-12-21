@@ -72,6 +72,22 @@ void Entity::HUD(SDL_Renderer* renderer, SDL_Texture* texture, int HP, int Score
         }
     }
 
+    TTF_Font* font = TTF_OpenFont("assets/arialmt.ttf", 24);
+    if (font) {
+        std::string scoreText = "Score: " + std::to_string(Score);
+        SDL_Color white = { 255, 255, 255, 255 };
+        size_t size = scoreText.size();
+        SDL_Surface* scoreSurface = TTF_RenderText_Solid(font, scoreText.c_str(), size, white);
+        if (scoreSurface) {
+            SDL_Texture* scoreTexture = SDL_CreateTextureFromSurface(renderer, scoreSurface);
+            SDL_FRect scoreRect = { 10.0f, 50.0f, (float)scoreSurface->w, (float)scoreSurface->h };
+            SDL_RenderTexture(renderer, scoreTexture, NULL, &scoreRect);
+            SDL_DestroyTexture(scoreTexture);
+            SDL_DestroySurface(scoreSurface);
+        }
+        TTF_CloseFont(font);
+    }
+
 }
 
 void Entity::Collide(std::vector<Enemy>& enemies) {
@@ -93,6 +109,7 @@ void Entity::Collide(std::vector<Enemy>& enemies) {
 
                 if (enemies[j].HP <= 0) {
                     enemyToRemove[j] = true;
+                    Score += enemies[j].Value;
                 }
                 break;
             }

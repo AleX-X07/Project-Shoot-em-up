@@ -4,6 +4,8 @@
 #include <vector>
 #include <SDL3_image/SDL_image.h>
 #include "Bullet.h"
+#include <string>
+#include <SDL3_ttf/SDL_ttf.h>
 
 class Enemy;
 
