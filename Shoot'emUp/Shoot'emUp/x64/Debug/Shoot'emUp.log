@@ -1,20 +1,74 @@
-﻿  Enemy.cpp
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(30,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+﻿  Bullet.cpp
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Bullet.h(20,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'Bullet.cpp')
+  
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(32,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'Bullet.cpp')
+  
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Bullet.cpp(9,60): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Bullet.cpp(9,50): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Bullet.cpp(35,16): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Bullet.cpp(54,43): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+  Enemy.cpp
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Bullet.h(20,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
   (compiler le fichier source 'Enemy.cpp')
   
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(46,13): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(104,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(105,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(109,31): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(119,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(120,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(125,31): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(135,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(136,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(141,31): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(151,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(152,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(157,31): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(162,20): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(179,20): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
-  Shoot'emUp.vcxproj -> C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\x64\Debug\Shoot'emUp.exe
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(32,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'Enemy.cpp')
+  
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(93,13): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(152,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(153,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(157,31): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(168,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(169,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(174,31): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(185,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(186,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(191,31): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(202,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(203,26): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(208,31): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(238,20): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(255,20): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(334,21): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  Hero.cpp
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Bullet.h(20,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'Hero.cpp')
+  
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(32,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'Hero.cpp')
+  
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Hero.cpp(101,16): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Hero.cpp(107,16): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+  Level.cpp
+  LoadRessource.cpp
+  Menu.cpp
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(14,28): warning C4838: la conversion de 'int' en 'float' requiert une conversion restrictive
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(14,28): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(14,32): warning C4838: la conversion de 'int' en 'float' requiert une conversion restrictive
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(14,32): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(14,36): warning C4838: la conversion de 'int' en 'float' requiert une conversion restrictive
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(14,36): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(14,40): warning C4838: la conversion de 'int' en 'float' requiert une conversion restrictive
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Menu.cpp(14,40): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+  Screen.cpp
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Bullet.h(20,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'Screen.cpp')
+  
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(32,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'Screen.cpp')
+  
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Screen.cpp(158,28): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+  main.cpp
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Bullet.h(20,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'main.cpp')
+  
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(32,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
+  (compiler le fichier source 'main.cpp')
+  
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(24,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(26,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
+C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(71,36): warning C4244: '=' : conversion de 'Uint64' en 'int', perte possible de données
+  Génération de code en cours...
+  Shoot'emUp.vcxproj -> C:\Users\Lenovo.LAPTOP-26PDEE3S\Documents\Etienne\Gaming Campus\Project-Shoot-em-up\Shoot'emUp\x64\Debug\Shoot'emUp.exe
