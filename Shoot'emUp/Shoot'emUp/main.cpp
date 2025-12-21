@@ -21,7 +21,7 @@ int main(int argc, char** argv) {
     Uint64 frameStart;
     int frameTime;
 
-    if (SDL_Init(SDL_INIT_VIDEO) < 0 || !SDL_CreateWindowAndRenderer("SHOOT'EM UP", 640, 480, SDL_WINDOW_FULLSCREEN, &window, &renderer)) // Initialisation window
+    if (SDL_Init(SDL_INIT_VIDEO) < 0 || !SDL_CreateWindowAndRenderer("SHOOT'EM UP", 1920, 1080, SDL_WINDOW_FULLSCREEN, &window, &renderer)) // Initialisation window
         return 1;
     if (TTF_Init() < 0) {
         SDL_Log("Erreur SDL_ttf : %s", SDL_GetError());
@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
     }
 
     LoadRessource MyRessource = LoadRessource(renderer);
-    Level MyLevel1 = Level(2,2,2,1);
+    Level MyLevel1 = Level( 0, 0, 0, 1);
     MyRessource.loadAllTexture();
     Entity player(400.0f, 300.0f, 100, 100, SDL_Color{ 255, 0, 0, 255 }, 400);
     player.texture = MyRessource.entityTexture;
@@ -46,7 +46,7 @@ int main(int argc, char** argv) {
         if (restart) {
             player.HP = 4;
             player.Score = 0;
-            player.bullets.clear();
+            player.heroBullets.clear();
             player.rect.x = 400.0f;
             player.rect.y = 300.0f;
             player.timeSinceLastShot = 0.0f;
@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
             NavigateMenu(screen, event, menuSelection, enterPressed);
         }
 
-        screen = updateGameState(screen, renderer, MyRessource, player, dt, window, MyEnemy.enemies, player.bullets, restart, MyLevel1); // Update the game (Menu,Level1,Level2,GameOver)
+        screen = updateGameState(screen, renderer, MyRessource, player, dt, window, MyEnemy.enemies, player.heroBullets, restart, MyLevel1); // Update the game (Menu,Level1,Level2,GameOver)
 
         frameTime = SDL_GetTicks() - frameStart;
 

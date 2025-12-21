@@ -13,6 +13,7 @@ public:
     SDL_FRect rect;
     SDL_Texture* texture;
     SDL_Color color;
+    std::vector<Bullet> heroBullets;
     float speed;
     float shootCooldown = 0.15f;      
     float timeSinceLastShot = 0.0f;

@@ -37,7 +37,7 @@ void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool ent
 }
 
 GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, bool& restart, Level& MyLevel1) {
-    int w, h;
+    static int w, h;
     static int menuSelection = 0;
     static int menuDeathSelection = 0;
     static bool upPressed = false;
@@ -109,7 +109,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
         player.handleInput(keys, dt);
         SDL_GetWindowSize(window, &w, &h);
         player.clampToScreen(w, h);
-        player.updateBullets(dt);
+        player.updateBullets(dt, player.heroBullets);
 
         spawnTimer += dt; // Spawn enemies
         if (spawnTimer >= spawnInterval) {
@@ -117,7 +117,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
             spawnTimer = 0;
         }
 
-        Enemy::updateEnemy(enemies, dt);
+        Enemy::updateEnemy(enemies, dt, w, h);
 
         for (auto& e : enemies) { // Shoot for enemies
             if (e.numEnemy == 2) {
@@ -126,6 +126,9 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
             else if (e.numEnemy == 3) {
                 e.shootV2(e.enemiesBullet);
             }
+            else if (e.numEnemy == 10) {
+                e.shootBoss(e.enemiesBullet);
+            }
         }
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -133,7 +136,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
         SDL_RenderTexture(renderer, MyRessource.backgroundLevel1, NULL, NULL);
 
         player.render(renderer);
-        player.renderBullets(renderer);
+        player.renderBullets(renderer, player.heroBullets);
         Enemy::renderEnemy(renderer, enemies);
         player.HUD(renderer, MyRessource.heart, player.HP, player.Score);
 
@@ -171,7 +174,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
 
         if (keys[SDL_SCANCODE_ESCAPE]) {
             player.HP = 4;
-            player.bullets.clear();
+            player.heroBullets.clear();
             enemies.clear();
             player.rect.x = 400.0f;
             player.rect.y = 300.0f;

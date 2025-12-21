@@ -19,10 +19,18 @@ void Entity::move(float dx, float dy, float dt) { // Function for move player
 }
 
 void Entity::clampToScreen(int screenWidth, int screenHeight) { // Function for lock player in the window
-    if (rect.x < 0) rect.x = 0;
-    if (rect.y < 0) rect.y = 0;
-    if (rect.x + rect.w > screenWidth) rect.x = screenWidth - rect.w;
-    if (rect.y + rect.h > screenHeight) rect.y = screenHeight - rect.h;
+    if (rect.x < 0) {
+        rect.x = 0;
+    }
+    if (rect.y < 0) {
+        rect.y = 0;
+    }
+    if (rect.x + rect.w > screenWidth) {
+        rect.x = screenWidth - rect.w;
+    }
+    if (rect.y + rect.h > screenHeight) {
+        rect.y = screenHeight - rect.h;
+    }
 }
 
 void Entity::render(SDL_Renderer* renderer) { // Function for display sprite of player
@@ -53,7 +61,7 @@ void Entity::handleInput(const bool* keys, float dt) { // Function for interatio
 void Entity::shoot() { // Function for shoot
         Bullet newBullet(rect.x + rect.w, rect.y + rect.h / 2 - 30, 800, 0, 120, 60, SDL_Color{ 0, 0, 255, 255 });
         newBullet.bulletTexture = bulletTexture;
-        bullets.push_back(newBullet);
+        heroBullets.push_back(newBullet);
 }
 
 void Entity::HUD(SDL_Renderer* renderer, SDL_Texture* texture, int HP, int Score) { // Function for display HUD
@@ -67,16 +75,15 @@ void Entity::HUD(SDL_Renderer* renderer, SDL_Texture* texture, int HP, int Score
             SDL_RenderFillRect(renderer, &hpRect);
         }
     }
-
 }
 
 void Entity::CollideBullet(std::vector<Enemy>& enemies) { // Function for check collision
 
-    std::vector<bool> bulletToRemove(bullets.size(), false);
+    std::vector<bool> bulletToRemove(heroBullets.size(), false);
     std::vector<bool> enemyToRemove(enemies.size(), false);
 
-    for (int i = 0; i < bullets.size(); i++) {
-        SDL_FRect rect = { bullets[i].x, bullets[i].y, bullets[i].w, bullets[i].h };
+    for (int i = 0; i < heroBullets.size(); i++) {
+        SDL_FRect rect = { heroBullets[i].x, heroBullets[i].y, heroBullets[i].w, heroBullets[i].h };
 
         for (int j = 0; j < enemies.size(); j++) {
             if (SDL_HasRectIntersectionFloat(&rect, &enemies[j].rect)) {
@@ -91,9 +98,9 @@ void Entity::CollideBullet(std::vector<Enemy>& enemies) { // Function for check 
         }
     }
 
-    for (int i = bullets.size() - 1; i >= 0; i--) {
+    for (int i = heroBullets.size() - 1; i >= 0; i--) {
         if (bulletToRemove[i]) {
-            bullets.erase(bullets.begin() + i);
+            heroBullets.erase(heroBullets.begin() + i);
         }
     }
 
