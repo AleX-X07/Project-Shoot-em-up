@@ -1,73 +1,8 @@
-﻿  Bullet.cpp
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Bullet.h(20,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
-  (compiler le fichier source 'Bullet.cpp')
-  
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(31,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
-  (compiler le fichier source 'Bullet.cpp')
-  
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Bullet.cpp(9,60): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Bullet.cpp(9,50): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Bullet.cpp(35,16): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Bullet.cpp(54,43): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-  Enemy.cpp
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Bullet.h(20,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
-  (compiler le fichier source 'Enemy.cpp')
-  
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(31,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
-  (compiler le fichier source 'Enemy.cpp')
-  
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(92,13): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(152,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(153,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(157,31): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(169,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(170,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(175,31): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(187,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(188,17): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(193,31): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(205,8): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(206,26): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(211,31): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(241,20): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(258,20): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(301,21): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(319,21): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(328,12): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.cpp(337,21): warning C4244: '=' : conversion de 'Uint64' en 'Uint32', perte possible de données
-  Hero.cpp
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Bullet.h(20,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
-  (compiler le fichier source 'Hero.cpp')
-  
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(31,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
-  (compiler le fichier source 'Hero.cpp')
-  
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Hero.cpp(124,16): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Hero.cpp(130,16): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Hero.cpp(154,24): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
-  Level.cpp
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Bullet.h(20,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
-  (compiler le fichier source 'Level.cpp')
-  
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(31,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
-  (compiler le fichier source 'Level.cpp')
-  
-  Screen.cpp
+﻿  Screen.cpp
 C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Bullet.h(20,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
   (compiler le fichier source 'Screen.cpp')
   
 C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(31,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
   (compiler le fichier source 'Screen.cpp')
   
-  main.cpp
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Bullet.h(20,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
-  (compiler le fichier source 'main.cpp')
-  
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\Enemy.h(31,30): warning C4244: 'initialisation' : conversion de 'Uint64' en 'Uint32', perte possible de données
-  (compiler le fichier source 'main.cpp')
-  
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(24,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(26,17): warning C4804: '<' : utilisation risquée du type 'bool' dans l'opération
-C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\Shoot'emUp\main.cpp(75,36): warning C4244: '=' : conversion de 'Uint64' en 'int', perte possible de données
-  Génération de code en cours...
   Shoot'emUp.vcxproj -> C:\Users\alexs\Documents\GitHub\Project-Shoot-em-up\Shoot'emUp\x64\Debug\Shoot'emUp.exe

@@ -14,7 +14,7 @@ void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool ent
         if (event.key.key == SDLK_RETURN && !enterPressed) {
             enterPressed = true;
             if (menuSelection == 0) {
-                screen = LEVEL1;
+                screen = LEVEL;
             }
             else if (menuSelection == 1) {
                 screen = QUIT;
@@ -83,7 +83,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
         if (keys[SDL_SCANCODE_RETURN]) {
             if (!enterPressed) {
                 enterPressed = true;
-                if (menuSelection == 0) return LEVEL1;
+                if (menuSelection == 0) return LEVEL;
                 if (menuSelection == 1) return QUIT;
             }
         }
@@ -92,68 +92,39 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
         break;
     }
 
-    case LEVEL1: {
+    case LEVEL: {
+
 
         if (player.HP <= 0) {
             screen = GAMEOVER;
             break;
         }
 
+        static int currentLevel = 0;
+        if (currentLevel != MyLevel.numLevel) {
+            if (MyLevel.numLevel == 1) {
+                MyLevel.setMyLevel(1, 0, 0, 0, 1);
+            }
+            else if (MyLevel.numLevel == 2) {
+                MyLevel.setMyLevel(0, 0, 0, 1, 0);
+            }
+            currentLevel = MyLevel.numLevel;
+        }
+
+        MyLevel.displayLevel(renderer, MyRessource, player, dt, window, enemies, bullets, MyLevel, keys, w, h);
+
         if (MyLevel.typeLevel(player) == 1) {
-            screen = MENU;
-            break;
-        }
+            MyLevel.reset(player, enemies);
+            player.nbr_enemy_death = 0;  
+            player.bossDeath = 0;        
+            MyLevel.numLevel++;
 
-        static float spawnTimer = 0;
-        const float spawnInterval = 1;
-
-        player.handleInput(keys, dt);
-        SDL_GetWindowSize(window, &w, &h);
-        player.clampToScreen(w, h);
-        player.updateBullets(dt, player.heroBullets);
-
-        spawnTimer += dt; // Spawn enemies
-        if (spawnTimer >= spawnInterval) {
-            Enemy::EnemyManager(enemies, renderer, w, h, MyRessource, MyLevel);
-            spawnTimer = 0;
-        }
-
-        Enemy::updateEnemy(enemies, dt, w, h);
-
-        for (auto& e : enemies) { // Shoot for enemies
-            if (e.numEnemy == 2) {
-                e.shoot(e.enemiesBullet);
-            }
-            else if (e.numEnemy == 3) {
-                e.shootV2(e.enemiesBullet);
-            }
-            else if (e.numEnemy == 10) {
-                e.shootBoss(e.enemiesBullet);
+            if (MyLevel.numLevel > 2) {
+                return MENU;
             }
         }
-
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderClear(renderer);
-        SDL_RenderTexture(renderer, MyRessource.backgroundLevel1, NULL, NULL);
-
-        player.render(renderer);
-        player.renderBullets(renderer, player.heroBullets);
-        Enemy::renderEnemy(renderer, enemies);
-        player.HUD(renderer, MyRessource.heart, player.HP, player.Score);
-
-        player.CollideEnemy(enemies, dt);
-        player.CollideEnemyBullet(enemies, dt);
-        player.CollideBullet(enemies);
-
-        SDL_RenderPresent(renderer);
-
+ 
         if (keys[SDL_SCANCODE_ESCAPE]) {
-            // Pause here
-            /*player.HP = 4;
-            player.heroBullets.clear();
-            enemies.clear();
-            player.rect.x = 400.0f;
-            player.rect.y = 300.0f;*/
             return MENU;
         }
         break;

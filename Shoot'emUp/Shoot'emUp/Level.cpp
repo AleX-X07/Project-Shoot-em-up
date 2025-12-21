@@ -3,6 +3,7 @@
 
 
 Level::Level() {
+    numLevel = 1;
 	nbr_enemy = 0;
 	nbr_shooter = 0;
 	nbr_shooter_V2 = 0;
@@ -20,6 +21,9 @@ void Level::setMyLevel(int _nbr_enemy, int _nbr_shooter, int _nbr_shooter_V2, in
 	if (_nbr_boss > 0) {
 		levelWithBoss = true;
 	}
+    if (nbr_enemy == 0 && nbr_shooter == 0 && nbr_shooter_V2 == 0 && nbr_boss == 0 && nbr_enemy_death == 0) {
+        printf("niveau terminer");
+    }
 }
 
 int Level::typeLevel(Entity& player) {
@@ -36,7 +40,8 @@ int Level::typeLevel(Entity& player) {
 	return 0;
 }
 
-void Level::displayLevel(SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, bool& restart, Level& MyLevel, const bool* keys, int w, int h) {
+void Level::displayLevel(SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, Level& MyLevel, const bool* keys, int w, int h) {
+    
     player.handleInput(keys, dt);
     SDL_GetWindowSize(window, &w, &h);
     player.clampToScreen(w, h);
@@ -76,4 +81,13 @@ void Level::displayLevel(SDL_Renderer* renderer, LoadRessource& MyRessource, Ent
     player.CollideBullet(enemies);
 
     SDL_RenderPresent(renderer);
+}
+
+void Level::reset(Entity& player, std::vector<Enemy>& enemies) {
+    player.HP = 4;
+    player.heroBullets.clear();
+    enemies.clear();
+    player.rect.x = 400.0f;
+    player.rect.y = 300.0f;
+    spawnTimer = 0;
 }

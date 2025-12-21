@@ -4,6 +4,7 @@
 #include "Menu.h"
 #include "Bullet.h"
 #include "LoadRessource.h"
+#include "Level.h"
 #include <vector>
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
@@ -11,8 +12,7 @@
 
 enum GameState {
     MENU,
-    LEVEL1,
-    LEVEL2,
+    LEVEL,
     GAMEOVER,
     QUIT
 };

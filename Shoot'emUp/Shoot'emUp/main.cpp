@@ -35,7 +35,6 @@ int main(int argc, char** argv) {
     player.bulletTexture = MyRessource.bulletTexture;
 
     Level MyLevel;
-    MyLevel.setMyLevel(2, 2, 2, 1, 1);
 
 
     Uint64 last_time = SDL_GetTicks();
