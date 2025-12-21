@@ -2,7 +2,8 @@
 #include "Enemy.h"
 
 Entity::Entity() {
-
+    nbr_enemy_death = 0;
+    bossDeath = 0;
 }
 
 Entity::Entity(float x, float y, float w, float h, SDL_Texture* tex, float spd) // Constructor with texture
@@ -108,6 +109,12 @@ void Entity::CollideBullet(std::vector<Enemy>& enemies) { // Function for check 
                 if (enemies[j].HP <= 0) {
                     enemyToRemove[j] = true;
                     Score += enemies[j].Value;
+                    if (enemies[j].numEnemy == 10) {
+                        bossDeath++;
+                    }
+                    else {
+                        nbr_enemy_death++;
+                    }
                 }
                 break;
             }
@@ -123,6 +130,37 @@ void Entity::CollideBullet(std::vector<Enemy>& enemies) { // Function for check 
     for (int i = enemies.size() - 1; i >= 0; i--) {
         if (enemyToRemove[i]) {
             enemies.erase(enemies.begin() + i);
+        }
+    }
+}
+
+void Entity::CollideEnemy(std::vector<Enemy>& enemies, float dt) {
+    timeSinceLastHit += dt;
+    if (timeSinceLastHit >= collisionCooldownEnemy) {
+        timeSinceLastHit = 0;
+        for (auto& e : enemies) {
+            if (SDL_HasRectIntersectionFloat(&rect, &e.rect)) {
+                HP--;
+                break;
+            }
+        }
+    }
+}
+
+void Entity::CollideEnemyBullet(std::vector<Enemy>& enemies, float dt) {
+    timeSinceLastHitBullet += dt;
+    if (timeSinceLastHitBullet >= collisionCooldownBulletEnemy) {
+        for (auto& e : enemies) {
+            for (int i = e.enemiesBullet.size() - 1; i >= 0; i--) {
+                SDL_FRect bulletRect = { e.enemiesBullet[i].x, e.enemiesBullet[i].y,
+                                         e.enemiesBullet[i].w, e.enemiesBullet[i].h };
+                if (SDL_HasRectIntersectionFloat(&rect, &bulletRect)) {
+                    HP--;
+                    e.enemiesBullet.erase(e.enemiesBullet.begin() + i);
+                    timeSinceLastHitBullet = 0;
+                    break;
+                }
+            }
         }
     }
 }

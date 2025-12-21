@@ -1,9 +1,5 @@
 #include "Screen.h"
 
-float collisionCooldown = 0.5f;
-float collisionCooldownEnemy = 0.2f;
-float timeSinceLastHit = 0.0f;
-float timeSinceLastHitBullet = 0.0f;
 
 void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool enterPressed) {
     enterPressed = false;
@@ -36,7 +32,7 @@ void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool ent
     }
 }
 
-GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, bool& restart, Level& MyLevel1) {
+GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, bool& restart, Level& MyLevel) {
     static int w, h;
     static int menuSelection = 0;
     static int menuDeathSelection = 0;
@@ -103,8 +99,13 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
             break;
         }
 
+        if (MyLevel.typeLevel(player) == 1) {
+            screen = MENU;
+            break;
+        }
+
         static float spawnTimer = 0;
-        const float spawnInterval = 1.5;
+        const float spawnInterval = 1;
 
         player.handleInput(keys, dt);
         SDL_GetWindowSize(window, &w, &h);
@@ -113,7 +114,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
 
         spawnTimer += dt; // Spawn enemies
         if (spawnTimer >= spawnInterval) {
-            Enemy::EnemyManager(enemies, renderer, w, h, MyRessource, MyLevel1);
+            Enemy::EnemyManager(enemies, renderer, w, h, MyRessource, MyLevel);
             spawnTimer = 0;
         }
 
@@ -140,44 +141,19 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
         Enemy::renderEnemy(renderer, enemies);
         player.HUD(renderer, MyRessource.heart, player.HP, player.Score);
 
-        timeSinceLastHit += dt;
-        if (timeSinceLastHit >= collisionCooldown) {
-            timeSinceLastHit = 0;
-
-            for (auto& e : enemies) {
-                if (SDL_HasRectIntersectionFloat(&player.rect, &e.rect)) {
-                    player.HP--;
-                    break;
-                }
-            }
-        }
-
-        timeSinceLastHitBullet += dt;
-        if (timeSinceLastHitBullet >= collisionCooldownEnemy) {
-            for (auto& e : enemies) {
-                for (int i = e.enemiesBullet.size() - 1; i >= 0; i--) {
-                    SDL_FRect bulletRect = { e.enemiesBullet[i].x, e.enemiesBullet[i].y,
-                                             e.enemiesBullet[i].w, e.enemiesBullet[i].h };
-                    if (SDL_HasRectIntersectionFloat(&player.rect, &bulletRect)) {
-                        player.HP--;
-                        e.enemiesBullet.erase(e.enemiesBullet.begin() + i);
-                        timeSinceLastHitBullet = 0;
-                        break;
-                    }
-                }
-            }
-        }
-
+        player.CollideEnemy(enemies, dt);
+        player.CollideEnemyBullet(enemies, dt);
         player.CollideBullet(enemies);
 
         SDL_RenderPresent(renderer);
 
         if (keys[SDL_SCANCODE_ESCAPE]) {
-            player.HP = 4;
+            // Pause here
+            /*player.HP = 4;
             player.heroBullets.clear();
             enemies.clear();
             player.rect.x = 400.0f;
-            player.rect.y = 300.0f;
+            player.rect.y = 300.0f;*/
             return MENU;
         }
         break;

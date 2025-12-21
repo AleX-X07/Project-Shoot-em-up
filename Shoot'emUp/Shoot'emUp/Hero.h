@@ -16,11 +16,22 @@ public:
     SDL_Texture* texture;
     SDL_Color color;
     std::vector<Bullet> heroBullets;
+
+    int HP = 4;
+    int Score = 0;
     float speed;
+
+    int nbr_enemy_death;
+    int bossDeath;
+
     float shootCooldown = 0.15f;      
     float timeSinceLastShot = 0.0f;
-	int HP = 4;
-    int Score = 0;
+	
+    float collisionCooldownEnemy = 0.5f;
+    float timeSinceLastHit = 0.0f;
+
+    float collisionCooldownBulletEnemy = 0.2f;
+    float timeSinceLastHitBullet = 0.0f;
 
     Entity();
     Entity(float x, float y, float w, float h, SDL_Texture* tex, float spd = 200.0f);
@@ -32,7 +43,9 @@ public:
     void handleInput(const bool* keys, float dt); // Function for interation with the keyboard
 	void shoot(); // Function for shoot
 	void HUD(SDL_Renderer* renderer, SDL_Texture* heart, int HP, int Score); // Function for display HUD
-    void CollideBullet(std::vector<Enemy>& enemies); // Function for check collision
+    void CollideBullet(std::vector<Enemy>& enemies); // Function for check collision between bullet of hero and enemy
+    void CollideEnemy(std::vector<Enemy>& enemies, float dt); // Function for check collision between an enemy and hero
+    void CollideEnemyBullet(std::vector<Enemy>& enemies, float dt); // Function for check collision between a bullet enemy and hero
 
     ~Entity();
 };

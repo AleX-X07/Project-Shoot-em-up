@@ -21,7 +21,6 @@ public:
     int Value;
     int numEnemy;
 
-
     SDL_Texture* enemyTextureBomb;
     SDL_Texture* enemyTextureShooter;
     SDL_Texture* bulletEnemyTexture;
