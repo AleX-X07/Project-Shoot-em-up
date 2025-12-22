@@ -32,7 +32,7 @@ void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool ent
     }
 }
 
-GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, bool& restart, Level& MyLevel) {
+GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, bool& restart, Level& MyLevel, FileManager& Level) {
     static int w, h;
     static int menuSelection = 0;
     static int menuDeathSelection = 0;
@@ -100,13 +100,19 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
             break;
         }
 
+        Level.readOrderLevel();
+
         static int currentLevel = 0;
         if (currentLevel != MyLevel.numLevel) {
             if (MyLevel.numLevel == 1) {
-                MyLevel.setMyLevel(1, 0, 0, 0, 1);
+                Level = FileManager(Level.level_1);
+                Level.readIntLevel(MyLevel.nbr_enemy, MyLevel.nbr_shooter, MyLevel.nbr_shooter_V2, MyLevel.nbr_boss);
+                MyLevel.setMyLevel(MyLevel.nbr_enemy, MyLevel.nbr_shooter, MyLevel.nbr_shooter_V2, MyLevel.nbr_boss);
             }
             else if (MyLevel.numLevel == 2) {
-                MyLevel.setMyLevel(0, 0, 0, 1, 0);
+                Level = FileManager(Level.level_2);
+                Level.readIntLevel(MyLevel.nbr_enemy, MyLevel.nbr_shooter, MyLevel.nbr_shooter_V2, MyLevel.nbr_boss);
+                MyLevel.setMyLevel(MyLevel.nbr_enemy, MyLevel.nbr_shooter, MyLevel.nbr_shooter_V2, MyLevel.nbr_boss);
             }
             currentLevel = MyLevel.numLevel;
         }

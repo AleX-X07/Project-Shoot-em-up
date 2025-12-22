@@ -3,23 +3,33 @@
 FileManager::FileManager(const std::string& path) : filepath(path) {
 }
 
-int FileManager::readInt() {
+void FileManager::readOrderLevel() {
     std::ifstream file(filepath);
-    int value = 0;
-
+    int level1 = 0;
+    int level2 = 0;
     if (file.is_open()) {
-        file >> value;
+        file >> level1;
+        file >> level2;
         file.close();
     }
-
-    return value;
+    if (level1 == 1) {
+        level_1 = "Level/Level1.txt";
+        level_2 = "Level/Level2.txt";
+    }
+    else {
+        level_1 = "Level/Level2.txt";
+        level_2 = "Level/Level1.txt";
+    }
 }
 
-void FileManager::writeInt(int value) {
-    std::ofstream file(filepath);
+void FileManager::readIntLevel(int& nbr_enemy, int& nbr_shooter, int& nbr_shooter_V2, int& nbr_boss) {
+    std::ifstream file(filepath);
 
     if (file.is_open()) {
-        file << value;
+        file >> nbr_enemy;
+        file >> nbr_shooter;
+        file >> nbr_shooter_V2;
+        file >> nbr_boss;
         file.close();
     }
 }

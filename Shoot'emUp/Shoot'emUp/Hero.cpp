@@ -104,7 +104,7 @@ void Entity::CollideBullet(std::vector<Enemy>& enemies) { // Function for check 
         for (int j = 0; j < enemies.size(); j++) {
             if (SDL_HasRectIntersectionFloat(&rect, &enemies[j].rect)) {
                 bulletToRemove[i] = true;
-                enemies[j].HP--;
+                enemies[j].HP = 0;
 
                 if (enemies[j].HP <= 0) {
                     enemyToRemove[j] = true;

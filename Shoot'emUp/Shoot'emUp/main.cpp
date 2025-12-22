@@ -37,6 +37,8 @@ int main(int argc, char** argv) {
     Level MyLevel;
 
 
+    FileManager Level = FileManager("Level/orderLevel.txt");
+
     Uint64 last_time = SDL_GetTicks();
     bool keepGoing = true;
     GameState screen = MENU;
@@ -69,7 +71,7 @@ int main(int argc, char** argv) {
             NavigateMenu(screen, event, menuSelection, enterPressed);
         }
 
-        screen = updateGameState(screen, renderer, MyRessource, player, dt, window, MyEnemy.enemies, player.heroBullets, restart, MyLevel); // Update the game (Menu,Level1,Level2,GameOver)
+        screen = updateGameState(screen, renderer, MyRessource, player, dt, window, MyEnemy.enemies, player.heroBullets, restart, MyLevel, Level); // Update the game (Menu,Level1,Level2,GameOver)
 
         frameTime = SDL_GetTicks() - frameStart;
 

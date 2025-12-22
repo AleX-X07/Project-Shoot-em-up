@@ -213,6 +213,7 @@ void Enemy::spawnEnemyBoss(std::vector<Enemy>& enemies, int windowWidth, int win
 }
 
 void Enemy::EnemyManager(std::vector<Enemy>& enemies, SDL_Renderer* renderer, int windowWidth, int windowHeight, LoadRessource& MyRessource, Level& MyLevel) {
+
 	int choice = randomInt(1,3);
 	if (choice == 1 && MyLevel.nbr_enemy > 0) {
 		Enemy::spawnEnemyBomb(enemies, windowWidth, windowHeight, renderer, MyRessource.bomb);
@@ -230,7 +231,7 @@ void Enemy::EnemyManager(std::vector<Enemy>& enemies, SDL_Renderer* renderer, in
 		choice = 10;
 	}
 	if (enemies.empty()) {
-		if (choice == 10 && MyLevel.nbr_boss > 0) {
+		if (MyLevel.nbr_boss > 0) {
 			Enemy::spawnEnemyBoss(enemies, windowWidth, windowHeight, renderer, MyRessource);
 			MyLevel.nbr_boss--;
 		}

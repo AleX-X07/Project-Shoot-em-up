@@ -8,29 +8,32 @@ Level::Level() {
 	nbr_shooter = 0;
 	nbr_shooter_V2 = 0;
 	nbr_boss = 0;
-	nbr_enemy_death = 0;
 	levelWithBoss = false;
 }
 
-void Level::setMyLevel(int _nbr_enemy, int _nbr_shooter, int _nbr_shooter_V2, int _nbr_boss, int _nbr_enemy_death) {
+void Level::setMyLevel(int _nbr_enemy, int _nbr_shooter, int _nbr_shooter_V2, int _nbr_boss) {
 	nbr_enemy = _nbr_enemy;
 	nbr_shooter = _nbr_shooter;
 	nbr_shooter_V2 = _nbr_shooter_V2;
 	nbr_boss = _nbr_boss;
-	nbr_enemy_death = _nbr_enemy_death;
 	if (_nbr_boss > 0) {
 		levelWithBoss = true;
 	}
+    nbr_enemy_total = _nbr_enemy;
+    nbr_shooter_total = _nbr_shooter;
+    nbr_shooter_V2_total = _nbr_shooter_V2;
+    nbr_boss_total = _nbr_boss;
 }
 
 int Level::typeLevel(Entity& player) {
 	if (levelWithBoss) {
-		if (player.bossDeath == 1) {
+		if (player.bossDeath == nbr_boss_total) {
+            levelWithBoss = false;
 			return 1;
 		}
 	}
 	else {
-		if (player.nbr_enemy_death == nbr_enemy_death) {
+		if (player.nbr_enemy_death == (nbr_enemy_total + nbr_shooter_total + nbr_shooter_V2_total)) {
 			return 1;
 		}
 	}

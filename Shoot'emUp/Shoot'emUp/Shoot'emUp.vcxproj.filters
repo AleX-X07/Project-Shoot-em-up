@@ -25,6 +25,12 @@
     <Filter Include="Fichiers sources\Window">
       <UniqueIdentifier>{28d428db-d270-4824-a077-bdf074beaae2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\Gestion">
+      <UniqueIdentifier>{a993c3c8-d2a3-40d8-84b0-ce801b7fce07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Gestion">
+      <UniqueIdentifier>{e03b1894-8cd0-4498-82ef-68da55f6d45d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,17 +48,17 @@
     <ClCompile Include="Screen.cpp">
       <Filter>Fichiers sources\Window</Filter>
     </ClCompile>
-    <ClCompile Include="LoadRessource.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Fichiers sources\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="Level.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="FileManager.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Gestion</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadRessource.cpp">
+      <Filter>Fichiers sources\Gestion</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Fichiers sources\Gestion</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -71,17 +77,17 @@
     <ClInclude Include="Screen.h">
       <Filter>Fichiers d%27en-tête\Window</Filter>
     </ClInclude>
-    <ClInclude Include="LoadRessource.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Fichiers d%27en-tête\Entity</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Gestion</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadRessource.h">
+      <Filter>Fichiers d%27en-tête\Gestion</Filter>
     </ClInclude>
     <ClInclude Include="FileManager.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Gestion</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
