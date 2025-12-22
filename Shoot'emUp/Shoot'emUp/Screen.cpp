@@ -231,8 +231,8 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
     case VICTORY:
 
             SDL_SetRenderDrawColor(renderer, 0, 0, 50, 255);
-            SDL_RenderTexture(renderer, MyRessource.backgroundHome, NULL, NULL);
             SDL_RenderClear(renderer);
+            SDL_RenderTexture(renderer, MyRessource.backgroundHome, NULL, NULL);
             SDL_GetWindowSize(window, &w, &h);
 
             TitleMenu(renderer, w, h, white, "VICTORY", font, w / 2 - 200, 200, 400, 80);
