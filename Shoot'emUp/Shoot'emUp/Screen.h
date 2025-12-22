@@ -16,6 +16,7 @@ enum GameState {
     LEVEL,
     PAUSE,
     GAMEOVER,
+    VICTORY,
     QUIT
 };
 
