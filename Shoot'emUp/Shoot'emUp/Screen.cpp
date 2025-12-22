@@ -34,11 +34,13 @@ void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool ent
 
 GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, bool& restart, Level& MyLevel, FileManager& Level) {
     static int w, h;
+    SDL_GetWindowSize(window, &w, &h);
     static int menuSelection = 0;
     static int menuDeathSelection = 0;
     static bool upPressed = false;
     static bool downPressed = false;
     static bool enterPressed = false;
+    static bool escPressed = false;
     static TTF_Font* font = nullptr;
     SDL_Color white = { 255, 255, 255, 255 };
 
@@ -57,7 +59,6 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
         SDL_RenderClear(renderer);
         SDL_RenderTexture(renderer, MyRessource.backgroundHome, NULL, NULL);
 
-        SDL_GetWindowSize(window, &w, &h);
         TitleMenu(renderer, w, h, white, "SHOOT'EM UP", font, w / 2 - 200, 200, 400, 80);
 
         ButtonMenu(renderer, w, h, white, "PLAY", font, w / 2 - 100, h / 2 - 60, 200, 50, menuSelection, 0);
@@ -131,10 +132,46 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
         }
  
         if (keys[SDL_SCANCODE_ESCAPE]) {
-            return MENU;
+            if (!escPressed) {
+                escPressed = true;
+                return PAUSE;
+            }
+        }
+        else {
+            escPressed = false;
         }
         break;
     }
+    case PAUSE: {
+
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderClear(renderer);
+        SDL_RenderTexture(renderer, MyRessource.backgroundLevel1, NULL, NULL);
+
+        player.render(renderer);
+        player.renderBullets(renderer, player.heroBullets);
+        Enemy::renderEnemy(renderer, enemies);
+        player.HUD(renderer, MyRessource.heart, player.HP, player.Score);
+
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 150);
+        SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+        SDL_RenderFillRect(renderer, NULL);
+
+        TitleMenu(renderer, w, h, white, "PAUSE", font, w / 2 - 200, 200, 400, 100);
+        SDL_RenderPresent(renderer);
+
+        if (keys[SDL_SCANCODE_ESCAPE]) {
+            if (!escPressed) {
+                escPressed = true;
+                return LEVEL;
+            }
+        }
+        else {
+            escPressed = false;
+        }
+        break;
+    }
+
     case GAMEOVER:
 
         if (!font) {
@@ -143,6 +180,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
                 SDL_Log("Erreur chargement police: %s", SDL_GetError());
             }
         }
+
         SDL_SetRenderDrawColor(renderer, 0, 0, 50, 255);
         SDL_RenderClear(renderer);
         SDL_GetWindowSize(window, &w, &h);
