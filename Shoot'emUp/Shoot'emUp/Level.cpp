@@ -21,9 +21,6 @@ void Level::setMyLevel(int _nbr_enemy, int _nbr_shooter, int _nbr_shooter_V2, in
 	if (_nbr_boss > 0) {
 		levelWithBoss = true;
 	}
-    if (nbr_enemy == 0 && nbr_shooter == 0 && nbr_shooter_V2 == 0 && nbr_boss == 0 && nbr_enemy_death == 0) {
-        printf("niveau terminer");
-    }
 }
 
 int Level::typeLevel(Entity& player) {
