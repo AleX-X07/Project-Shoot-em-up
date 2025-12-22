@@ -1,8 +1,9 @@
+// Load file
 #include "LoadRessource.h"
 
-
-
+// Constructor
 LoadRessource::LoadRessource(SDL_Renderer* rend) : renderer(rend) {
+    // Initialize of all texture to nullptr
 	backgroundHome = nullptr;
 	backgroundLevel1 = nullptr;
 	heart = nullptr;
@@ -14,6 +15,7 @@ LoadRessource::LoadRessource(SDL_Renderer* rend) : renderer(rend) {
     bossTexture = nullptr;
 }
 
+// Load all texture
 void LoadRessource::loadAllTexture() {
     SDL_Surface* surface;
 
@@ -68,14 +70,34 @@ void LoadRessource::loadAllTexture() {
     SDL_DestroySurface(surface);
 }
 
-LoadRessource::~LoadRessource() { // Destroy all texture
-	if (backgroundLevel1) SDL_DestroyTexture(backgroundLevel1);
-	if (backgroundHome) SDL_DestroyTexture(backgroundHome);
-	if (bomb) SDL_DestroyTexture(entityTexture);
-	if (bulletTexture) SDL_DestroyTexture(bulletTexture);
-	if (entityTexture) SDL_DestroyTexture(entityTexture);
-	if (heart) SDL_DestroyTexture(heart);
-    if (ship) SDL_DestroyTexture(ship);
-    if (bulletEnemyTexture) SDL_DestroyTexture(bulletEnemyTexture);
-    if (bossTexture) SDL_DestroyTexture(bossTexture);
+// Destructor
+LoadRessource::~LoadRessource() { 
+    // Destroy all texture
+    if (backgroundLevel1) {
+        SDL_DestroyTexture(backgroundLevel1);
+    }
+    if (backgroundHome) {
+        SDL_DestroyTexture(backgroundHome);
+    }
+    if (bomb) {
+        SDL_DestroyTexture(entityTexture);
+    }
+    if (bulletTexture) {
+        SDL_DestroyTexture(bulletTexture);
+    }
+    if (entityTexture) {
+        SDL_DestroyTexture(entityTexture);
+    }
+    if (heart) {
+        SDL_DestroyTexture(heart);
+    }
+    if (ship) {
+        SDL_DestroyTexture(ship);
+    }
+    if (bulletEnemyTexture) {
+        SDL_DestroyTexture(bulletEnemyTexture);
+    }
+    if (bossTexture) {
+        SDL_DestroyTexture(bossTexture);
+    }
 }

@@ -1,12 +1,14 @@
 #pragma once
+// Load SDL
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
 #include <SDL3_ttf/SDL_ttf.h>
 
-class LoadRessource // Class for sprite for entity
+// Class for sprite for entity
+class LoadRessource 
 {
 public:
-	//Surfce
+	//Surface
 	SDL_Renderer* renderer;
 
 	//Texture
@@ -20,9 +22,13 @@ public:
 	SDL_Texture* bulletEnemyTexture;
 	SDL_Texture* bossTexture;
 
-	void loadAllTexture(); // Load all texture
-
+	// Constructor
 	LoadRessource(SDL_Renderer* rend);
+
+	// Load all texture
+	void loadAllTexture(); 
+
+	// Destructor
 	~LoadRessource(); 
 };
 

@@ -1,51 +1,70 @@
 #pragma once
+// Librairie externe
 #include <iostream>
-#include <SDL3/SDL.h>
-#include <vector>
-#include <SDL3_image/SDL_image.h>
-#include "Bullet.h"
 #include <string>
+#include <vector>
+
+// Load SDL
+#include <SDL3/SDL.h>
+#include <SDL3_image/SDL_image.h>
 #include <SDL3_ttf/SDL_ttf.h>
 
+// Load file
+#include "Bullet.h"
+
+
+// Foraward declaration for Enemy
 class Enemy;
 
-class Entity : public Bullet { // Class for player
+// Class Entity for play, who inherit from bullet
+class Hero : public Bullet { 
+
 public:
 
+    // Variable for position/dimension
     SDL_FRect rect;
-    SDL_Texture* texture;
-    SDL_Color color;
+
+    // Vector for bullet
     std::vector<Bullet> heroBullets;
 
+    // Variable for his characteristic
     int HP = 4;
-    int Score = 0;
+    int score = 0;
     float speed;
+    int nbr_enemy_death = 0;
+    int bossDeath = 0;
 
-    int nbr_enemy_death;
-    int bossDeath;
+    SDL_Texture* texture = nullptr;
 
+    // Variable for calculate cooldown
     float shootCooldown = 0.15f;      
-    float timeSinceLastShot = 0.0f;
+    float timeSinceLastShot = 0;
 	
     float collisionCooldownEnemy = 0.5f;
-    float timeSinceLastHit = 0.0f;
+    float timeSinceLastHit = 0;
 
     float collisionCooldownBulletEnemy = 0.2f;
-    float timeSinceLastHitBullet = 0.0f;
+    float timeSinceLastHitBullet = 0;
 
-    Entity();
-    Entity(float x, float y, float w, float h, SDL_Texture* tex, float spd = 200.0f);
-    Entity(float x, float y, float w, float h, SDL_Color col, float spd = 200.0f);
+    // Constructor
+    Hero();
+    Hero(float x, float y, float w, float h, float _speed);
 
-    void move(float dx, float dy, float dt); // Function for move player
-    void clampToScreen(int screenWidth, int screenHeight); // Function for lock player in the window
-    void render(SDL_Renderer* renderer); // Function for display sprite of player
-    void handleInput(const bool* keys, float dt); // Function for interation with the keyboard
-	void shoot(); // Function for shoot
-	void HUD(SDL_Renderer* renderer, SDL_Texture* heart, int HP, int Score); // Function for display HUD
-    void CollideBullet(std::vector<Enemy>& enemies); // Function for check collision between bullet of hero and enemy
-    void CollideEnemy(std::vector<Enemy>& enemies, float dt); // Function for check collision between an enemy and hero
-    void CollideEnemyBullet(std::vector<Enemy>& enemies, float dt); // Function for check collision between a bullet enemy and hero
+    //Render/Update
+    void render(SDL_Renderer* renderer); 
+    void updateInput(const bool* keys, float dt);
 
-    ~Entity();
+    // Function for lock in window
+    void clampToScreen(int screenWidth, int screenHeight);
+
+    // Function for shoot
+	void shoot(); 
+
+    // Function for display HUD
+	void HUD(SDL_Renderer* renderer, SDL_Texture* heart, int HP, int Score); 
+
+    // Function for collision
+    void CollideBullet(std::vector<Enemy>& enemies); 
+    void CollideEnemy(std::vector<Enemy>& enemies, float dt); 
+    void CollideEnemyBullet(std::vector<Enemy>& enemies, float dt);
 };

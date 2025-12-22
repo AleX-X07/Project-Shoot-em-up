@@ -1,25 +1,19 @@
+// Load file
 #include "Hero.h"
 #include "Enemy.h"
 
-Entity::Entity() {
-    nbr_enemy_death = 0;
-    bossDeath = 0;
+// Constructor
+Hero::Hero() {
+
 }
 
-Entity::Entity(float x, float y, float w, float h, SDL_Texture* tex, float spd) // Constructor with texture
-    : rect{ x, y, w, h }, texture(tex), color{ 255, 255, 255, 255 }, speed(spd) {
+Hero::Hero(float x, float y, float w, float h, float _speed) {
+    rect = { x, y, w, h };
+    speed = _speed;
 }
 
-Entity::Entity(float x, float y, float w, float h, SDL_Color col, float spd) // Constructor without texture
-    : rect{ x, y, w, h }, texture(nullptr), color(col), speed(spd) {
-}
-
-void Entity::move(float dx, float dy, float dt) { // Function for move player
-    rect.x += dx * speed * dt;
-    rect.y += dy * speed * dt;
-}
-
-void Entity::clampToScreen(int screenWidth, int screenHeight) { // Function for lock player in the window
+// Function for lock player in the window
+void Hero::clampToScreen(int screenWidth, int screenHeight) { 
     if (rect.x < 0) {
         rect.x = 0;
     }
@@ -34,48 +28,68 @@ void Entity::clampToScreen(int screenWidth, int screenHeight) { // Function for 
     }
 }
 
-void Entity::render(SDL_Renderer* renderer) { // Function for display sprite of player
+// Render of player
+void Hero::render(SDL_Renderer* renderer) { 
+    // If texture existe, dispaly sprite. Else, display cube 
     if (texture) {
         SDL_RenderTexture(renderer, texture, NULL, &rect);
     }
     else {
-        SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         SDL_RenderFillRect(renderer, &rect);
     }
 }
 
-void Entity::handleInput(const bool* keys, float dt) { // Function for interation with the keyboard
+// Update of hero, depending on input
+void Hero::updateInput(const bool* keys, float dt) { 
     float dx = 0, dy = 0;
-    if (keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_W]) dy -= 1;
-    if (keys[SDL_SCANCODE_DOWN] || keys[SDL_SCANCODE_S]) dy += 1;
-    if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A]) dx -= 1;
-    if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D]) dx += 1;
-
+    // Chek if z,q,s,d or up,down,left,right are pressed
+    if (keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_W]) {
+        dy -= 1;
+    }
+    if (keys[SDL_SCANCODE_DOWN] || keys[SDL_SCANCODE_S]) {
+        dy += 1;
+    }
+    if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A]) {
+        dx -= 1;
+    }
+    if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D]) {
+        dx += 1;
+    }
+    // Check the time for delay of 0.15 between each bullet
     timeSinceLastShot += dt;
     if (keys[SDL_SCANCODE_SPACE] && timeSinceLastShot >= shootCooldown) {
         shoot();
         timeSinceLastShot = 0.0f;
     }
-    move(dx, dy, dt);
+    // Update position of player
+    rect.x += dx * speed * dt;
+    rect.y += dy * speed * dt;
 }
 
-void Entity::shoot() { // Function for shoot
-        Bullet newBullet(rect.x + rect.w, rect.y + rect.h / 2 - 30, 800, 0, 120, 60, SDL_Color{ 0, 0, 255, 255 });
+// Function for shoot
+void Hero::shoot() {
+        // Create bullet
+        Bullet newBullet(rect.x + rect.w, rect.y + rect.h / 2 - 30, 800, 0, 120, 60);
         newBullet.bulletTexture = bulletTexture;
-        heroBullets.push_back(newBullet);
+        heroBullets.push_back(newBullet); // Put the bullet in the vector bullet
 }
 
-void Entity::HUD(SDL_Renderer* renderer, SDL_Texture* texture, int HP, int Score) { // Function for display HUD
+// Function for display HUD
+void Hero::HUD(SDL_Renderer* renderer, SDL_Texture* texture, int HP, int Score) {
+    // Display heart side by side
     for (int i = 0; i < HP; ++i) {
         SDL_FRect hpRect = { 10.0f + i * 35.0f, 10.0f, 30, 30 };
+        // If texture existe, display heart. Else, display cube color
         if (texture) {
             SDL_RenderTexture(renderer, texture, NULL, &hpRect);
         }
         else {
-            SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+            SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0);
             SDL_RenderFillRect(renderer, &hpRect);
         }
     }
+    // Display score under hearts
     TTF_Font* font = TTF_OpenFont("assets/arialmt.ttf", 24);
     if (font) {
         std::string scoreText = "Score: " + std::to_string(Score);
@@ -93,11 +107,14 @@ void Entity::HUD(SDL_Renderer* renderer, SDL_Texture* texture, int HP, int Score
     }
 }
 
-void Entity::CollideBullet(std::vector<Enemy>& enemies) { // Function for check collision
+// Function for check collision between enemy and bullet player
+void Hero::CollideBullet(std::vector<Enemy>& enemies) { 
 
+    // Create vector of bool for bullet and enemy to remove
     std::vector<bool> bulletToRemove(heroBullets.size(), false);
     std::vector<bool> enemyToRemove(enemies.size(), false);
 
+    // If bullet have collide with enemies, enemies lost HP
     for (int i = 0; i < heroBullets.size(); i++) {
         SDL_FRect rect = { heroBullets[i].x, heroBullets[i].y, heroBullets[i].w, heroBullets[i].h };
 
@@ -106,9 +123,10 @@ void Entity::CollideBullet(std::vector<Enemy>& enemies) { // Function for check 
                 bulletToRemove[i] = true;
                 enemies[j].HP--;
 
+                // If HP enemmies == 0, change bool in the vector ToRemove, increase score and increase bossDeath if it's boss, else nbr_enemy_death
                 if (enemies[j].HP <= 0) {
                     enemyToRemove[j] = true;
-                    Score += enemies[j].Value;
+                    score += enemies[j].Value;
                     if (enemies[j].numEnemy == 10) {
                         bossDeath++;
                     }
@@ -121,12 +139,14 @@ void Entity::CollideBullet(std::vector<Enemy>& enemies) { // Function for check 
         }
     }
 
+    // Remove heroBullets who are true in the ToRemove vector
     for (int i = heroBullets.size() - 1; i >= 0; i--) {
         if (bulletToRemove[i]) {
             heroBullets.erase(heroBullets.begin() + i);
         }
     }
 
+    // Remove enemies who are true in the ToRemove vector
     for (int i = enemies.size() - 1; i >= 0; i--) {
         if (enemyToRemove[i]) {
             enemies.erase(enemies.begin() + i);
@@ -134,11 +154,14 @@ void Entity::CollideBullet(std::vector<Enemy>& enemies) { // Function for check 
     }
 }
 
-void Entity::CollideEnemy(std::vector<Enemy>& enemies, float dt) {
+// Function for check collision between hero and enemies
+void Hero::CollideEnemy(std::vector<Enemy>& enemies, float dt) {
+    // Check cooldown
     timeSinceLastHit += dt;
     if (timeSinceLastHit >= collisionCooldownEnemy) {
         timeSinceLastHit = 0;
         for (auto& e : enemies) {
+            // If collision, player - 1 HP
             if (SDL_HasRectIntersectionFloat(&rect, &e.rect)) {
                 HP--;
                 break;
@@ -147,13 +170,14 @@ void Entity::CollideEnemy(std::vector<Enemy>& enemies, float dt) {
     }
 }
 
-void Entity::CollideEnemyBullet(std::vector<Enemy>& enemies, float dt) {
+// Function for check collision between player and enemies bullets
+void Hero::CollideEnemyBullet(std::vector<Enemy>& enemies, float dt) {
     timeSinceLastHitBullet += dt;
     if (timeSinceLastHitBullet >= collisionCooldownBulletEnemy) {
         for (auto& e : enemies) {
             for (int i = e.enemiesBullet.size() - 1; i >= 0; i--) {
-                SDL_FRect bulletRect = { e.enemiesBullet[i].x, e.enemiesBullet[i].y,
-                                         e.enemiesBullet[i].w, e.enemiesBullet[i].h };
+                SDL_FRect bulletRect = { e.enemiesBullet[i].x, e.enemiesBullet[i].y, e.enemiesBullet[i].w, e.enemiesBullet[i].h };
+                // If collide, player - 1 HP and enemies bullet is erase
                 if (SDL_HasRectIntersectionFloat(&rect, &bulletRect)) {
                     HP--;
                     e.enemiesBullet.erase(e.enemiesBullet.begin() + i);
@@ -163,8 +187,4 @@ void Entity::CollideEnemyBullet(std::vector<Enemy>& enemies, float dt) {
             }
         }
     }
-}
-
-Entity::~Entity() {
-
 }

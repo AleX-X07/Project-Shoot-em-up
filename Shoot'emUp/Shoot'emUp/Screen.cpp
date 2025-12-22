@@ -1,6 +1,7 @@
+// Load file
 #include "Screen.h"
 
-
+// Function for navigate in menu
 void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool enterPressed) {
     enterPressed = false;
     menuSelection = 0;
@@ -32,7 +33,9 @@ void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool ent
     }
 }
 
-GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, bool& restart, Level& MyLevel, FileManager& Level, std::vector<Item>& item) {
+// Function for the game state
+GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessource& MyRessource, Hero& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, bool& restart, Level& MyLevel, FileManager& Level, std::vector<Item>& item) {
+    // Variable static
     static int w, h;
     SDL_GetWindowSize(window, &w, &h);
     static int menuSelection = 0;
@@ -45,10 +48,13 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
     static TTF_Font* font = nullptr;
     SDL_Color white = { 255, 255, 255, 255 };
 
+    // Check the input
     const bool* keys = SDL_GetKeyboardState(NULL);
 
     switch (screen) {
+    // If screen is MENU
     case MENU: {
+        // Load font
         if (!font) {
             font = TTF_OpenFont("assets/arialmt.ttf", 32);
             if (!font) {
@@ -60,11 +66,11 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
         SDL_RenderClear(renderer);
         SDL_RenderTexture(renderer, MyRessource.backgroundHome, NULL, NULL);
 
-        TitleMenu(renderer, w, h, white, "SHOOT'EM UP", font, w / 2 - 200, 200, 400, 80);
+        Texte(renderer, w, h, white, "SHOOT'EM UP", font, w / 2 - 200, 200, 400, 80);
 
-        ButtonMenu(renderer, w, h, white, "PLAY", font, w / 2 - 100, h / 2 - 60, 200, 50, menuSelection, 0);
+        Button(renderer, w, h, white, "PLAY", font, w / 2 - 100, h / 2 - 60, 200, 50, menuSelection, 0);
 
-        ButtonMenu(renderer, w, h, white, "QUIT", font, w / 2 - 100, h / 2 + 20, 200, 50, menuSelection, 1);
+        Button(renderer, w, h, white, "QUIT", font, w / 2 - 100, h / 2 + 20, 200, 50, menuSelection, 1);
 
         if (keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_W]) {
             if (!upPressed) {
@@ -94,13 +100,13 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
             }
         }
         else enterPressed = false;
+        // Display MENU
         SDL_RenderPresent(renderer);
         break;
     }
-
+    // If screen is LEVEL
     case LEVEL: {
-
-
+        //Chek if player alive
         if (player.HP <= 0) {
             screen = GAMEOVER;
             break;
@@ -108,6 +114,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
 
         Level.readOrderLevel();
 
+        // Check what level I'm in
         if (currentLevel != MyLevel.numLevel) {
             if (MyLevel.numLevel == 1) {
                 Level = FileManager(Level.level_1);
@@ -124,6 +131,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
 
         MyLevel.displayLevel(renderer, MyRessource, player, dt, window, enemies, bullets, MyLevel, keys, w, h, item);
 
+        // Win condition
         if (MyLevel.typeLevel(player) == 1) {
             MyLevel.reset(player, enemies);
             player.nbr_enemy_death = 0;  
@@ -134,7 +142,8 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
                 return VICTORY;
             }
         }
- 
+        
+        // Escape for BREAK
         if (keys[SDL_SCANCODE_ESCAPE]) {
             if (!escPressed) {
                 escPressed = true;
@@ -146,8 +155,10 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
         }
         break;
     }
+    // If screen is PAUSE
     case PAUSE: {
 
+        // Only render, not update
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
         SDL_RenderTexture(renderer, MyRessource.backgroundLevel1, NULL, NULL);
@@ -155,13 +166,14 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
         player.render(renderer);
         player.renderBullets(renderer, player.heroBullets);
         Enemy::renderEnemy(renderer, enemies);
-        player.HUD(renderer, MyRessource.heart, player.HP, player.Score);
+        player.HUD(renderer, MyRessource.heart, player.HP, player.score);
 
+        // Background black transparent
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 150);
         SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
         SDL_RenderFillRect(renderer, NULL);
 
-        TitleMenu(renderer, w, h, white, "PAUSE", font, w / 2 - 200, 200, 400, 100);
+        Texte(renderer, w, h, white, "PAUSE", font, w / 2 - 200, 200, 400, 100);
         SDL_RenderPresent(renderer);
 
         if (keys[SDL_SCANCODE_ESCAPE]) {
@@ -175,9 +187,10 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
         }
         break;
     }
-
+    // If screen is GAMEOVER
     case GAMEOVER:
 
+        // Load font
         if (!font) {
             font = TTF_OpenFont("assets/arialmt.ttf", 32);
             if (!font) {
@@ -190,11 +203,11 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
         SDL_RenderTexture(renderer, MyRessource.backgroundHome, NULL, NULL);
         SDL_GetWindowSize(window, &w, &h);
 
-        TitleMenu(renderer, w, h, white, "GAME OVER", font, w / 2 - 200, 200, 400, 80);
+        Texte(renderer, w, h, white, "GAME OVER", font, w / 2 - 200, 200, 400, 80);
 
-        ButtonMenu(renderer, w, h, white, "MENU", font, w / 2 - 100, h / 2 - 60, 200, 50, menuDeathSelection, 0);
+        Button(renderer, w, h, white, "MENU", font, w / 2 - 100, h / 2 - 60, 200, 50, menuDeathSelection, 0);
 
-        ButtonMenu(renderer, w, h, white, "QUIT", font, w / 2 - 100, h / 2 + 20, 200, 50, menuDeathSelection, 1);
+        Button(renderer, w, h, white, "QUIT", font, w / 2 - 100, h / 2 + 20, 200, 50, menuDeathSelection, 1);
 
         if (keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_W]) {
             if (!upPressed) {
@@ -229,9 +242,10 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
         else {
             enterPressed = false;
         }
+        // Display PAUSE
         SDL_RenderPresent(renderer);
         break;
-
+    // If screen is VICTORY
     case VICTORY:
 
             SDL_SetRenderDrawColor(renderer, 0, 0, 50, 255);
@@ -239,11 +253,11 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
             SDL_RenderTexture(renderer, MyRessource.backgroundHome, NULL, NULL);
             SDL_GetWindowSize(window, &w, &h);
 
-            TitleMenu(renderer, w, h, white, "VICTORY", font, w / 2 - 200, 200, 400, 80);
+            Texte(renderer, w, h, white, "VICTORY", font, w / 2 - 200, 200, 400, 80);
 
-            ButtonMenu(renderer, w, h, white, "MENU", font, w / 2 - 100, h / 2 - 60, 200, 50, menuDeathSelection, 0);
+            Button(renderer, w, h, white, "MENU", font, w / 2 - 100, h / 2 - 60, 200, 50, menuDeathSelection, 0);
 
-            ButtonMenu(renderer, w, h, white, "QUIT", font, w / 2 - 100, h / 2 + 20, 200, 50, menuDeathSelection, 1);
+            Button(renderer, w, h, white, "QUIT", font, w / 2 - 100, h / 2 + 20, 200, 50, menuDeathSelection, 1);
 
             if (keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_W]) {
                 if (!upPressed) {
@@ -279,11 +293,14 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
             else {
                 enterPressed = false;
             }
+            // Display VICTORY
             SDL_RenderPresent(renderer);
             break;
-
+    // If screen is QUIT
     case QUIT:
+        // Close game
         break;
     }
+    // Return the game state
     return screen;
 }

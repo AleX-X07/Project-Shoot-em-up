@@ -1,17 +1,23 @@
+// Load file
 #include "FileManager.h"
 
+// Constructor
 FileManager::FileManager(const std::string& path) : filepath(path) {
+
 }
 
+// Function for read OrderLevel
 void FileManager::readOrderLevel() {
     std::ifstream file(filepath);
     int level1 = 0;
     int level2 = 0;
+    // Take the value in the .txt
     if (file.is_open()) {
         file >> level1;
         file >> level2;
         file.close();
     }
+    // Check the value for know what level is in first
     if (level1 == 1) {
         level_1 = "Level/Level1.txt";
         level_2 = "Level/Level2.txt";
@@ -22,9 +28,10 @@ void FileManager::readOrderLevel() {
     }
 }
 
+// Function for read Level
 void FileManager::readIntLevel(int& nbr_enemy, int& nbr_shooter, int& nbr_shooter_V2, int& nbr_boss) {
     std::ifstream file(filepath);
-
+    // Take the value in the .txt and put in in the variable
     if (file.is_open()) {
         file >> nbr_enemy;
         file >> nbr_shooter;
@@ -32,7 +39,4 @@ void FileManager::readIntLevel(int& nbr_enemy, int& nbr_shooter, int& nbr_shoote
         file >> nbr_boss;
         file.close();
     }
-}
-
-FileManager::~FileManager() {
 }

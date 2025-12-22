@@ -1,19 +1,21 @@
-﻿#include "Enemy.h"
+﻿// Load file
+#include "Enemy.h"
 
+// Constructor
 Enemy::Enemy() {
 
 }
 
-Enemy::Enemy(float _x, float _y, float _w, float _h, float _speed, SDL_Color _color) {
+Enemy::Enemy(float _x, float _y, float _w, float _h, float _speed) {
 	x = _x;
 	y = _y;
 	w = _w;
 	h = _h;
 	speed = _speed;
-	color = _color;
 	Value = 5;
 }
 
+// Random : return a int between min and max
 int Enemy::randomInt(int min, int max) {
 	static std::random_device rd;
 	static std::mt19937 gen(rd());
@@ -21,6 +23,7 @@ int Enemy::randomInt(int min, int max) {
 	return dis(gen);
 }
 
+// Prevents the enemy to get out of the window
 void Enemy::clampToScreenEnemy(int screenWidth, int screenHeight) {
 	if (rect.y < 0) {
 		rect.y = 0;
@@ -30,16 +33,20 @@ void Enemy::clampToScreenEnemy(int screenWidth, int screenHeight) {
 	}
 }
 
-void Enemy::updateEnemy(std::vector<Enemy>& enemies, float dt, int w, int h, Entity& player) {
+// Update enemy
+void Enemy::updateEnemy(std::vector<Enemy>& enemies, float dt, int w, int h, Hero& player) {
 	static bool upOrDown = true;
 	for (auto& e : enemies) {
+		// Update for boss
 		if (e.numEnemy == 10) {
 			int width = (w / 4) * 3;
+			// First, the boss move in x until 1/4 of window
 			if (e.x > width) {
 				e.x -= e.speed * dt;
 				e.rect.x = e.x;
 				e.rect.y = e.y;
 			}
+			// After, he move in y until one border of window ,and go in the other side after
 			else {
 				if (upOrDown) {
 					if (e.rect.y == 0) {
@@ -65,13 +72,14 @@ void Enemy::updateEnemy(std::vector<Enemy>& enemies, float dt, int w, int h, Ent
 				}
 			}
 		}
+		// Update for other enemies
 		else {
 			e.x -= e.speed * dt;
 			e.rect.x = e.x;
 			e.rect.y = e.y;
 		}
 
-		// Mise à jour des balles de l'ennemi
+		// update bullet enemy
 		for (auto& b : e.enemiesBullet) {
 			b.x += b.vx * dt;
 			b.y += b.vy * dt;
@@ -80,15 +88,15 @@ void Enemy::updateEnemy(std::vector<Enemy>& enemies, float dt, int w, int h, Ent
 		Bullet b;
 		b.exploseBullet(w, e.enemiesBullet);
 
-		// Supprimer les balles hors écran
-		e.enemiesBullet.erase(
-			std::remove_if(e.enemiesBullet.begin(), e.enemiesBullet.end(),
-				[](const Bullet& b) { return b.x < -100 || b.x > 2000; }),
-			e.enemiesBullet.end()
-		);
+		// Erase bullet off-screen
+		for (int i = e.enemiesBullet.size() - 1; i >= 0; i--) {
+			if (e.enemiesBullet[i].x < -25) {
+				e.enemiesBullet.erase(e.enemiesBullet.begin() + i);
+			}
+		}
 	}
 
-	// Supprimer les ennemis hors écran
+	// Erase enemies off-screen
 	for (int i = enemies.size() - 1; i >= 0; i--) {
 		if (enemies[i].x + enemies[i].w < 0) {
 			enemies.erase(enemies.begin() + i);
@@ -97,12 +105,11 @@ void Enemy::updateEnemy(std::vector<Enemy>& enemies, float dt, int w, int h, Ent
 	}
 }
 
+// Render enemies
 void Enemy::renderEnemy(SDL_Renderer* renderer, const std::vector<Enemy>& enemies) {
 	for (const auto& e : enemies) {
-		// Rendu de l'ennemi
 		SDL_FRect rect = { e.x, e.y, e.w, e.h };
-
-		// Sélection de la texture appropriée
+		// Choose the good texture
 		SDL_Texture* currentTexture = nullptr;
 		if (e.numEnemy == 1) {
 			currentTexture = e.enemyTextureBomb;
@@ -117,19 +124,20 @@ void Enemy::renderEnemy(SDL_Renderer* renderer, const std::vector<Enemy>& enemie
 			currentTexture = e.bossTexture;
 		}
 
-		// Affichage de l'ennemi
+		// If he have texture, render the enemy. Else, display a cube of color
 		if (currentTexture) {
 			SDL_RenderTexture(renderer, currentTexture, NULL, &rect);
 		}
 		else {
-			SDL_SetRenderDrawColor(renderer, e.color.r, e.color.g, e.color.b, e.color.a);
+			SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 			SDL_RenderFillRect(renderer, &rect);
 		}
 
-		// Rendu des balles pour les ennemis qui tirent (numEnemy 2, 3 ou -1)
+		// Render bullets for enemy 2, 3 and the boss, the enemy 10
 		if (e.numEnemy == 2 || e.numEnemy == 3 || e.numEnemy == 10) {
 			for (const auto& b : e.enemiesBullet) {
 				SDL_FRect bulletRect = { b.x, b.y, b.w, b.h };
+				// If they have texture, render the bullet. Else, display a cube of color
 				if (e.bulletEnemyTexture) {
 					SDL_RenderTexture(renderer, e.bulletEnemyTexture, NULL, &bulletRect);
 				}
@@ -142,7 +150,9 @@ void Enemy::renderEnemy(SDL_Renderer* renderer, const std::vector<Enemy>& enemie
 	}
 }
 
+// Spawn for bomb
 void Enemy::spawnEnemyBomb(std::vector<Enemy>& enemies, int windowWidth, int windowHeight, SDL_Renderer* renderer, SDL_Texture* sharedTexture) {
+	// Create bomb
 	Enemy e;
 	e.numEnemy = 1;
 	e.HP = 3;
@@ -150,15 +160,17 @@ void Enemy::spawnEnemyBomb(std::vector<Enemy>& enemies, int windowWidth, int win
 	e.Value = 5;
 	e.w = 50;
 	e.h = 50;
-	e.x = windowWidth;
-	e.y = randomInt(0, windowHeight - 50);
-	e.rect = { e.x, e.y, e.w, e.h };
-	e.enemyTextureBomb = sharedTexture;
 	e.speed = 400.0f;
-	enemies.emplace_back(e);
+	e.enemyTextureBomb = sharedTexture;
+	e.x = windowWidth;
+	e.y = randomInt(0, windowHeight - 50); // Spawn random in axis y
+	e.rect = { e.x, e.y, e.w, e.h };
+	enemies.emplace_back(e); // Put the bomb in the enemies vector
 }
 
+// Spawn for shooter
 void Enemy::spawnEnemyShooter(std::vector<Enemy>& enemies, int windowWidth, int windowHeight, SDL_Renderer* renderer, SDL_Texture* sharedTexture, SDL_Texture* sharedTextureBulet) {
+	// Create shooter
 	Enemy e;
 	e.numEnemy = 2;
 	e.HP = 5;
@@ -166,17 +178,19 @@ void Enemy::spawnEnemyShooter(std::vector<Enemy>& enemies, int windowWidth, int 
 	e.Value = 10;
 	e.w = 75;
 	e.h = 75;
-	e.x = windowWidth;
-	e.y = randomInt(0, windowHeight - 50);
-	e.rect = { e.x, e.y, e.w, e.h };
+	e.speed = 200.0f;
 	e.enemyTextureShooter = sharedTexture;
 	e.bulletEnemyTexture = sharedTextureBulet;
-	e.speed = 200.0f; // Vitesse en pixels par seconde
-	e.lastShotTime = SDL_GetTicks();
-	enemies.emplace_back(e);
+	e.lastShotTime = SDL_GetTicks(); // Take time for bullet
+	e.x = windowWidth;
+	e.y = randomInt(0, windowHeight - 50); // Spawn random in axis y
+	e.rect = { e.x, e.y, e.w, e.h };
+	enemies.emplace_back(e); // Put the shooter in the enemies vector
 }
 
+// Spawn for shooter V2
 void Enemy::spawnEnemyShooterV2(std::vector<Enemy>& enemies, int windowWidth, int windowHeight, SDL_Renderer* renderer, SDL_Texture* sharedTexture, SDL_Texture* sharedTextureBulet) {
+	// Create enemy
 	Enemy e;
 	e.numEnemy = 3;
 	e.HP = 7;
@@ -184,17 +198,19 @@ void Enemy::spawnEnemyShooterV2(std::vector<Enemy>& enemies, int windowWidth, in
 	e.Value = 10;
 	e.w = 75;
 	e.h = 75;
-	e.x = windowWidth;
-	e.y = randomInt(0, windowHeight - 50);
-	e.rect = { e.x, e.y, e.w, e.h };
+	e.speed = 200.0f;
 	e.enemyTextureShooter = sharedTexture;
 	e.bulletEnemyTexture = sharedTextureBulet;
-	e.speed = 200.0f; // Vitesse en pixels par seconde
-	e.lastShotTime = SDL_GetTicks();
-	enemies.emplace_back(e);
+	e.lastShotTime = SDL_GetTicks(); // Take time for bullet
+	e.x = windowWidth; 
+	e.y = randomInt(0, windowHeight - 50); // Spawn random in axis y
+	e.rect = { e.x, e.y, e.w, e.h };
+	enemies.emplace_back(e); // Put the shooter V2 in the enemies vector
 }
 
+// Spawn boss
 void Enemy::spawnEnemyBoss(std::vector<Enemy>& enemies, int windowWidth, int windowHeight, SDL_Renderer* renderer, LoadRessource& MyRessource) {
+	// Create boss
 	Enemy e;
 	e.numEnemy = 10;
 	e.HP = 100;
@@ -202,19 +218,21 @@ void Enemy::spawnEnemyBoss(std::vector<Enemy>& enemies, int windowWidth, int win
 	e.Value = 50;
 	e.w = 400;
 	e.h = 400;
-	e.x = windowWidth;
-	e.y =  windowHeight / 2 - 150;
-	e.rect = { e.x, e.y, e.w, e.h };
+	e.speed = 200.0f;
 	e.bossTexture = MyRessource.bossTexture;
 	e.bulletEnemyTexture = MyRessource.bulletEnemyTexture;
-	e.speed = 200.0f; // Vitesse en pixels par seconde
-	e.lastShotTime = SDL_GetTicks();
-	enemies.emplace_back(e);
+	e.lastShotTime = SDL_GetTicks(); // Take time for bullet
+	e.x = windowWidth;
+	e.y = windowHeight / 2 - 150; // Spawn the boss in the middle of the window
+	e.rect = { e.x, e.y, e.w, e.h };
+	enemies.emplace_back(e); // Put the boss in the enemies vector
 }
 
+// EnemyManager for manage the spawn of enemies
 void Enemy::EnemyManager(std::vector<Enemy>& enemies, SDL_Renderer* renderer, int windowWidth, int windowHeight, LoadRessource& MyRessource, Level& MyLevel) {
-
+	// Random for choose what enemy spawn
 	int choice = randomInt(1,3);
+
 	if (choice == 1 && MyLevel.nbr_enemy > 0) {
 		Enemy::spawnEnemyBomb(enemies, windowWidth, windowHeight, renderer, MyRessource.bomb);
 		MyLevel.nbr_enemy--;
@@ -227,6 +245,8 @@ void Enemy::EnemyManager(std::vector<Enemy>& enemies, SDL_Renderer* renderer, in
 		Enemy::spawnEnemyShooterV2(enemies, windowWidth, windowHeight, renderer, MyRessource.ship, MyRessource.bulletEnemyTexture);
 		MyLevel.nbr_shooter_V2--;
 	}
+
+	// If no enemy, the boss spawning
 	if (MyLevel.nbr_enemy == 0 && MyLevel.nbr_shooter == 0 && MyLevel.nbr_shooter_V2 == 0) {
 		choice = 10;
 	}
@@ -238,120 +258,106 @@ void Enemy::EnemyManager(std::vector<Enemy>& enemies, SDL_Renderer* renderer, in
 	}
 }
 
+// Shoot for shooter
 void Enemy::shoot(std::vector<Bullet>& enemiesBullet) {
+	// Take time for calculate delay of 1500 between 2 bullet
 	now = SDL_GetTicks();
 	if (now - lastShotTime >= 1500) {
+		// Create bullet
 		Bullet b;
 		b.x = x;
 		b.y = y + h / 2 - 5;
 		b.w = 25;
 		b.h = 25;
-		b.vx = -300.0f; // Vitesse en pixels par seconde
+		b.vx = -300.0f; // Speed of the bullet
 		b.vy = 0;
-		b.color = { 255, 255, 0, 255 };
-		enemiesBullet.emplace_back(b);
-		lastShotTime = now;
+		enemiesBullet.emplace_back(b); // Put the bullet in the bullet vector
+		lastShotTime = now; // Update time for calculate delay between 2 bullet
 	}
 }
 
+// Shoot for shooter V2
 void Enemy::shootV2(std::vector<Bullet>& enemiesBullet)
 {
+	// Take time for calculate delay of 1000 between 2 bullet
 	now = SDL_GetTicks();
-	if (now - lastShotTime >= 1500) {
+	if (now - lastShotTime >= 1000) {
+		// Take the center position
 		float centerY = y + h / 2 - 12.5f;
-
-		// In front
-		Bullet b1;
-		b1.x = x;
-		b1.y = centerY;
-		b1.w = 25;
-		b1.h = 25;
-		b1.vx = -300.0f;
-		b1.vy = 0;
-		b1.color = { 255, 255, 0, 255 };
-		enemiesBullet.emplace_back(b1);
-
-		// Up (angle ~30°)
-		Bullet b2;
-		b2.x = x;
-		b2.y = centerY;
-		b2.w = 25;
-		b2.h = 25;
-		b2.vx = -300.0f;
-		b2.vy = -150.0f;
-		b2.color = { 255, 255, 0, 255 };
-		enemiesBullet.emplace_back(b2);
-
-		// Down (angle ~30°)
-		Bullet b3;
-		b3.x = x;
-		b3.y = centerY;
-		b3.w = 25;
-		b3.h = 25;
-		b3.vx = -300.0f;
-		b3.vy = 150.0f;
-		b3.color = { 255, 255, 0, 255 };
-		enemiesBullet.emplace_back(b3);
-
-		lastShotTime = now;
+		int _vy = -150; // Bullet direction (-150 : At the top, 0 in the middle and 150 at the bottom)
+		for (int X = 0; X <= 2; X++) {
+			Bullet b1;
+			b1.x = x;
+			b1.y = centerY;
+			b1.w = 25;
+			b1.h = 25;
+			b1.vx = -250.0f; // Speed of the bullet
+			b1.vy = _vy;
+			enemiesBullet.emplace_back(b1); // Put the bullet in the bullet vector
+			_vy += 150; // Increas _vy for change the bullet direction
+		}
+		lastShotTime = now; // Update time for calculate delay between 2 bullet
 	}
 }
 
+// Shoot for boos
 void Enemy::shootBoss(std::vector<Bullet>& enemiesBullet) {
+	// Check if the HP boss is above 3/4
 	if (HP > (HPmax/4)*3) {
+		// Take time for calculate delay of 100 between 2 bullet
 		now = SDL_GetTicks();
 		if (now - lastShotTime >= 100) {
+			// Create bullet
 			Bullet b;
 			b.x = x;
 			b.y = y + h / 2 - 35;
 			b.w = 25;
 			b.h = 25;
-			b.vx = -600; // Vitesse en pixels par seconde
+			b.vx = -600; // Speed for bullet
 			b.vy = 0;
-			b.color = { 255, 255, 0, 255 };
-			enemiesBullet.emplace_back(b);
-			lastShotTime = now;
+			enemiesBullet.emplace_back(b); // Put the bullet in the bullet vector
+			lastShotTime = now; // Update time for calculate delay between 2 bullet
 		}
 	}
+	// Check if the HP boss is between 1/2 and 3/4
 	else if (HP > (HPmax/2) && HP < (HPmax / 4) * 3) {
 		int nbr_bullet = 5;
-		int anglebullet = -150;
+		int anglebullet = -150; // Bullet direction
 		float centerY = y + h / 2 - 50;
+		// Take time for calculate delay of 1000 between 2 bullet
 		now = SDL_GetTicks();
 		if (now - lastShotTime >= 1000) {
 			for (int X = 0; X <= nbr_bullet; X++) {
+				// Create bullet
 				Bullet b;
 				b.x = x;
 				b.y = centerY;
 				b.w = 25;
 				b.h = 25;
-				b.vx = -300.0f;
+				b.vx = -300.0f; // Speed of bullet
 				b.vy = anglebullet;
-				b.color = { 255, 255, 0, 255 };
-				enemiesBullet.emplace_back(b);
-				anglebullet += 75;
+				enemiesBullet.emplace_back(b); // Put the bullet in the bullet vector
+				anglebullet += 75; // Increas anglebullet for change the bullet direction
 			}
-			lastShotTime = now;
+			lastShotTime = now; // Update time for calculate delay between 2 bullet
 		}
 	}
+	// Check if the HP boss is between 1/2 and 1/4
 	else if (HP < HPmax / 2 && HP > HPmax / 4) {
+		// Take time for calculate delay of 1500 between 2 bullet
 		now = SDL_GetTicks();
-		if (now - lastShotTime >= 3000) {
+		if (now - lastShotTime >= 1500) {
+			// Create bullet
 			Bullet b;
 			b.x = x;
-			b.y = y + h / 2 - 35;
+			b.y = y + h / 2 - 35; // Change center because the dimension are different
 			b.w = 100;
 			b.h = 100;
-			b.vx = -300.0f;
+			b.vx = -300.0f; // Speed of bullet
 			b.vy = 0;
-			b.color = { 255, 255, 0, 255 };
-			b.shouldExplose = true;
-			enemiesBullet.emplace_back(b);
-			lastShotTime = now;
+			b.shouldExplode = true;
+			enemiesBullet.emplace_back(b); // Put the bullet in the bullet vector
+			lastShotTime = now; // Update time for calculate delay between 2 bullet
 		}
 	}
-}
-
-Enemy::~Enemy() {
-
 }

@@ -1,9 +1,11 @@
-#include "Menu.h"
+// Librairie externe
 #include <iostream>
 
+// Load fiele
+#include "Menu.h"
 
-
-void TitleMenu(SDL_Renderer* renderer, int w, int h, SDL_Color color, const char* text, TTF_Font* font, int x2, int y2, int w2, int h2) {
+// Function for write on screen
+void Texte(SDL_Renderer* renderer, int w, int h, SDL_Color color, const char* text, TTF_Font* font, int x2, int y2, int w2, int h2) {
     std::string str(text);
     size_t size = str.size();
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -13,26 +15,30 @@ void TitleMenu(SDL_Renderer* renderer, int w, int h, SDL_Color color, const char
 
     SDL_FRect destRect = { x2, y2, w2, h2 };
 
+    // Display text
     SDL_RenderTexture(renderer, texteTexture, NULL, &destRect);
     SDL_DestroyTexture(texteTexture);
 }
 
-void ButtonMenu(SDL_Renderer* renderer, int w, int h, SDL_Color color, const char* text, TTF_Font* font, int x2, int y2, int w2, int h2, int menuSelection, int Selection) {
+// Function for display button
+void Button(SDL_Renderer* renderer, int w, int h, SDL_Color color, const char* text, TTF_Font* font, float x2, float y2, float w2, float h2, int menuSelection, int Selection) {
     std::string str(text);
     size_t size = str.size();
 
-    SDL_FRect Rect = { (float)x2, (float)y2, (float)w2,(float)h2 };
+    SDL_FRect Rect = { x2, y2, w2,h2 };
 
+    // Change color if player is in menu (green) or in quit (red)
     if (menuSelection == Selection) {
         if (Selection == 1) {
-            SDL_SetRenderDrawColor(renderer, 255, 100, 100, 255);  // Rouge pour QUIT
+            SDL_SetRenderDrawColor(renderer, 255, 100, 100, 255); 
         }
         else {
-            SDL_SetRenderDrawColor(renderer, 100, 255, 100, 255);  // Vert pour PLAY
+            SDL_SetRenderDrawColor(renderer, 100, 255, 100, 255);
         }
         SDL_RenderFillRect(renderer, &Rect);
     }
 
+    // Create surface for display text
     SDL_Surface* texteSurface = TTF_RenderText_Solid(font, text, size, color);
     if (!texteSurface) {
         SDL_Log("Erreur création surface texte: %s", SDL_GetError());
@@ -56,7 +62,8 @@ void ButtonMenu(SDL_Renderer* renderer, int w, int h, SDL_Color color, const cha
         (float)textW,
         (float)textH
     };
-    // Afficherr
+
+    // Display button
     SDL_RenderTexture(renderer, texteTexture, NULL, &destRect);
     SDL_DestroyTexture(texteTexture);
 
