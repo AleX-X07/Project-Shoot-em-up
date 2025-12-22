@@ -32,7 +32,7 @@ void NavigateMenu(GameState screen, SDL_Event event, int menuSelection, bool ent
     }
 }
 
-GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, bool& restart, Level& MyLevel, FileManager& Level) {
+GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, bool& restart, Level& MyLevel, FileManager& Level, std::vector<Item>& item) {
     static int w, h;
     SDL_GetWindowSize(window, &w, &h);
     static int menuSelection = 0;
@@ -41,6 +41,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
     static bool downPressed = false;
     static bool enterPressed = false;
     static bool escPressed = false;
+    static int currentLevel = 0;
     static TTF_Font* font = nullptr;
     SDL_Color white = { 255, 255, 255, 255 };
 
@@ -84,8 +85,12 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
         if (keys[SDL_SCANCODE_RETURN]) {
             if (!enterPressed) {
                 enterPressed = true;
-                if (menuSelection == 0) return LEVEL;
-                if (menuSelection == 1) return QUIT;
+                if (menuSelection == 0) {
+                    return LEVEL;
+                }
+                if (menuSelection == 1) {
+                    return QUIT;
+                }
             }
         }
         else enterPressed = false;
@@ -103,7 +108,6 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
 
         Level.readOrderLevel();
 
-        static int currentLevel = 0;
         if (currentLevel != MyLevel.numLevel) {
             if (MyLevel.numLevel == 1) {
                 Level = FileManager(Level.level_1);
@@ -118,7 +122,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
             currentLevel = MyLevel.numLevel;
         }
 
-        MyLevel.displayLevel(renderer, MyRessource, player, dt, window, enemies, bullets, MyLevel, keys, w, h);
+        MyLevel.displayLevel(renderer, MyRessource, player, dt, window, enemies, bullets, MyLevel, keys, w, h, item);
 
         if (MyLevel.typeLevel(player) == 1) {
             MyLevel.reset(player, enemies);
@@ -263,6 +267,7 @@ GameState updateGameState(GameState screen, SDL_Renderer* renderer, LoadRessourc
                 if (!enterPressed) {
                     enterPressed = true;
                     if (menuDeathSelection == 0) {
+                        currentLevel = 0;
                         restart = true;
                         return MENU;
                     }

@@ -36,7 +36,7 @@ public:
     static int randomInt(int min, int max);
     void clampToScreenEnemy(int w, int h);
 
-    static void updateEnemy(std::vector<Enemy>& enemies, float dt, int screenWidth, int screenHeight);
+    static void updateEnemy(std::vector<Enemy>& enemies, float dt, int screenWidth, int screenHeight, Entity& player);
     static void renderEnemy(SDL_Renderer* renderer, const std::vector<Enemy>& enemies);
 
     static void spawnEnemyBomb(std::vector<Enemy>& enemies, int windowWidth, int windowHeight, SDL_Renderer* renderer, SDL_Texture* sharedTexture);

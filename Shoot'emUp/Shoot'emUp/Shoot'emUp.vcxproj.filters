@@ -60,6 +60,9 @@
     <ClCompile Include="Level.cpp">
       <Filter>Fichiers sources\Gestion</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Fichiers sources\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -88,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="FileManager.h">
       <Filter>Fichiers d%27en-tête\Gestion</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Fichiers d%27en-tête\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -30,7 +30,7 @@ void Enemy::clampToScreenEnemy(int screenWidth, int screenHeight) {
 	}
 }
 
-void Enemy::updateEnemy(std::vector<Enemy>& enemies, float dt, int w, int h) {
+void Enemy::updateEnemy(std::vector<Enemy>& enemies, float dt, int w, int h, Entity& player) {
 	static bool upOrDown = true;
 	for (auto& e : enemies) {
 		if (e.numEnemy == 10) {
@@ -92,6 +92,7 @@ void Enemy::updateEnemy(std::vector<Enemy>& enemies, float dt, int w, int h) {
 	for (int i = enemies.size() - 1; i >= 0; i--) {
 		if (enemies[i].x + enemies[i].w < 0) {
 			enemies.erase(enemies.begin() + i);
+			player.nbr_enemy_death++;
 		}
 	}
 }
@@ -153,8 +154,7 @@ void Enemy::spawnEnemyBomb(std::vector<Enemy>& enemies, int windowWidth, int win
 	e.y = randomInt(0, windowHeight - 50);
 	e.rect = { e.x, e.y, e.w, e.h };
 	e.enemyTextureBomb = sharedTexture;
-	e.speed = 400.0f; // Vitesse en pixels par seconde
-	e.lastShotTime = SDL_GetTicks();
+	e.speed = 400.0f;
 	enemies.emplace_back(e);
 }
 

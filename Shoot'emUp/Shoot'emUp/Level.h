@@ -1,8 +1,10 @@
 #pragma once
 #include "Hero.h"
 #include "LoadRessource.h"
+#include "FileManager.h"
 
 class Enemy;
+class Item;
 
 struct Level
 {
@@ -20,13 +22,17 @@ struct Level
 	float spawnTimer = 0;
 	float spawnInterval = 1;
 
+	float spawnTimerItem = 0;
+	float spawnIntervalItem = 10;
+
 	int numLevel;
-	
+
 	Level();
 	void setMyLevel(int _nbr_enemy, int _nbr_shooter, int _nbr_shooter_V2, int _nbr_boss);
 	int typeLevel(Entity& player);
-	void displayLevel(SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, Level& MyLevel, const bool* keys, int w, int h);
+	void displayLevel(SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, Level& MyLevel, const bool* keys, int w, int h, std::vector<Item>& item);
 	void reset(Entity& player, std::vector<Enemy>& enemies);
+	void restart(Entity& player, Enemy& MyEnemy, Item& MyItem, Level& MyLevel, bool& restart);
 
 };
 

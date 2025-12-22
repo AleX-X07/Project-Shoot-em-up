@@ -7,13 +7,15 @@
 #include "Enemy.h"
 #include "LoadRessource.h"
 #include "Level.h"
+#include "Item.h"
 
 int main(int argc, char** argv) {
 
-    bool restart = true;
+    bool restart = false;
     SDL_Window* window;
     SDL_Renderer* renderer;
     Enemy MyEnemy;
+    Item MyItem;
 
     const int FPS = 60;
     const int FRAME_DELAY = 1000 / FPS;
@@ -36,7 +38,6 @@ int main(int argc, char** argv) {
 
     Level MyLevel;
 
-
     FileManager Level = FileManager("Level/orderLevel.txt");
 
     Uint64 last_time = SDL_GetTicks();
@@ -48,14 +49,7 @@ int main(int argc, char** argv) {
 
     while (keepGoing) { // Loop for reload level
         if (restart) {
-            player.HP = 4;
-            player.Score = 0;
-            player.heroBullets.clear();
-            player.rect.x = 400.0f;
-            player.rect.y = 300.0f;
-            player.timeSinceLastShot = 0.0f;
-            MyEnemy.enemies.clear();
-            restart = false;
+            MyLevel.restart(player,MyEnemy,MyItem,MyLevel,restart);
         }
 
         float dt = (SDL_GetTicks() - last_time) / 1000.0f; // Computes the time elapsed (in seconds) since the previous frame.
@@ -71,7 +65,7 @@ int main(int argc, char** argv) {
             NavigateMenu(screen, event, menuSelection, enterPressed);
         }
 
-        screen = updateGameState(screen, renderer, MyRessource, player, dt, window, MyEnemy.enemies, player.heroBullets, restart, MyLevel, Level); // Update the game (Menu,Level1,Level2,GameOver)
+        screen = updateGameState(screen, renderer, MyRessource, player, dt, window, MyEnemy.enemies, player.heroBullets, restart, MyLevel, Level, MyItem.itemVector); // Update the game (Menu,Level,PAUSE,VICTORY,GAMEOVER)
 
         frameTime = SDL_GetTicks() - frameStart;
 

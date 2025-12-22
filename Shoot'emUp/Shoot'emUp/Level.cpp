@@ -1,5 +1,6 @@
 #include "Level.h"
 #include "Enemy.h"
+#include "Item.h"
 
 
 Level::Level() {
@@ -40,7 +41,7 @@ int Level::typeLevel(Entity& player) {
 	return 0;
 }
 
-void Level::displayLevel(SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, Level& MyLevel, const bool* keys, int w, int h) {
+void Level::displayLevel(SDL_Renderer* renderer, LoadRessource& MyRessource, Entity& player, float dt, SDL_Window* window, std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, Level& MyLevel, const bool* keys, int w, int h, std::vector<Item>& item) {
     
     player.handleInput(keys, dt);
     SDL_GetWindowSize(window, &w, &h);
@@ -53,7 +54,15 @@ void Level::displayLevel(SDL_Renderer* renderer, LoadRessource& MyRessource, Ent
         spawnTimer = 0;
     }
 
-    Enemy::updateEnemy(enemies, dt, w, h);
+    spawnTimerItem += dt;
+    if (spawnTimerItem >= spawnIntervalItem) {
+        Item::itemSpawn(item, MyRessource.heart, w, h);
+        spawnTimerItem = 0;
+    }
+
+
+    Item::updateItem(item, dt);
+    Enemy::updateEnemy(enemies, dt, w, h, player);
 
     for (auto& e : enemies) { // Shoot for enemies
         if (e.numEnemy == 2) {
@@ -74,11 +83,13 @@ void Level::displayLevel(SDL_Renderer* renderer, LoadRessource& MyRessource, Ent
     player.render(renderer);
     player.renderBullets(renderer, player.heroBullets);
     Enemy::renderEnemy(renderer, enemies);
+    Item::renderItem(renderer, item);
     player.HUD(renderer, MyRessource.heart, player.HP, player.Score);
 
     player.CollideEnemy(enemies, dt);
     player.CollideEnemyBullet(enemies, dt);
     player.CollideBullet(enemies);
+    Item::collidePlayer(item, player);
 
     SDL_RenderPresent(renderer);
 }
@@ -89,5 +100,34 @@ void Level::reset(Entity& player, std::vector<Enemy>& enemies) {
     enemies.clear();
     player.rect.x = 400.0f;
     player.rect.y = 300.0f;
+    spawnTimer = 0;     
+}
+
+void Level::restart(Entity& player, Enemy& MyEnemy, Item& MyItem, Level& MyLevel, bool& restart) {
+    player.HP = 4;
+    player.Score = 0;
+    player.nbr_enemy_death = 0;
+    player.bossDeath = 0;
+    player.heroBullets.clear();
+    player.rect.x = 400.0f;
+    player.rect.y = 300.0f;
+    player.timeSinceLastShot = 0.0f;
+
+    MyEnemy.enemies.clear();
+
+    MyItem.itemVector.clear();
+
+    numLevel = 0;
     spawnTimer = 0;
+    spawnTimerItem = 0;
+    levelWithBoss = false;
+
+    FileManager _Level = FileManager("Level/orderLevel.txt");
+    _Level.readOrderLevel();
+    _Level = FileManager(_Level.level_1);
+    _Level.readIntLevel(MyLevel.nbr_enemy, MyLevel.nbr_shooter,MyLevel.nbr_shooter_V2, MyLevel.nbr_boss);
+    MyLevel.setMyLevel(MyLevel.nbr_enemy, MyLevel.nbr_shooter,MyLevel.nbr_shooter_V2, MyLevel.nbr_boss);
+
+
+    restart = false;
 }
