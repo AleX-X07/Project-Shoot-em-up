@@ -15,6 +15,7 @@ enum GameState {
     MENU,
     LEVEL,
     GAMEOVER,
+    VICTORY,
     QUIT
 };
 
